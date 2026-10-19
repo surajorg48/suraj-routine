@@ -49,10 +49,40 @@
   }
 
   // -------------------------------------------------------------
-  // AUDIO & VIBRATION REST ALERTS (100% Offline Gym Friendly)
+  // AUDIO & VIBRATION REST ALERTS (Authentic iPhone Style Tone)
   // -------------------------------------------------------------
   let audioCtx = null;
-  function playRestAlarm() {
+  let isAudioUnlocked = false;
+
+  // Global Audio Unlock on user interaction (essential for iPhone Safari)
+  function unlockAudio() {
+    try {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      const audioEl = document.getElementById('rest-chime-audio');
+      if (audioEl && !isAudioUnlocked) {
+        // Micro-play to prime iOS Safari audio buffer
+        audioEl.volume = 0.01;
+        audioEl.play().then(() => {
+          audioEl.pause();
+          audioEl.currentTime = 0;
+          audioEl.volume = 1.0;
+          isAudioUnlocked = true;
+        }).catch(() => {});
+      }
+    } catch (e) {
+      // Ignore background gesture errors
+    }
+  }
+
+  // Melodic, crisp Apple / iPhone Tri-tone chime (G5 -> B5 -> E6 bell harmonics)
+  function playSynthesizedChime() {
     try {
       if (!audioCtx) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -63,32 +93,66 @@
       }
       if (audioCtx) {
         const now = audioCtx.currentTime;
-        // Two-tone bell beep
-        const osc1 = audioCtx.createOscillator();
-        const gain1 = audioCtx.createGain();
-        osc1.type = 'sine';
-        osc1.frequency.setValueAtTime(880, now); // A5
-        osc1.frequency.exponentialRampToValueAtTime(440, now + 0.35);
-        gain1.gain.setValueAtTime(0.3, now);
-        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-        osc1.connect(gain1);
-        gain1.connect(audioCtx.destination);
-        osc1.start(now);
-        osc1.stop(now + 0.35);
+        const notes = [
+          { freq: 783.99, start: 0.00, dur: 0.22, gain: 0.35 },  // G5
+          { freq: 987.77, start: 0.14, dur: 0.24, gain: 0.35 },  // B5
+          { freq: 1318.51, start: 0.28, dur: 0.70, gain: 0.45 }  // E6 (bright completion)
+        ];
 
-        const osc2 = audioCtx.createOscillator();
-        const gain2 = audioCtx.createGain();
-        osc2.type = 'triangle';
-        osc2.frequency.setValueAtTime(1174.66, now + 0.18); // D6
-        gain2.gain.setValueAtTime(0.3, now + 0.18);
-        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
-        osc2.connect(gain2);
-        gain2.connect(audioCtx.destination);
-        osc2.start(now + 0.18);
-        osc2.stop(now + 0.55);
+        notes.forEach(n => {
+          // Fundamental sine wave
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(n.freq, now + n.start);
+
+          gain.gain.setValueAtTime(0.0001, now + n.start);
+          gain.gain.exponentialRampToValueAtTime(n.gain, now + n.start + 0.006);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + n.start + n.dur);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + n.start);
+          osc.stop(now + n.start + n.dur);
+
+          // Second harmonic for crystal bell timbre
+          const oscHarm = audioCtx.createOscillator();
+          const gainHarm = audioCtx.createGain();
+          oscHarm.type = 'triangle';
+          oscHarm.frequency.setValueAtTime(n.freq * 2, now + n.start);
+
+          gainHarm.gain.setValueAtTime(0.0001, now + n.start);
+          gainHarm.gain.exponentialRampToValueAtTime(n.gain * 0.25, now + n.start + 0.006);
+          gainHarm.gain.exponentialRampToValueAtTime(0.0001, now + n.start + n.dur * 0.7);
+
+          oscHarm.connect(gainHarm);
+          gainHarm.connect(audioCtx.destination);
+          oscHarm.start(now + n.start);
+          oscHarm.stop(now + n.start + n.dur);
+        });
       }
-    } catch (e) {
-      console.log('Audio alert fallback:', e);
+    } catch (err) {
+      console.warn('AudioContext chime error:', err);
+    }
+  }
+
+  function playRestAlarm() {
+    let playedHtml5 = false;
+    const audioEl = document.getElementById('rest-chime-audio');
+    if (audioEl) {
+      audioEl.volume = 1.0;
+      audioEl.currentTime = 0;
+      const playPromise = audioEl.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          playedHtml5 = true;
+        }).catch(err => {
+          console.log('HTML5 audio play blocked, falling back to synth:', err);
+          playSynthesizedChime();
+        });
+      }
+    } else {
+      playSynthesizedChime();
     }
 
     // Mobile Vibration
@@ -106,9 +170,8 @@
     totalSeconds: 90,
     remainingSeconds: 90,
     isRunning: false,
-    intervalId: null,
-
     start(seconds) {
+      unlockAudio();
       if (seconds !== undefined) {
         this.totalSeconds = seconds;
         this.remainingSeconds = seconds;
@@ -1240,6 +1303,21 @@
     if (timerAdd10) {
       timerAdd10.addEventListener('click', () => timer.adjust(10));
     }
+
+    const testChimeBtn = document.getElementById('btn-test-chime');
+    if (testChimeBtn) {
+      testChimeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        unlockAudio();
+        playRestAlarm();
+        showToast('🔔 iPhone completion chime previewed!', 'success');
+      });
+    }
+
+    // Global audio unlock for iPhone / Safari on any tap
+    ['touchstart', 'touchend', 'click'].forEach(evt => {
+      document.addEventListener(evt, unlockAudio, { passive: true });
+    });
 
     // Preset Buttons
     document.querySelectorAll('.btn-preset').forEach(btn => {

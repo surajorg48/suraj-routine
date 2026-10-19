@@ -1658,6 +1658,32 @@ a {
   color: var(--surface);
 }
 
+.timer-header-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-timer-tool {
+  background: rgba(244, 81, 11, 0.15);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-timer-tool:hover, .btn-timer-tool:active {
+  background: var(--primary);
+  color: #ffffff;
+}
+
 .timer-display-ring-wrap {
   position: relative;
   width: 170px;

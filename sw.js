@@ -1,12 +1,13 @@
 // Service Worker for Offline Gym Support
-const CACHE_NAME = 'suraj-routine-cache-v1';
+const CACHE_NAME = 'suraj-routine-cache-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './styles.css',
   './routineData.js',
   './app.js',
-  './manifest.json'
+  './manifest.json',
+  './timer-chime.wav'
 ];
 
 self.addEventListener('install', (event) => {

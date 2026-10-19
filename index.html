@@ -400,10 +400,18 @@
       <div class="timer-expanded-panel" id="timer-expanded-panel">
         <div class="timer-panel-header">
           <span class="timer-panel-title">REST TIMER</span>
-          <button id="btn-timer-minimize" class="btn-timer-icon" aria-label="Minimize Timer">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
+          <div class="timer-header-tools">
+            <button id="btn-test-chime" class="btn-timer-tool" title="Test iPhone Rest Chime">
+              <span>🔔 Test Tone</span>
+            </button>
+            <button id="btn-timer-minimize" class="btn-timer-icon" aria-label="Minimize Timer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+          </div>
         </div>
+
+        <!-- Audio Element for 1-sec iPhone Chime -->
+        <audio id="rest-chime-audio" preload="auto" src="timer-chime.wav" playsinline></audio>
 
         <div class="timer-display-ring-wrap">
           <svg class="timer-ring-svg" viewBox="0 0 200 200">
