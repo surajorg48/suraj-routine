@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#263137">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Suraj Routine">
+  <meta name="description" content="Suraj 6-Month Aesthetic Transformation Program — Men's Physique Standard, 6 Days/Week Split, Offline Gym Logger, Rest Timer & Nutrition Guide.">
+  <title>SURAJ | 6-Month Aesthetic Transformation Hub</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Manifest & Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23F4510B'/><path d='M25 50h50M35 35v30M65 35v30' stroke='%23ffffff' stroke-width='8' stroke-linecap='round'/></svg>">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- App Container -->
+  <div id="app" class="app-container">
+
+    <!-- Top Sticky Header -->
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand-block">
+          <div class="brand-badge">V3.0</div>
+          <div>
+            <h1 class="brand-title">SURAJ <span class="highlight">AESTHETIC</span></h1>
+            <p class="brand-sub">6-Month Transformation • Men's Physique</p>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button id="btn-quick-today" class="btn-pill-today" title="Jump to Today's Workout">
+            <span class="pulsing-dot"></span>
+            <span id="today-label">Today</span>
+          </button>
+          <button id="btn-open-guide" class="btn-icon" aria-label="Open Master Guide & Instructions">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Day Selector Pills (Horizontal Scroll on Mobile) -->
+      <nav class="day-scroll-nav" aria-label="Routine Days">
+        <div class="day-pills-wrap" id="day-pills-container">
+          <!-- Dynamically populated day pills (Mon - Sun) -->
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Dynamic Content Views -->
+    <main class="main-content" id="main-content">
+      
+      <!-- VIEW 1: WORKOUT VIEW (Default / Selected Day) -->
+      <section id="view-workout" class="view-section active">
+        <!-- Day Banner / Overview Card -->
+        <div id="day-overview-card" class="day-overview-card">
+          <!-- Filled dynamically -->
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="search-filter-bar">
+          <div class="search-input-wrap">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="exercise-search" placeholder="Search exercise or muscle..." autocomplete="off">
+            <button id="search-clear-btn" class="search-clear-btn" style="display:none;" aria-label="Clear Search">&times;</button>
+          </div>
+          <div class="filter-chips" id="filter-chips">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="Chest">Chest</button>
+            <button class="chip" data-filter="Back">Back</button>
+            <button class="chip" data-filter="Shoulders">Delts</button>
+            <button class="chip" data-filter="Arms">Arms</button>
+            <button class="chip" data-filter="Legs">Legs</button>
+            <button class="chip" data-filter="Abs">Abs</button>
+          </div>
+        </div>
+
+        <!-- Exercises List Container -->
+        <div id="exercises-container" class="exercises-container">
+          <!-- Dynamically populated exercise cards -->
+        </div>
+
+        <!-- Finisher & Cardio Card (if applicable for current day) -->
+        <div id="aux-day-card" class="aux-day-card" style="display:none;"></div>
+
+        <!-- Day Action Buttons (Reset, Mark All, Summary) -->
+        <div class="day-footer-actions">
+          <button id="btn-reset-day" class="btn-secondary-outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            Reset Day Checkboxes
+          </button>
+          <button id="btn-export-quick" class="btn-secondary-outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Backup Logs
+          </button>
+        </div>
+      </section>
+
+      <!-- VIEW 2: 6-DAY SPLIT AT A GLANCE -->
+      <section id="view-split" class="view-section">
+        <div class="section-hero">
+          <h2 class="section-title">6-Day Master Split</h2>
+          <p class="section-subtitle">Quick reference overview of all sessions, target muscle priorities, and starting working weights.</p>
+        </div>
+        <div id="all-days-overview-container" class="all-days-overview-grid">
+          <!-- Filled dynamically -->
+        </div>
+      </section>
+
+      <!-- VIEW 3: NUTRITION & BELLY FAT PROTOCOL -->
+      <section id="view-nutrition" class="view-section">
+        <div class="section-hero">
+          <div class="target-badge-lg">DAILY TARGET: 130g PROTEIN</div>
+          <h2 class="section-title">Nutrition & Belly Fat Protocol</h2>
+          <p class="section-subtitle">2g/kg × 65kg = 130g protein. "80% of belly fat reduction is nutrition. You cannot out-train a bad diet."</p>
+        </div>
+
+        <!-- Interactive Protein Tracker / Calculator -->
+        <div class="card glass-card tracker-protein-card">
+          <div class="card-header-simple">
+            <div class="card-icon-badge">🥗</div>
+            <div>
+              <h3 class="card-title-sm">Today's Protein Tracker</h3>
+              <p class="text-muted-sm">Tap quick additions or custom grams to reach 130g</p>
+            </div>
+            <div class="protein-counter">
+              <span id="protein-current">0</span><span class="protein-goal">/ 130g</span>
+            </div>
+          </div>
+          <div class="protein-progress-bar-wrap">
+            <div id="protein-progress-fill" class="protein-progress-fill" style="width: 0%;"></div>
+          </div>
+          <div class="protein-quick-buttons">
+            <button class="btn-quick-add" data-add="6">+1 Egg (6g)</button>
+            <button class="btn-quick-add" data-add="12">+2 Eggs (12g)</button>
+            <button class="btn-quick-add" data-add="24">+1 Scoop Whey (24g)</button>
+            <button class="btn-quick-add" data-add="26">+50g Soy Chunks (26g)</button>
+            <button class="btn-quick-add" data-add="16">+500ml Milk (16g)</button>
+            <button class="btn-quick-reset" id="btn-reset-protein">Reset</button>
+          </div>
+        </div>
+
+        <!-- Indian Protein Sources Value Table -->
+        <div class="card glass-card">
+          <h3 class="card-title-sm">Protein Sources — Cost per Gram Value</h3>
+          <p class="text-muted-sm mb-3">Maximize protein intake on a budget. Soy chunks, eggs, and dal are your primary staples.</p>
+          <div class="table-responsive">
+            <table class="custom-table" id="table-protein-sources">
+              <thead>
+                <tr>
+                  <th>Food</th>
+                  <th>Serving</th>
+                  <th>Protein</th>
+                  <th>Cost Approx.</th>
+                  <th>Cost / g</th>
+                </tr>
+              </thead>
+              <tbody id="protein-sources-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Daily Meal Plan -->
+        <div class="card glass-card">
+          <h3 class="card-title-sm">Sample Daily Meal Plan (Hitting 130g)</h3>
+          <p class="text-muted-sm mb-3">Exact daily structure designed for Suraj's schedule and 5:50 AM workout timing.</p>
+          <div class="meal-plan-timeline" id="meal-plan-timeline">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- 5 Belly Fat Rules -->
+        <div class="card glass-card rules-card">
+          <div class="card-header-simple">
+            <span class="warning-badge">NON-NEGOTIABLE</span>
+            <h3 class="card-title-sm">5 Belly Fat Reduction Rules</h3>
+          </div>
+          <div class="rules-list" id="belly-rules-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: WEEKLY PROGRESS TRACKER & LOGS -->
+      <section id="view-tracker" class="view-section">
+        <div class="section-hero">
+          <h2 class="section-title">Weekly Progress & Lifts Log</h2>
+          <p class="section-subtitle">Track your 5 key compound lifts, bodyweight, belly circumference (cm), and sleep for all 24 weeks.</p>
+        </div>
+
+        <!-- LocalStorage Status & Backup Box -->
+        <div class="storage-status-card">
+          <div class="storage-status-left">
+            <span class="status-indicator-green"></span>
+            <div>
+              <strong>Local Gym Database Active</strong>
+              <p class="text-muted-sm">Saves automatically to your phone. 100% offline-ready in gym basements.</p>
+            </div>
+          </div>
+          <div class="storage-actions">
+            <button id="btn-export-json" class="btn-sm btn-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Export JSON
+            </button>
+            <label for="import-file-input" class="btn-sm btn-secondary cursor-pointer">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              Import JSON
+            </label>
+            <input type="file" id="import-file-input" accept=".json" style="display:none;">
+          </div>
+        </div>
+
+        <!-- Week Selector for Tracking -->
+        <div class="week-selector-bar">
+          <label for="tracking-week-select" class="week-select-label">Select Week:</label>
+          <select id="tracking-week-select" class="custom-select">
+            <!-- Weeks 1 to 24 with deload marks -->
+          </select>
+          <div id="week-deload-alert" class="deload-pill-alert" style="display:none;">
+            DELOAD WEEK (Reduce weights 40%)
+          </div>
+        </div>
+
+        <!-- Active Week Entry Card -->
+        <div class="card glass-card" id="week-entry-card">
+          <div class="card-header-flex">
+            <h3 class="card-title-sm" id="week-entry-title">Week 1 Log</h3>
+            <span class="text-muted-sm" id="week-save-indicator">Auto-saved</span>
+          </div>
+
+          <!-- Body stats (weight, belly cm, sleep) -->
+          <div class="body-stats-grid">
+            <div class="stat-input-group">
+              <label for="stat-bodyweight">Bodyweight (kg)</label>
+              <input type="number" id="stat-bodyweight" step="0.1" placeholder="e.g. 65.5">
+            </div>
+            <div class="stat-input-group">
+              <label for="stat-belly">Belly Circumference (cm)</label>
+              <input type="number" id="stat-belly" step="0.5" placeholder="e.g. 82.0">
+            </div>
+            <div class="stat-input-group">
+              <label for="stat-sleep">Avg Sleep (hrs)</label>
+              <input type="number" id="stat-sleep" step="0.5" placeholder="e.g. 8.0">
+            </div>
+          </div>
+
+          <!-- Key compound lifts table for the week -->
+          <h4 class="mt-4 mb-2 text-primary font-bold">5 Main Compound Lifts Log</h4>
+          <p class="text-muted-sm mb-3">Record actual working weight (kg) and reps achieved across sets.</p>
+          <div id="compound-lifts-form" class="compound-lifts-form">
+            <!-- Dynamically populated lift inputs -->
+          </div>
+
+          <div class="notes-input-group mt-3">
+            <label for="week-general-notes">Weekly Reflection & Notes</label>
+            <textarea id="week-general-notes" rows="2" placeholder="How did this week feel? RIR consistency, fatigue, sleep quality..."></textarea>
+          </div>
+        </div>
+
+        <!-- History / Saved Weeks Table -->
+        <div class="card glass-card mt-4">
+          <h3 class="card-title-sm">Weekly History Overview</h3>
+          <div class="table-responsive">
+            <table class="custom-table" id="table-history-overview">
+              <thead>
+                <tr>
+                  <th>Week</th>
+                  <th>Weight</th>
+                  <th>Belly</th>
+                  <th>Sleep</th>
+                  <th>Incline Press</th>
+                  <th>Flat Bench</th>
+                  <th>Squat</th>
+                </tr>
+              </thead>
+              <tbody id="history-overview-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: MASTER GUIDE & PROTOCOLS -->
+      <section id="view-guide" class="view-section">
+        <div class="section-hero">
+          <h2 class="section-title">Master Guide & Protocols</h2>
+          <p class="section-subtitle">Deload cycles, Karnage pre-workout schedule, warm-up guides, and training terminology.</p>
+        </div>
+
+        <!-- Pre-workout Karnage Card -->
+        <div class="card glass-card">
+          <div class="card-header-simple">
+            <span class="card-icon-badge">⚡</span>
+            <div>
+              <h3 class="card-title-sm">Pre-Workout Protocol (Karnage)</h3>
+              <p class="text-muted-sm">1 scoop ONLY (100mg) at 5:50 AM. Never take after 4:00 PM.</p>
+            </div>
+          </div>
+          <div class="rules-list mb-3">
+            <div class="rule-item"><strong>Strict Dose:</strong> 1 scoop only (100mg caffeine). Never 2.</div>
+            <div class="rule-item"><strong>Timing:</strong> 20-30 min before training at 5:50 AM.</div>
+            <div class="rule-item"><strong>Sleep Guard:</strong> Never consume after 4:00 PM.</div>
+            <div class="rule-item"><strong>Tolerance Reset:</strong> Skip pre-workout entirely on Week 4 to reset receptor sensitivity.</div>
+          </div>
+          <div class="table-responsive">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Day</th><th>Session</th><th>Pre-Workout</th><th>Time</th></tr>
+              </thead>
+              <tbody id="preworkout-schedule-tbody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Deload Protocol Card -->
+        <div class="card glass-card">
+          <div class="card-header-simple">
+            <span class="card-icon-badge">🔄</span>
+            <div>
+              <h3 class="card-title-sm">Deload Protocol (Every 6th Week)</h3>
+              <p class="text-muted-sm">Weights reduced 40%. Same sets, same reps. No pre-workout.</p>
+            </div>
+          </div>
+          <div class="table-responsive mb-3">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Week Cycle</th><th>Action & Instructions</th></tr>
+              </thead>
+              <tbody id="deload-schedule-tbody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+          <div class="early-signs-box">
+            <h4 class="font-bold text-accent mb-2">Early Warning Deload Signs:</h4>
+            <ul id="deload-signs-list" class="styled-bullet-list">
+              <!-- Populated dynamically -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- 6-Month Aesthetic Roadmap -->
+        <div class="card glass-card">
+          <h3 class="card-title-sm mb-3">6-Month Aesthetic Progression Roadmap</h3>
+          <div class="roadmap-timeline" id="roadmap-timeline">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Terminology Card -->
+        <div class="card glass-card">
+          <h3 class="card-title-sm mb-3">Core Training Terminology</h3>
+          <div class="terminology-grid" id="terminology-grid">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FLOATING REST TIMER WIDGET (Gym mobile-friendly) -->
+    <div id="rest-timer-widget" class="rest-timer-widget minimized">
+      <!-- Minimized Bar View -->
+      <div class="timer-minimized-bar" id="timer-minimized-bar">
+        <div class="timer-min-info">
+          <span class="timer-min-icon">⏱️</span>
+          <span class="timer-min-label">Rest:</span>
+          <span class="timer-min-digits" id="timer-min-digits">00:00</span>
+        </div>
+        <div class="timer-min-controls">
+          <button id="btn-timer-min-toggle" class="btn-timer-icon" aria-label="Toggle Timer Play/Pause">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </button>
+          <button id="btn-timer-expand" class="btn-timer-icon" aria-label="Expand Full Timer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Expanded Overlay Modal / Panel -->
+      <div class="timer-expanded-panel" id="timer-expanded-panel">
+        <div class="timer-panel-header">
+          <span class="timer-panel-title">REST TIMER</span>
+          <button id="btn-timer-minimize" class="btn-timer-icon" aria-label="Minimize Timer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+
+        <div class="timer-display-ring-wrap">
+          <svg class="timer-ring-svg" viewBox="0 0 200 200">
+            <circle class="timer-ring-bg" cx="100" cy="100" r="88"></circle>
+            <circle class="timer-ring-progress" id="timer-ring-progress" cx="100" cy="100" r="88"></circle>
+          </svg>
+          <div class="timer-ring-center">
+            <div class="timer-ring-time" id="timer-ring-digits">01:30</div>
+            <div class="timer-ring-status" id="timer-ring-status">Resting...</div>
+          </div>
+        </div>
+
+        <!-- Quick Rest Preset Buttons -->
+        <div class="timer-presets-row">
+          <button class="btn-preset" data-seconds="30">30s</button>
+          <button class="btn-preset active" data-seconds="60">60s</button>
+          <button class="btn-preset" data-seconds="90">90s</button>
+          <button class="btn-preset" data-seconds="120">2m</button>
+          <button class="btn-preset" data-seconds="150">2.5m</button>
+          <button class="btn-preset" data-seconds="180">3m</button>
+        </div>
+
+        <div class="timer-action-buttons">
+          <button id="btn-timer-sub10" class="btn-timer-secondary">-10s</button>
+          <button id="btn-timer-toggle-play" class="btn-timer-primary">Pause</button>
+          <button id="btn-timer-add10" class="btn-timer-secondary">+10s</button>
+          <button id="btn-timer-reset" class="btn-timer-secondary">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WARM-UP MODAL -->
+    <div id="warmup-modal" class="app-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="warmup-modal-title">
+      <div class="modal-backdrop" id="warmup-modal-backdrop"></div>
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3 class="modal-title" id="warmup-modal-title">Push Warm-Up Guide</h3>
+          <button class="btn-modal-close" id="btn-close-warmup" aria-label="Close Modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted-sm mb-3">"Cold muscles tear. 5 minutes of warm-up prevents months of injury. Never skip this."</p>
+          <div class="warmup-steps-list" id="warmup-modal-steps">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-primary w-100" id="btn-warmup-done">Done &amp; Ready to Lift</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM THUMB NAVIGATION (Mobile-First) -->
+    <nav class="bottom-nav" aria-label="Main Navigation">
+      <button class="nav-tab active" data-view="view-workout" aria-label="Today Workout">
+        <span class="nav-icon">🏋️</span>
+        <span class="nav-label">Workout</span>
+      </button>
+      <button class="nav-tab" data-view="view-split" aria-label="6-Day Split">
+        <span class="nav-icon">📅</span>
+        <span class="nav-label">6-Day Split</span>
+      </button>
+      <button class="nav-tab" data-view="view-nutrition" aria-label="Nutrition & Diet">
+        <span class="nav-icon">🥗</span>
+        <span class="nav-label">Nutrition</span>
+      </button>
+      <button class="nav-tab" data-view="view-tracker" aria-label="Progress Logs">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Tracker</span>
+      </button>
+      <button class="nav-tab" data-view="view-guide" aria-label="Master Guide">
+        <span class="nav-icon">📖</span>
+        <span class="nav-label">Guide</span>
+      </button>
+    </nav>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="routineData.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Register Service Worker for offline gym use if supported
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(err => {
+          console.log('SW registration note:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

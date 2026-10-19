@@ -1,0 +1,18 @@
+{
+  "name": "Suraj Aesthetic Transformation Hub",
+  "short_name": "Suraj Routine",
+  "description": "6-Month Aesthetic Transformation Program — Men's Physique Standard, 6 Days/Week Split, Offline Gym Logger & Rest Timer",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#161d21",
+  "theme_color": "#263137",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23F4510B'/><path d='M25 50h50M35 35v30M65 35v30' stroke='%23ffffff' stroke-width='8' stroke-linecap='round'/></svg>",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
