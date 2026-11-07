@@ -2031,3 +2031,316 @@ a {
     border-right: 1px solid var(--surface-border);
   }
 }
+
+/* ==========================================================================
+   V6.1 ADDITIONS: MOBILITY FLOW & PROGRESS REPORT STYLES
+   ========================================================================== */
+.btn-pill-mobility {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(244, 81, 11, 0.14);
+  border: 1px solid rgba(244, 81, 11, 0.4);
+  color: var(--text-white);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.btn-pill-mobility:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.warmup-step-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  background: rgba(38, 49, 55, 0.6);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  transition: all var(--transition-fast);
+}
+.warmup-step-row:hover {
+  border-color: var(--surface-border-bright);
+}
+.warmup-step-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  cursor: pointer;
+  margin: 0;
+}
+.warmup-step-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-white);
+  line-height: 1.35;
+}
+
+/* Progress Section */
+.progress-hero-card {
+  border-color: rgba(244, 81, 11, 0.35);
+  background: linear-gradient(145deg, rgba(38, 49, 55, 0.9), rgba(24, 32, 36, 0.95));
+}
+.progress-top-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.progress-overall-circle {
+  flex-shrink: 0;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+  background: rgba(244, 81, 11, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(244, 81, 11, 0.25);
+}
+.progress-overall-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1;
+}
+.progress-overall-sub {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.progress-meta-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+}
+.progress-stat-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-border);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.progress-stat-pill .stat-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.progress-stat-pill .stat-val {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-white);
+}
+.progress-stat-pill .stat-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.progress-muscles-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.progress-muscle-card {
+  padding: 10px 12px;
+  background: rgba(38, 49, 55, 0.5);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+}
+.progress-muscle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.progress-muscle-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-white);
+}
+.progress-muscle-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--text-white);
+}
+.progress-muscle-val.text-regressed {
+  color: #ef4444;
+}
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-deep);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.progress-bar-inner {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+.progress-muscle-note {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.35;
+}
+.diet-rules-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.diet-rule-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+}
+.diet-rule-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.diet-rule-item p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-white);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* Mobility Flow Styles */
+.mobility-today-hero {
+  border-color: rgba(244, 81, 11, 0.35);
+  background: linear-gradient(145deg, rgba(38, 49, 55, 0.95), rgba(24, 32, 36, 0.98));
+}
+.mobility-hero-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn-mobility-done {
+  padding: 10px 16px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--surface-border-bright);
+  color: var(--text-white);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.btn-mobility-done:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.btn-mobility-done.is-done {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+  color: #10b981;
+}
+.mobility-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mobility-exercise-card {
+  padding: 12px;
+  background: rgba(38, 49, 55, 0.55);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+.mobility-exercise-card:hover {
+  border-color: var(--surface-border-bright);
+}
+.mobility-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.mobility-step-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--secondary-light);
+  border: 1px solid var(--surface-border-bright);
+  color: var(--text-white);
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.mobility-step-badge.add-on-badge {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.mobility-step-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.mobility-step-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-white);
+}
+.mobility-step-reps {
+  font-size: 0.72rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+.mobility-step-cue {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0 0 6px 0;
+  line-height: 1.4;
+}
+.mobility-why-tag {
+  font-size: 0.72rem;
+  color: var(--surface);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px 8px;
+  border-radius: 4px;
+  line-height: 1.35;
+}
+.custom-table tr.active-day-row td {
+  background: rgba(244, 81, 11, 0.1);
+  color: var(--text-white);
+}

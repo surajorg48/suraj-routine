@@ -1,7 +1,7 @@
 /**
- * SURAJ 6-MONTH AESTHETIC TRANSFORMATION PROGRAM
- * Comprehensive Program Data & Interactive Database
- * Version 3.0 | August 2026
+ * SURAJ AESTHETIC TRANSFORMATION PROGRAM — DATABASE
+ * Updated V6.1 with Restructured Abs, Progress Report & Daily Mobility Flow
+ * November 2026
  */
 
 const ROUTINE_DATA = {
@@ -14,9 +14,9 @@ const ROUTINE_DATA = {
     "status": "Natural Athlete",
     "standard": "Men's Physique Standard",
     "split": "6 Days / Week (Push / Pull / Legs / Push / Pull / Arms)",
-    "duration": "6 Months",
-    "version": "Version 3.0",
-    "date": "August 2026",
+    "duration": "Extended to April–May 2027 (Originally 6 Months)",
+    "version": "Version 6.1 (Restructured Abs + Mobility)",
+    "date": "November 2026",
     "theme": {
       "primary": "#F4510B",
       "secondary": "#263137",
@@ -33,7 +33,7 @@ const ROUTINE_DATA = {
     },
     {
       "term": "SET",
-      "meaning": "A group of reps without stopping. '4 \u00d7 8' = 4 sets of 8 reps."
+      "meaning": "A group of reps without stopping. '4 × 8' = 4 sets of 8 reps."
     },
     {
       "term": "WORKING SET",
@@ -45,7 +45,7 @@ const ROUTINE_DATA = {
     },
     {
       "term": "RIR 0",
-      "meaning": "Absolute failure \u2014 cannot do one more clean rep. Last set of isolation only."
+      "meaning": "Absolute failure — cannot do one more clean rep. Last set of isolation only."
     },
     {
       "term": "RIR 1",
@@ -57,7 +57,7 @@ const ROUTINE_DATA = {
     },
     {
       "term": "TEMPO 3-1-1-0",
-      "meaning": "3 sec lower \u2192 1 sec pause \u2192 1 sec lift \u2192 0 pause at top."
+      "meaning": "3 sec lower → 1 sec pause → 1 sec lift → 0 pause at top."
     },
     {
       "term": "PROGRESSIVE OVERLOAD",
@@ -77,14 +77,14 @@ const ROUTINE_DATA = {
     "schedule": [
       {
         "day": "Monday",
-        "session": "Push A \u2014 Upper Chest + Shoulders",
+        "session": "Push A — Upper Chest + Shoulders",
         "preWorkout": true,
         "amount": "1 scoop",
         "time": "5:50 AM"
       },
       {
         "day": "Tuesday",
-        "session": "Pull A \u2014 Lats + Biceps",
+        "session": "Pull A — Lats + Biceps",
         "preWorkout": true,
         "amount": "1 scoop",
         "time": "5:50 AM"
@@ -98,14 +98,14 @@ const ROUTINE_DATA = {
       },
       {
         "day": "Thursday",
-        "session": "Push B \u2014 Mid + Lower Chest + Triceps",
+        "session": "Push B — Mid + Lower Chest + Triceps",
         "preWorkout": true,
         "amount": "1 scoop",
         "time": "5:50 AM"
       },
       {
         "day": "Friday",
-        "session": "Pull B \u2014 Rear Delts + Back + Abs",
+        "session": "Pull B — Rear Delts + Back + Abs",
         "preWorkout": true,
         "amount": "1 scoop",
         "time": "5:50 AM"
@@ -131,44 +131,104 @@ const ROUTINE_DATA = {
       "title": "Push Warm-Up (Monday & Thursday)",
       "duration": "5-7 min",
       "steps": [
-        "Arm circles x20 each way (forward & backward)",
-        "Band pull-aparts x20 (squeeze upper back)",
-        "Push-ups controlled tempo x20",
-        "Shoulder rotations / Cuban press x10",
-        "Specific progressive warm-up sets for Exercise 1"
+        {
+          "text": "Arm circles ×20 each way (forward & backward)",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=arm+circles+shoulder+warmup+proper+form"
+        },
+        {
+          "text": "Band pull-aparts ×20 (squeeze upper back)",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=band+pull+apart+shoulder+warmup+upper+back"
+        },
+        {
+          "text": "Push-ups controlled tempo ×20",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=push+up+controlled+tempo+chest+warmup"
+        },
+        {
+          "text": "Shoulder rotations / Cuban press ×10",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=cuban+press+shoulder+rotation+warmup"
+        },
+        {
+          "text": "Specific progressive warm-up sets for Exercise 1",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=pyramid+warmup+sets+compound+lifting+form"
+        }
       ]
     },
     "pull": {
       "title": "Pull Warm-Up (Tuesday & Friday)",
       "duration": "5-7 min",
       "steps": [
-        "Dead hang from pull-up bar for 30 seconds",
-        "Scapular retractions / pull-downs x15",
-        "Band pull-aparts x30",
-        "Light cable face pulls x20",
-        "Specific progressive warm-up sets for Exercise 1"
+        {
+          "text": "Dead hang from pull-up bar for 30 seconds",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=dead+hang+pullup+bar+lat+warmup+form"
+        },
+        {
+          "text": "Scapular retractions / pull-downs ×15",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=scapular+retraction+pulldown+shoulder+blade+warmup"
+        },
+        {
+          "text": "Band pull-aparts ×30",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=band+pull+apart+upper+back+rear+delt+warmup"
+        },
+        {
+          "text": "Light cable face pulls ×20",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=light+cable+face+pull+rear+delt+warmup"
+        },
+        {
+          "text": "Specific progressive warm-up sets for Exercise 1",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=pyramid+warmup+sets+compound+lifting+form"
+        }
       ]
     },
     "legs": {
       "title": "Legs Warm-Up (Wednesday)",
       "duration": "7-9 min",
       "steps": [
-        "5 minutes stationary bike or incline treadmill (Zone 1/2)",
-        "10 bodyweight squats full depth with pause",
-        "10 leg swings forward/backward & sideways (each leg)",
-        "10 bodyweight glute bridges (hold top squeeze)",
-        "Specific progressive warm-up sets for Barbell Squat"
+        {
+          "text": "5 minutes stationary bike or incline treadmill (Zone 1/2)",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=stationary+bike+warmup+legs+zone+2"
+        },
+        {
+          "text": "10 bodyweight squats full depth with pause",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=bodyweight+squat+full+depth+pause+warmup+form"
+        },
+        {
+          "text": "10 leg swings forward/backward & sideways (each leg)",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=leg+swings+hip+mobility+warmup"
+        },
+        {
+          "text": "10 bodyweight glute bridges (hold top squeeze)",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=bodyweight+glute+bridge+activation+warmup"
+        },
+        {
+          "text": "Specific progressive warm-up sets for Barbell Squat",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=squat+warmup+pyramid+sets+proper+depth"
+        }
       ]
     },
     "shoulders": {
       "title": "Shoulders & Arms Warm-Up (Saturday)",
       "duration": "5-7 min",
       "steps": [
-        "Arm circles x20 each way",
-        "Band pull-aparts x25",
-        "Controlled push-ups x10",
-        "5kg light dumbbell lateral raises x15",
-        "Specific progressive warm-up sets for Exercise 1"
+        {
+          "text": "Arm circles ×20 each way",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=arm+circles+shoulder+warmup+proper+form"
+        },
+        {
+          "text": "Band pull-aparts ×25",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=band+pull+apart+shoulder+warmup+upper+back"
+        },
+        {
+          "text": "Controlled push-ups ×10",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=push+up+controlled+tempo+chest+warmup"
+        },
+        {
+          "text": "5kg light dumbbell lateral raises ×15",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=light+dumbbell+lateral+raise+shoulder+warmup"
+        },
+        {
+          "text": "Specific progressive warm-up sets for Exercise 1",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=pyramid+warmup+sets+compound+lifting+form"
+        }
       ]
     }
   },
@@ -178,10 +238,10 @@ const ROUTINE_DATA = {
     "schedule": [
       {
         "period": "Weeks 1-5",
-        "action": "Full program at full weights \u2014 progressive overload every session."
+        "action": "Full program at full weights — progressive overload every session."
       },
       {
-        "period": "Week 6 \u2014 DELOAD",
+        "period": "Week 6 — DELOAD",
         "action": "All weights reduced 40%. Same sets, same reps. No pre-workout this week."
       },
       {
@@ -189,7 +249,7 @@ const ROUTINE_DATA = {
         "action": "Resume full program. You will return noticeably stronger."
       },
       {
-        "period": "Week 12 \u2014 DELOAD",
+        "period": "Week 12 — DELOAD",
         "action": "Repeat deload protocol (40% weight drop, no pre-workout)."
       },
       {
@@ -197,7 +257,7 @@ const ROUTINE_DATA = {
         "action": "Full intensity progression cycle."
       },
       {
-        "period": "Week 18 \u2014 DELOAD",
+        "period": "Week 18 — DELOAD",
         "action": "Deload week (40% reduction)."
       },
       {
@@ -205,7 +265,7 @@ const ROUTINE_DATA = {
         "action": "Peak transformation cycle."
       },
       {
-        "period": "Week 24 \u2014 DELOAD",
+        "period": "Week 24 — DELOAD",
         "action": "Final deload / physique photoshoot readiness."
       }
     ],
@@ -217,7 +277,7 @@ const ROUTINE_DATA = {
     ]
   },
   "nutrition": {
-    "dailyTarget": "130g protein / day minimum (2g \u00d7 65kg bodyweight = 130g)",
+    "dailyTarget": "130g protein / day minimum (2g × 65kg bodyweight = 130g)",
     "bellyFatPhilosophy": "80% of belly fat reduction is nutrition. One extra roti adds back what you burned in 5 minutes of cardio. You cannot out-train a bad diet.",
     "proteinSources": [
       {
@@ -326,7 +386,7 @@ const ROUTINE_DATA = {
         "reason": "Slight deficit reduction without crashing metabolic rate or workout energy."
       },
       {
-        "rule": "Sugar is the enemy \u2014 eliminate entirely",
+        "rule": "Sugar is the enemy — eliminate entirely",
         "reason": "Cold drinks, biscuits, bakery treats, and mithai must be completely eliminated, not just reduced."
       }
     ]
@@ -355,7 +415,7 @@ const ROUTINE_DATA = {
     {
       "month": "Month 6",
       "focus": "Weeks 21-23 peak high-intensity volume. Week 24 deload 40% for optimal aesthetic fullness.",
-      "result": "Complete 6-month aesthetic transformation \u2014 Men's Physique standard achieved."
+      "result": "Complete 6-month aesthetic transformation — Men's Physique standard achieved."
     }
   ],
   "trackingLifts": [
@@ -389,7 +449,7 @@ const ROUTINE_DATA = {
     {
       "id": "monday",
       "day": "Monday",
-      "title": "Push A \u2014 Upper Chest + Shoulders",
+      "title": "Push A — Upper Chest + Shoulders",
       "sessionName": "Push A",
       "primaryFocus": "Upper Chest Clavicular Priority + Side Delts + Triceps",
       "duration": "~75 min",
@@ -419,8 +479,8 @@ const ROUTINE_DATA = {
           "name": "Incline Barbell Press",
           "rawName": "Incline Barbell Press",
           "muscleGroup": "Upper Chest",
-          "target": "Upper chest (clavicular head) \u2014 #1 Priority",
-          "equipment": "Barbell + Bench 30-35\u00b0",
+          "target": "Upper chest (clavicular head) — #1 Priority",
+          "equipment": "Barbell + Bench 30-35°",
           "tempo": "3-1-1-0",
           "setsReps": "4 x 8",
           "rest": "3 min",
@@ -457,17 +517,17 @@ const ROUTINE_DATA = {
               "defaultReps": "6"
             }
           ],
-          "progression": "All 4x8 at RIR 2 \u2192 increase to 35kg. Stay if any set drops below 6.",
+          "progression": "All 4x8 at RIR 2 → increase to 35kg. Stay if any set drops below 6.",
           "doThis": [
-            "Set bench EXACTLY 30-35\u00b0 \u2014 NOT 45\u00b0",
+            "Set bench EXACTLY 30-35° — NOT 45°",
             "Retract scapula before unracking and hold throughout",
-            "Elbows at 60-70\u00b0 from torso",
+            "Elbows at 60-70° from torso",
             "Bar touches upper chest not neck",
             "Drive feet into floor"
           ],
           "neverDo": [
-            "Angle above 35\u00b0 \u2014 shifts load to front delt",
-            "Elbows flared to 90\u00b0 \u2014 impingement risk",
+            "Angle above 35° — shifts load to front delt",
+            "Elbows flared to 90° — impingement risk",
             "Bouncing bar off chest",
             "Losing scapular retraction mid-set"
           ],
@@ -480,8 +540,8 @@ const ROUTINE_DATA = {
           "name": "Incline Dumbbell Press",
           "rawName": "Incline Dumbbell Press",
           "muscleGroup": "Upper Chest",
-          "target": "Upper chest \u2014 second compound for upper chest priority",
-          "equipment": "Dumbbells + Incline Bench 30-35\u00b0",
+          "target": "Upper chest — second compound for upper chest priority",
+          "equipment": "Dumbbells + Incline Bench 30-35°",
           "tempo": "3-1-2-0",
           "setsReps": "3 x 10",
           "rest": "2 min",
@@ -510,15 +570,15 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "All 3x10 \u2192 increase to 18kg",
+          "progression": "All 3x10 → increase to 18kg",
           "doThis": [
-            "Same angle as barbell press \u2014 30-35\u00b0",
+            "Same angle as barbell press — 30-35°",
             "Full stretch at bottom, feel upper pec open",
             "Press up and slightly inward at top",
             "3-second controlled descent"
           ],
           "neverDo": [
-            "Going above 35\u00b0 angle",
+            "Going above 35° angle",
             "Partial reps at top",
             "Rushing the negative"
           ],
@@ -531,8 +591,8 @@ const ROUTINE_DATA = {
           "name": "Cable Low-to-High Fly",
           "rawName": "Cable Low-to-High Fly",
           "muscleGroup": "Upper Chest",
-          "target": "Upper chest \u2014 constant cable tension through full range",
-          "equipment": "Cable Machine \u2014 Low Pulley",
+          "target": "Upper chest — constant cable tension through full range",
+          "equipment": "Cable Machine — Low Pulley",
           "tempo": "2-1-2-1 (1 sec squeeze at top)",
           "setsReps": "2 x 12",
           "rest": "90 sec",
@@ -555,14 +615,14 @@ const ROUTINE_DATA = {
               "defaultReps": "12"
             }
           ],
-          "progression": "2x12 \u2192 add 2.5kg",
+          "progression": "2x12 → add 2.5kg",
           "doThis": [
             "Pulleys set at LOWEST position",
-            "Fly upward and inward \u2014 matching upper chest fiber direction",
+            "Fly upward and inward — matching upper chest fiber direction",
             "Squeeze at top like clapping above your head"
           ],
           "neverDo": [
-            "Elbows bending too much \u2014 becomes a press",
+            "Elbows bending too much — becomes a press",
             "Standing too close to the cable stack"
           ],
           "youtubeQuery": "cable low to high fly upper chest clavicular head proper form tutorial",
@@ -574,8 +634,8 @@ const ROUTINE_DATA = {
           "name": "Cable Reverse Fly",
           "rawName": "Cable Reverse Fly",
           "muscleGroup": "Rear Delts",
-          "target": "Rear delt isolation \u2014 cable constant-tension variation",
-          "equipment": "Cable Machine \u2014 Low Pulley (crossed handles)",
+          "target": "Rear delt isolation — cable constant-tension variation",
+          "equipment": "Cable Machine — Low Pulley (crossed handles)",
           "tempo": "2-1-2-1 (1 sec squeeze at contraction)",
           "setsReps": "3 x 12-15",
           "rest": "60 sec",
@@ -604,17 +664,17 @@ const ROUTINE_DATA = {
               "defaultReps": "15"
             }
           ],
-          "progression": "3x15 \u2192 add 2.5kg (one pin)",
+          "progression": "3x15 → add 2.5kg (one pin)",
           "doThis": [
             "Cross the handles, pull hands apart and back",
             "Squeeze shoulder blades together at the peak",
             "Slight elbow bend throughout, held constant",
-            "Control the return \u2014 don't let the cables snap back"
+            "Control the return — don't let the cables snap back"
           ],
           "neverDo": [
             "Using momentum or leaning back to move the weight",
-            "Going too heavy \u2014 this is a feel exercise, not a strength one",
-            "Bending elbows too much \u2014 turns it into a row"
+            "Going too heavy — this is a feel exercise, not a strength one",
+            "Bending elbows too much — turns it into a row"
           ],
           "youtubeQuery": "cable reverse fly rear delts cross cable proper form tutorial",
           "youtubeUrl": "https://www.youtube.com/results?search_query=cable+reverse+fly+rear+delts+cross+cable+proper+form+tutorial",
@@ -625,7 +685,7 @@ const ROUTINE_DATA = {
           "name": "Dumbbell Lateral Raise",
           "rawName": "Dumbbell Lateral Raise",
           "muscleGroup": "Side Delts",
-          "target": "Side delts \u2014 most important muscle for visible width",
+          "target": "Side delts — most important muscle for visible width",
           "equipment": "Dumbbells",
           "tempo": "1-0-3-0 (raise fast, LOWER SLOWLY 3 sec)",
           "setsReps": "4 x 15 + Drop Set on Set 4",
@@ -656,22 +716,22 @@ const ROUTINE_DATA = {
             },
             {
               "set": 4,
-              "target": "8kg x 15 then immediately 5kg x 10 \u2014 NO rest between weights",
+              "target": "8kg x 15 then immediately 5kg x 10 — NO rest between weights",
               "defaultWeight": "8",
               "defaultReps": "15"
             }
           ],
-          "progression": "All 4x15 clean \u2192 increase to 10kg",
+          "progression": "All 4x15 clean → increase to 10kg",
           "doThis": [
-            "Slight forward lean at hips (10-15\u00b0)",
+            "Slight forward lean at hips (10-15°)",
             "Lead with ELBOWS not hands",
             "Pinky slightly higher than thumb at top",
-            "Stop at shoulder height \u2014 not above",
+            "Stop at shoulder height — not above",
             "3 full seconds on the way DOWN every rep"
           ],
           "neverDo": [
             "Swinging torso for momentum",
-            "Raising above shoulder height \u2014 traps take over",
+            "Raising above shoulder height — traps take over",
             "Shrugging during the raise",
             "Going too heavy"
           ],
@@ -685,7 +745,7 @@ const ROUTINE_DATA = {
           "rawName": "Tricep Rope Pushdown",
           "muscleGroup": "Triceps",
           "target": "Triceps lateral + medial head",
-          "equipment": "Cable Machine \u2014 High Pulley",
+          "equipment": "Cable Machine — High Pulley",
           "tempo": "2-1-2-1 (1 sec hold at bottom)",
           "setsReps": "3 x 12",
           "rest": "90 sec",
@@ -714,9 +774,9 @@ const ROUTINE_DATA = {
               "defaultReps": "12"
             }
           ],
-          "progression": "3x12 \u2192 add 2.5kg",
+          "progression": "3x12 → add 2.5kg",
           "doThis": [
-            "Pin elbows to sides \u2014 they do NOT move",
+            "Pin elbows to sides — they do NOT move",
             "Spread rope apart at bottom for max contraction",
             "Full extension at bottom, full stretch at top"
           ],
@@ -728,13 +788,62 @@ const ROUTINE_DATA = {
           "youtubeQuery": "cable tricep rope pushdown lateral head proper form tutorial",
           "youtubeUrl": "https://www.youtube.com/results?search_query=cable+tricep+rope+pushdown+lateral+head+proper+form+tutorial",
           "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Tricep%20Rope%20Pushdown%20exercise%20proper%20form"
+        },
+        {
+          "id": "ex_mon_abs",
+          "name": "Hanging Knee Raise (Monday Abs Finisher)",
+          "rawName": "⭐ CALISTHENICS — Hanging Knee Raise",
+          "muscleGroup": "Lower Abs",
+          "target": "Lower abs (Calisthenics knee curl) — Frequency addition without CNS fatigue",
+          "equipment": "Pull-Up Bar",
+          "tempo": "Controlled (3-1-1-0)",
+          "setsReps": "3 × 12",
+          "rest": "60 sec",
+          "restSeconds": 60,
+          "rir": "RIR 1 all sets",
+          "warmupSets": [],
+          "workingSets": [
+            {
+              "set": 1,
+              "target": "Bodyweight × 12",
+              "defaultWeight": "",
+              "defaultReps": "12"
+            },
+            {
+              "set": 2,
+              "target": "Bodyweight × 12",
+              "defaultWeight": "",
+              "defaultReps": "12"
+            },
+            {
+              "set": 3,
+              "target": "Bodyweight × 12",
+              "defaultWeight": "",
+              "defaultReps": "12"
+            }
+          ],
+          "progression": "3×12 clean without swing → progress to straight-leg raise",
+          "doThis": [
+            "Dead hang start on bar",
+            "Curl knees up toward chest using the lower abs, not momentum",
+            "Tuck pelvis slightly at the top for maximum lower ab activation",
+            "Lower slowly with 3-second control"
+          ],
+          "neverDo": [
+            "Swinging the body or kipping to lift legs",
+            "Using momentum from the shoulders instead of the abs",
+            "Dropping legs fast without eccentric control"
+          ],
+          "youtubeQuery": "hanging knee raise lower abs calisthenics proper form",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=hanging+knee+raise+lower+abs+calisthenics+proper+form",
+          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Hanging+Knee+Raise+exercise+proper+form"
         }
       ]
     },
     {
       "id": "tuesday",
       "day": "Tuesday",
-      "title": "Pull A \u2014 Lats + Biceps",
+      "title": "Pull A — Lats + Biceps",
       "sessionName": "Pull A",
       "primaryFocus": "Lat Width (V-Taper) + Horizontal Thickness + Biceps",
       "duration": "~75 min",
@@ -747,7 +856,7 @@ const ROUTINE_DATA = {
         {
           "id": "ex_7",
           "name": "Pull-Ups",
-          "rawName": "\u2b50 CALISTHENICS \u2014 Pull-Ups",
+          "rawName": "⭐ CALISTHENICS — Pull-Ups",
           "muscleGroup": "Lats & Biceps",
           "target": "Lats + biceps (Calisthenics compound)",
           "equipment": "Gym standard",
@@ -793,8 +902,8 @@ const ROUTINE_DATA = {
           "name": "Straight-Arm Pulldown",
           "rawName": "Straight-Arm Pulldown",
           "muscleGroup": "Lats",
-          "target": "Lat activation \u2014 isolates lats without biceps; builds mind-muscle connection before heavy pulling",
-          "equipment": "Cable Machine \u2014 High Pulley, straight bar",
+          "target": "Lat activation — isolates lats without biceps; builds mind-muscle connection before heavy pulling",
+          "equipment": "Cable Machine — High Pulley, straight bar",
           "tempo": "2-1-2-0",
           "setsReps": "3 x 15",
           "rest": "60 sec",
@@ -823,17 +932,17 @@ const ROUTINE_DATA = {
               "defaultReps": "15"
             }
           ],
-          "progression": "3x15 \u2192 add 2.5kg",
+          "progression": "3x15 → add 2.5kg",
           "doThis": [
             "Slight forward hip hinge, arms stay almost straight throughout",
             "Pull the bar down in an arc to your thighs",
-            "Squeeze the lats \u2014 think \"elbows to pockets\"",
+            "Squeeze the lats — think \"elbows to pockets\"",
             "Control the bar back up to the top"
           ],
           "neverDo": [
-            "Bending the elbows \u2014 turns it into a pushdown",
+            "Bending the elbows — turns it into a pushdown",
             "Using the lower back to heave the weight",
-            "Going heavy \u2014 this is a feel/activation exercise, not a strength one"
+            "Going heavy — this is a feel/activation exercise, not a strength one"
           ],
           "youtubeQuery": "straight arm lat pulldown cable proper form tutorial",
           "youtubeUrl": "https://www.youtube.com/results?search_query=straight+arm+lat+pulldown+cable+proper+form+tutorial",
@@ -844,8 +953,8 @@ const ROUTINE_DATA = {
           "name": "Wide Grip Lat Pulldown",
           "rawName": "Wide Grip Lat Pulldown",
           "muscleGroup": "Lats (Width)",
-          "target": "Lat width \u2014 primary V-taper muscle",
-          "equipment": "Cable Machine \u2014 Lat Pulldown Bar",
+          "target": "Lat width — primary V-taper muscle",
+          "equipment": "Cable Machine — Lat Pulldown Bar",
           "tempo": "3-1-2-0",
           "setsReps": "4 x 10",
           "rest": "2.5 min",
@@ -882,15 +991,15 @@ const ROUTINE_DATA = {
               "defaultReps": "8"
             }
           ],
-          "progression": "All 4x10 \u2192 increase to 37.5kg",
+          "progression": "All 4x10 → increase to 37.5kg",
           "doThis": [
-            "Start from dead hang \u2014 full lat stretch every rep",
-            "Pull elbows DOWN and BACK \u2014 think elbows to back pockets",
+            "Start from dead hang — full lat stretch every rep",
+            "Pull elbows DOWN and BACK — think elbows to back pockets",
             "Chin clears the bar at bottom",
             "3-second controlled return to dead hang"
           ],
           "neverDo": [
-            "Not achieving full hang \u2014 removes lat stretch",
+            "Not achieving full hang — removes lat stretch",
             "Pulling with biceps instead of elbows",
             "Kipping or swinging"
           ],
@@ -903,8 +1012,8 @@ const ROUTINE_DATA = {
           "name": "Seated Cable Row (Close Grip)",
           "rawName": "Seated Cable Row (Close Grip)",
           "muscleGroup": "Back (Thickness)",
-          "target": "Back thickness + lats \u2014 horizontal pull",
-          "equipment": "Cable Machine \u2014 V-Bar Attachment",
+          "target": "Back thickness + lats — horizontal pull",
+          "equipment": "Cable Machine — V-Bar Attachment",
           "tempo": "3-1-2-1 (1 sec squeeze)",
           "setsReps": "4 x 10",
           "rest": "2 min",
@@ -940,9 +1049,9 @@ const ROUTINE_DATA = {
               "defaultReps": "9"
             }
           ],
-          "progression": "All 4x10 \u2192 add 5kg",
+          "progression": "All 4x10 → add 5kg",
           "doThis": [
-            "Pull to LOWER STERNUM \u2014 not belly button",
+            "Pull to LOWER STERNUM — not belly button",
             "Squeeze shoulder blades together and hold 1 sec",
             "Full lat stretch at front every rep",
             "Sit tall with slight lower back arch"
@@ -950,7 +1059,7 @@ const ROUTINE_DATA = {
           "neverDo": [
             "Rounding lower back",
             "Leaning back excessively",
-            "Pulling to belly button \u2014 lats disengage"
+            "Pulling to belly button — lats disengage"
           ],
           "youtubeQuery": "seated cable row close grip v bar back thickness proper form",
           "youtubeUrl": "https://www.youtube.com/results?search_query=seated+cable+row+close+grip+v+bar+back+thickness+proper+form",
@@ -961,7 +1070,7 @@ const ROUTINE_DATA = {
           "name": "Single Arm Dumbbell Row",
           "rawName": "Single Arm Dumbbell Row",
           "muscleGroup": "Lats (Unilateral)",
-          "target": "Lats + mid back \u2014 unilateral, fixes imbalances",
+          "target": "Lats + mid back — unilateral, fixes imbalances",
           "equipment": "Dumbbell + Flat Bench",
           "tempo": "3-0-2-1 (1 sec squeeze at top)",
           "setsReps": "2 x 10 each side",
@@ -985,12 +1094,12 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "2x10 both sides clean \u2192 increase to 22.5kg",
+          "progression": "2x10 both sides clean → increase to 22.5kg",
           "doThis": [
-            "Drive ELBOW TO CEILING \u2014 not out to the side",
+            "Drive ELBOW TO CEILING — not out to the side",
             "Spine neutral and parallel to floor",
             "Pause and squeeze lat hard at top",
-            "Lower slowly \u2014 feel lat lengthen"
+            "Lower slowly — feel lat lengthen"
           ],
           "neverDo": [
             "Rotating torso to generate the row",
@@ -1006,7 +1115,7 @@ const ROUTINE_DATA = {
           "name": "Dumbbell Pullover",
           "rawName": "Dumbbell Pullover",
           "muscleGroup": "Lats (Stretch)",
-          "target": "Lats in FULLY STRETCHED position \u2014 loaded stretch = maximum hypertrophy",
+          "target": "Lats in FULLY STRETCHED position — loaded stretch = maximum hypertrophy",
           "equipment": "Dumbbell + Flat Bench",
           "tempo": "3-2-1-0 (2 sec pause at bottom stretch)",
           "setsReps": "2 x 12",
@@ -1030,17 +1139,17 @@ const ROUTINE_DATA = {
               "defaultReps": "12"
             }
           ],
-          "progression": "2x12 \u2192 increase to 18kg",
+          "progression": "2x12 → increase to 18kg",
           "doThis": [
             "Upper back on bench, hips dropped down",
             "Lower dumbbell slowly behind head in wide arc",
             "Feel the lat FULLY STRETCH at the bottom",
-            "Pull back using lats \u2014 think pulling from armpits"
+            "Pull back using lats — think pulling from armpits"
           ],
           "neverDo": [
-            "Bending elbows too much \u2014 becomes tricep exercise",
-            "Dropping hips \u2014 removes lat stretch",
-            "Rushing \u2014 the 2 sec stretch pause is the entire point"
+            "Bending elbows too much — becomes tricep exercise",
+            "Dropping hips — removes lat stretch",
+            "Rushing — the 2 sec stretch pause is the entire point"
           ],
           "youtubeQuery": "dumbbell pullover lats loaded stretch chest proper form",
           "youtubeUrl": "https://www.youtube.com/results?search_query=dumbbell+pullover+lats+loaded+stretch+chest+proper+form",
@@ -1052,7 +1161,7 @@ const ROUTINE_DATA = {
           "rawName": "Incline Dumbbell Curl",
           "muscleGroup": "Biceps (Long Head)",
           "target": "Biceps in fully lengthened/stretched position",
-          "equipment": "Dumbbells + Incline Bench 45-60\u00b0",
+          "equipment": "Dumbbells + Incline Bench 45-60°",
           "tempo": "3-1-2-0",
           "setsReps": "4 x 10",
           "rest": "90 sec",
@@ -1087,15 +1196,15 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "All 4x10 \u2192 increase to 12kg",
+          "progression": "All 4x10 → increase to 12kg",
           "doThis": [
             "Arms hang STRAIGHT DOWN behind torso",
-            "Elbows stay BEHIND torso \u2014 non-negotiable",
+            "Elbows stay BEHIND torso — non-negotiable",
             "Curl with supination (wrist rotates outward)",
-            "Slow the bottom \u2014 feel the full stretch"
+            "Slow the bottom — feel the full stretch"
           ],
           "neverDo": [
-            "Elbows drifting forward \u2014 kills the stretched position entirely",
+            "Elbows drifting forward — kills the stretched position entirely",
             "Not supinating wrist",
             "Rushing the descent"
           ],
@@ -1108,7 +1217,7 @@ const ROUTINE_DATA = {
           "name": "Preacher Curl (EZ Bar)",
           "rawName": "Preacher Curl (EZ Bar)",
           "muscleGroup": "Biceps (Peak)",
-          "target": "Bicep peak \u2014 the bottom stretch builds the peak",
+          "target": "Bicep peak — the bottom stretch builds the peak",
           "equipment": "EZ Bar + Preacher Bench",
           "tempo": "3-2-1-0 (2 sec pause at full stretch)",
           "setsReps": "3 x 10",
@@ -1138,14 +1247,14 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "3x10 \u2192 add 2.5kg",
+          "progression": "3x10 → add 2.5kg",
           "doThis": [
-            "Lower to FULL extension \u2014 this is where growth happens",
+            "Lower to FULL extension — this is where growth happens",
             "2 second pause at bottom every rep",
             "Upper arms fully on pad throughout"
           ],
           "neverDo": [
-            "Not going to full extension \u2014 directly kills bicep peak development",
+            "Not going to full extension — directly kills bicep peak development",
             "Lifting arms off the pad",
             "Swinging the weight up"
           ],
@@ -1158,16 +1267,159 @@ const ROUTINE_DATA = {
     {
       "id": "wednesday",
       "day": "Wednesday",
-      "title": "Legs + Abs (Session 1 of 3)",
+      "title": "Legs + Abs (Session 1 of 3) — Abs FIRST Priority",
       "sessionName": "Legs + Abs",
-      "primaryFocus": "Squat Strength, Quad & Hamstring Hypertrophy + Lower Abs",
+      "primaryFocus": "ABS FIRST PRIORITY (Cable Crunch → Hanging Leg Raise → Reverse Crunch) before Leg Fatigue, followed by Squat Strength & Hypertrophy",
       "duration": "~85 min",
       "preWorkout": false,
       "preWorkoutTiming": "Skip pre-workout today to preserve caffeine receptor sensitivity",
       "warmupKey": "legs",
       "finisher": null,
-      "cardio": null,
+      "cardio": {
+        "name": "Fast Walk or Light Stationary Bike (Zone 2 Fat Loss)",
+        "duration": "15 min",
+        "timing": "After lifting session",
+        "intensity": "Conversational pace (Zone 2)",
+        "note": "NEW from November — 3rd weekly cardio session to accelerate belly fat reduction alongside Monday cycling & Thursday jump rope."
+      },
       "exercises": [
+        {
+          "id": "ex_21",
+          "name": "Cable Crunch (Weighted)",
+          "rawName": "Cable Crunch (Weighted)",
+          "muscleGroup": "Upper/Mid Abs",
+          "target": "Upper/mid abs (Spinal flexion) — MUST DO FIRST, never skip. Highest yield weighted ab lift.",
+          "equipment": "Gym standard",
+          "tempo": "Controlled (3-1-1-0)",
+          "setsReps": "3 x 15",
+          "rest": "90 sec",
+          "restSeconds": 90,
+          "rir": "RIR 1",
+          "warmupSets": [],
+          "workingSets": [
+            {
+              "set": 1,
+              "target": "15kg x 15",
+              "defaultWeight": "15",
+              "defaultReps": "15"
+            },
+            {
+              "set": 2,
+              "target": "15kg x 15",
+              "defaultWeight": "15",
+              "defaultReps": "15"
+            },
+            {
+              "set": 3,
+              "target": "15kg x 12",
+              "defaultWeight": "15",
+              "defaultReps": "12"
+            }
+          ],
+          "progression": "Increase by 2.5kg every 2 weeks. If at 15kg, progress to 17.5kg–20kg in November.",
+          "doThis": [
+            "Flex at the SPINE not just hips. Round lower back at bottom. Hold 2 sec. Progress weight every 2 weeks."
+          ],
+          "neverDo": [
+            "Hinging at hips instead of spine — becomes a hip exercise not abs."
+          ],
+          "youtubeQuery": "kneeling cable rope crunch abs spinal flexion proper form",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=kneeling+cable+rope+crunch+abs+spinal+flexion+proper+form",
+          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Cable%20Crunch%20(Weighted"
+        },
+        {
+          "id": "ex_20",
+          "name": "Hanging Leg Raise",
+          "rawName": "Hanging Leg Raise",
+          "muscleGroup": "Lower Abs",
+          "target": "Lower abs (Pelvic curl) — MUST DO SECOND, never skip. Hardest lower ab movement.",
+          "equipment": "Gym standard",
+          "tempo": "Controlled (3-1-1-0)",
+          "setsReps": "3 x 12",
+          "rest": "90 sec",
+          "restSeconds": 90,
+          "rir": "RIR 1",
+          "warmupSets": [],
+          "workingSets": [
+            {
+              "set": 1,
+              "target": "Bodyweight x 12",
+              "defaultWeight": "",
+              "defaultReps": "Bodyweight x 12"
+            },
+            {
+              "set": 2,
+              "target": "Bodyweight x 12",
+              "defaultWeight": "",
+              "defaultReps": "Bodyweight x 12"
+            },
+            {
+              "set": 3,
+              "target": "Bodyweight x 10",
+              "defaultWeight": "",
+              "defaultReps": "Bodyweight x 10"
+            }
+          ],
+          "progression": "Progress to straight-leg raises once 3×12 with bent knee feels easy.",
+          "doThis": [
+            "Dead hang start. Raise legs to parallel min. Do NOT swing. Lower slowly."
+          ],
+          "neverDo": [
+            "Swinging body — removes ab engagement. Dropping legs fast."
+          ],
+          "youtubeQuery": "hanging leg raise lower abs pelvic tilt proper form",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=hanging+leg+raise+lower+abs+pelvic+tilt+proper+form",
+          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Hanging%20Leg%20Raise%20exercise%20proper%20form"
+        },
+        {
+          "id": "ex_wed_reverse_crunch",
+          "name": "Reverse Crunch (Floor/Bench)",
+          "rawName": "Reverse Crunch",
+          "muscleGroup": "Lower Abs",
+          "target": "Lower abs (Pelvic curl off floor) — Third ab movement before squats",
+          "equipment": "Floor Mat / Flat Bench",
+          "tempo": "Controlled (3-1-1-0)",
+          "setsReps": "3 × 15",
+          "rest": "60 sec",
+          "restSeconds": 60,
+          "rir": "RIR 1 all sets",
+          "warmupSets": [],
+          "workingSets": [
+            {
+              "set": 1,
+              "target": "Bodyweight × 15",
+              "defaultWeight": "",
+              "defaultReps": "15"
+            },
+            {
+              "set": 2,
+              "target": "Bodyweight × 15",
+              "defaultWeight": "",
+              "defaultReps": "15"
+            },
+            {
+              "set": 3,
+              "target": "Bodyweight × 15",
+              "defaultWeight": "",
+              "defaultReps": "15"
+            }
+          ],
+          "progression": "3×15 clean → incline decline bench or add small ankle weight",
+          "doThis": [
+            "Lie flat, knees bent at 90°",
+            "Curl pelvis UP off floor bringing knees toward chest",
+            "Squeeze lower abs at top for 1 full second",
+            "Lower slowly without lower back overarching"
+          ],
+          "neverDo": [
+            "Swinging legs for momentum",
+            "Only bending knees without lifting pelvis",
+            "Dropping down fast"
+          ],
+          "youtubeQuery": "reverse crunch floor lower abs pelvic curl proper form",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=reverse+crunch+floor+lower+abs+pelvic+curl+proper+form",
+          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Reverse+Crunch+exercise+proper+form"
+        },
         {
           "id": "ex_15",
           "name": "Barbell Back Squat",
@@ -1211,18 +1463,18 @@ const ROUTINE_DATA = {
               "defaultReps": "6"
             }
           ],
-          "progression": "All 4x8 \u2192 add 5kg",
+          "progression": "All 4x8 → add 5kg",
           "doThis": [
-            "Bar on upper traps \u2014 NOT neck",
-            "Toes out 15-30\u00b0, slightly wide stance",
+            "Bar on upper traps — NOT neck",
+            "Toes out 15-30°, slightly wide stance",
             "Sit back AND down simultaneously",
-            "Hit parallel or below \u2014 above parallel is a wasted rep",
+            "Hit parallel or below — above parallel is a wasted rep",
             "Drive through mid-foot"
           ],
           "neverDo": [
-            "Heels rising \u2014 ankle mobility issue",
+            "Heels rising — ankle mobility issue",
             "Knees caving inward",
-            "Good morning squat \u2014 hips rise before shoulders",
+            "Good morning squat — hips rise before shoulders",
             "Partial reps above parallel"
           ],
           "youtubeQuery": "barbell back squat proper form depth hypertrophy quads glutes",
@@ -1265,16 +1517,16 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "3x10 \u2192 add 5kg",
+          "progression": "3x10 → add 5kg",
           "doThis": [
-            "Hip hinge \u2014 push hips BACK not down",
+            "Hip hinge — push hips BACK not down",
             "Maintain arch in lower back throughout",
             "Bar stays touching legs the entire time",
             "Stop when lower back starts to round"
           ],
           "neverDo": [
-            "Bending knees too much \u2014 becomes a deadlift",
-            "Rounding lower back \u2014 injury risk",
+            "Bending knees too much — becomes a deadlift",
+            "Rounding lower back — injury risk",
             "Bar drifting away from legs"
           ],
           "youtubeQuery": "romanian deadlift barbell hamstrings glutes hip hinge form",
@@ -1286,7 +1538,7 @@ const ROUTINE_DATA = {
           "name": "Leg Press",
           "rawName": "Leg Press",
           "muscleGroup": "Quads",
-          "target": "Quads \u2014 extra volume, zero spinal load",
+          "target": "Quads — extra volume, zero spinal load",
           "equipment": "Leg Press Machine",
           "tempo": "3-0-2-0",
           "setsReps": "3 x 12",
@@ -1317,14 +1569,14 @@ const ROUTINE_DATA = {
               "defaultReps": "12"
             }
           ],
-          "progression": "3x12 \u2192 add 10kg",
+          "progression": "3x12 → add 10kg",
           "doThis": [
             "Feet low-to-mid on platform, hip width",
-            "Lower until knees reach 90\u00b0",
-            "Do NOT lock out at top \u2014 keeps tension on quads"
+            "Lower until knees reach 90°",
+            "Do NOT lock out at top — keeps tension on quads"
           ],
           "neverDo": [
-            "Partial reps \u2014 most common mistake",
+            "Partial reps — most common mistake",
             "Lower back peeling off seat at bottom",
             "Locking knees at top"
           ],
@@ -1337,7 +1589,7 @@ const ROUTINE_DATA = {
           "name": "Lying Leg Curl",
           "rawName": "Lying Leg Curl",
           "muscleGroup": "Hamstrings",
-          "target": "Hamstrings \u2014 shortened position, completes hamstring development",
+          "target": "Hamstrings — shortened position, completes hamstring development",
           "equipment": "Leg Curl Machine",
           "tempo": "2-1-2-1 (1 sec hold at top)",
           "setsReps": "4 x 12",
@@ -1373,12 +1625,12 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "3x12 \u2192 add 5kg",
+          "progression": "3x12 → add 5kg",
           "doThis": [
             "Hips stay FLAT on pad",
             "Curl heels fully toward glutes",
             "Hold top contraction 1 second",
-            "Lower slowly \u2014 2 full seconds"
+            "Lower slowly — 2 full seconds"
           ],
           "neverDo": [
             "Hips rising to generate momentum",
@@ -1394,7 +1646,7 @@ const ROUTINE_DATA = {
           "name": "Standing Calf Raise",
           "rawName": "Standing Calf Raise",
           "muscleGroup": "Calves (Gastrocnemius)",
-          "target": "Gastrocnemius, soleus \u2014 full ROM essential for growth",
+          "target": "Gastrocnemius, soleus — full ROM essential for growth",
           "equipment": "Calf Raise Machine",
           "tempo": "1-2-1-2 (2 sec pause TOP and BOTTOM)",
           "setsReps": "5 x 20",
@@ -1436,115 +1688,27 @@ const ROUTINE_DATA = {
               "defaultReps": "15"
             }
           ],
-          "progression": "All 4 sets full ROM \u2192 add 5kg",
+          "progression": "All 4 sets full ROM → add 5kg",
           "doThis": [
             "Rise as HIGH as possible at top",
             "Heel BELOW platform at bottom",
-            "2 sec pause at BOTH top and bottom \u2014 non-negotiable"
+            "2 sec pause at BOTH top and bottom — non-negotiable"
           ],
           "neverDo": [
-            "Partial reps \u2014 the only reason calves do not grow for most people",
+            "Partial reps — the only reason calves do not grow for most people",
             "Bouncing at bottom",
             "Skipping the pauses"
           ],
           "youtubeQuery": "standing calf raise full stretch gastrocnemius proper form",
           "youtubeUrl": "https://www.youtube.com/results?search_query=standing+calf+raise+full+stretch+gastrocnemius+proper+form",
           "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Standing%20Calf%20Raise%20exercise%20proper%20form"
-        },
-        {
-          "id": "ex_20",
-          "name": "Hanging Leg Raise",
-          "rawName": "Hanging Leg Raise",
-          "muscleGroup": "Lower Abs",
-          "target": "Lower abs (Pelvic curl)",
-          "equipment": "Gym standard",
-          "tempo": "Controlled (3-1-1-0)",
-          "setsReps": "3 x 12",
-          "rest": "90 sec",
-          "restSeconds": 90,
-          "rir": "RIR 1",
-          "warmupSets": [],
-          "workingSets": [
-            {
-              "set": 1,
-              "target": "Bodyweight x 12",
-              "defaultWeight": "",
-              "defaultReps": "Bodyweight x 12"
-            },
-            {
-              "set": 2,
-              "target": "Bodyweight x 12",
-              "defaultWeight": "",
-              "defaultReps": "Bodyweight x 12"
-            },
-            {
-              "set": 3,
-              "target": "Bodyweight x 10",
-              "defaultWeight": "",
-              "defaultReps": "Bodyweight x 10"
-            }
-          ],
-          "progression": "",
-          "doThis": [
-            "Dead hang start. Raise legs to parallel min. Do NOT swing. Lower slowly."
-          ],
-          "neverDo": [
-            "Swinging body \u2014 removes ab engagement. Dropping legs fast."
-          ],
-          "youtubeQuery": "hanging leg raise lower abs pelvic tilt proper form",
-          "youtubeUrl": "https://www.youtube.com/results?search_query=hanging+leg+raise+lower+abs+pelvic+tilt+proper+form",
-          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Hanging%20Leg%20Raise%20exercise%20proper%20form"
-        },
-        {
-          "id": "ex_21",
-          "name": "Cable Crunch (Weighted)",
-          "rawName": "Cable Crunch (Weighted)",
-          "muscleGroup": "Upper/Mid Abs",
-          "target": "Upper/mid abs (Spinal flexion)",
-          "equipment": "Gym standard",
-          "tempo": "Controlled (3-1-1-0)",
-          "setsReps": "3 x 15",
-          "rest": "90 sec",
-          "restSeconds": 90,
-          "rir": "RIR 1",
-          "warmupSets": [],
-          "workingSets": [
-            {
-              "set": 1,
-              "target": "15kg x 15",
-              "defaultWeight": "15",
-              "defaultReps": "15"
-            },
-            {
-              "set": 2,
-              "target": "15kg x 15",
-              "defaultWeight": "15",
-              "defaultReps": "15"
-            },
-            {
-              "set": 3,
-              "target": "15kg x 12",
-              "defaultWeight": "15",
-              "defaultReps": "12"
-            }
-          ],
-          "progression": "",
-          "doThis": [
-            "Flex at the SPINE not just hips. Round lower back at bottom. Hold 2 sec. Progress weight every 2 weeks."
-          ],
-          "neverDo": [
-            "Hinging at hips instead of spine \u2014 becomes a hip exercise not abs."
-          ],
-          "youtubeQuery": "kneeling cable rope crunch abs spinal flexion proper form",
-          "youtubeUrl": "https://www.youtube.com/results?search_query=kneeling+cable+rope+crunch+abs+spinal+flexion+proper+form",
-          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Cable%20Crunch%20(Weighted"
         }
       ]
     },
     {
       "id": "thursday",
       "day": "Thursday",
-      "title": "Push B \u2014 Mid + Lower Chest + Triceps",
+      "title": "Push B — Mid + Lower Chest + Triceps",
       "sessionName": "Push B",
       "primaryFocus": "Flat Heavy Bench, Lower Pec Cable Arc + Close Grip Triceps",
       "duration": "~65 min",
@@ -1565,7 +1729,7 @@ const ROUTINE_DATA = {
           "name": "Flat Barbell Bench Press",
           "rawName": "Flat Barbell Bench Press",
           "muscleGroup": "Mid Chest",
-          "target": "Mid chest (sternal head) \u2014 foundational chest mass builder",
+          "target": "Mid chest (sternal head) — foundational chest mass builder",
           "equipment": "Barbell + Flat Bench",
           "tempo": "3-1-1-0",
           "setsReps": "4 x 8",
@@ -1604,16 +1768,16 @@ const ROUTINE_DATA = {
               "defaultReps": "6"
             }
           ],
-          "progression": "All 4x8 at RIR 2 \u2192 increase to 42.5kg (1.25kg each side)",
+          "progression": "All 4x8 at RIR 2 → increase to 42.5kg (1.25kg each side)",
           "doThis": [
             "Grip slightly wider than shoulder width",
-            "Bar touches LOWER pec line \u2014 not upper chest",
-            "Elbows at 60-70\u00b0 from torso",
-            "Retract scapula \u2014 hold throughout every rep",
+            "Bar touches LOWER pec line — not upper chest",
+            "Elbows at 60-70° from torso",
+            "Retract scapula — hold throughout every rep",
             "Drive feet into floor"
           ],
           "neverDo": [
-            "Elbows flared to 90\u00b0 \u2014 shoulder impingement",
+            "Elbows flared to 90° — shoulder impingement",
             "Bouncing bar off chest",
             "Losing upper back tightness mid-set"
           ],
@@ -1626,8 +1790,8 @@ const ROUTINE_DATA = {
           "name": "Decline Dumbbell Press",
           "rawName": "Decline Dumbbell Press",
           "muscleGroup": "Lower Chest",
-          "target": "Lower chest (lower pec head) \u2014 dedicated lower chest exercise",
-          "equipment": "Dumbbells + Decline Bench 20-25\u00b0",
+          "target": "Lower chest (lower pec head) — dedicated lower chest exercise",
+          "equipment": "Dumbbells + Decline Bench 20-25°",
           "tempo": "3-1-2-0",
           "setsReps": "3 x 10",
           "rest": "2 min",
@@ -1656,15 +1820,15 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "All 3x10 \u2192 increase to 18kg",
+          "progression": "All 3x10 → increase to 18kg",
           "doThis": [
-            "Bench EXACTLY 20-25\u00b0 decline \u2014 not steeper",
-            "Lower to lower chest \u2014 feel lower pec stretch",
-            "Control descent \u2014 3 full seconds",
+            "Bench EXACTLY 20-25° decline — not steeper",
+            "Lower to lower chest — feel lower pec stretch",
+            "Control descent — 3 full seconds",
             "Secure feet firmly before starting"
           ],
           "neverDo": [
-            "Angle too steep \u2014 shifts load away from lower pec",
+            "Angle too steep — shifts load away from lower pec",
             "Not using full range of motion",
             "Elbows flaring wide"
           ],
@@ -1677,8 +1841,8 @@ const ROUTINE_DATA = {
           "name": "Cable High-to-Low Fly",
           "rawName": "Cable High-to-Low Fly",
           "muscleGroup": "Lower Chest",
-          "target": "Lower chest \u2014 constant cable tension",
-          "equipment": "Cable Machine \u2014 High Pulley",
+          "target": "Lower chest — constant cable tension",
+          "equipment": "Cable Machine — High Pulley",
           "tempo": "2-1-2-1 (1 sec squeeze at bottom)",
           "setsReps": "2 x 12",
           "rest": "90 sec",
@@ -1701,14 +1865,14 @@ const ROUTINE_DATA = {
               "defaultReps": "12"
             }
           ],
-          "progression": "2x12 \u2192 add 2.5kg",
+          "progression": "2x12 → add 2.5kg",
           "doThis": [
             "Pulleys at HIGHEST position",
-            "Fly downward and inward \u2014 matching lower chest fiber direction",
+            "Fly downward and inward — matching lower chest fiber direction",
             "Squeeze at bottom like clapping below waist"
           ],
           "neverDo": [
-            "Elbows bending too much \u2014 becomes a press",
+            "Elbows bending too much — becomes a press",
             "Standing too close to cable"
           ],
           "youtubeQuery": "high to low cable fly lower chest proper form tutorial",
@@ -1720,7 +1884,7 @@ const ROUTINE_DATA = {
           "name": "Close Grip Bench Press",
           "rawName": "Close Grip Bench Press",
           "muscleGroup": "Triceps",
-          "target": "Triceps \u2014 long head + lateral head",
+          "target": "Triceps — long head + lateral head",
           "equipment": "Barbell + Flat Bench",
           "tempo": "3-1-1-1 (1 sec hold at lockout)",
           "setsReps": "4 x 10",
@@ -1757,15 +1921,15 @@ const ROUTINE_DATA = {
               "defaultReps": "8"
             }
           ],
-          "progression": "All 4x10 \u2192 add 2.5kg",
+          "progression": "All 4x10 → add 2.5kg",
           "doThis": [
             "Grip 30-35cm between hands",
             "Elbows tuck CLOSE to ribs as you lower",
-            "Full lockout at top \u2014 feel tricep squeeze"
+            "Full lockout at top — feel tricep squeeze"
           ],
           "neverDo": [
-            "Grip too narrow \u2014 wrist strain",
-            "Elbows flaring out \u2014 becomes a chest press",
+            "Grip too narrow — wrist strain",
+            "Elbows flaring out — becomes a chest press",
             "No lockout at top"
           ],
           "youtubeQuery": "close grip bench press triceps proper form technique",
@@ -1807,10 +1971,10 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "3x12 \u2192 add 2.5kg",
+          "progression": "3x12 → add 2.5kg",
           "doThis": [
-            "Elbows point FORWARD \u2014 they do NOT flare outward",
-            "Only the forearm moves \u2014 upper arm stays locked",
+            "Elbows point FORWARD — they do NOT flare outward",
+            "Only the forearm moves — upper arm stays locked",
             "Feel deep stretch in back of arm at bottom"
           ],
           "neverDo": [
@@ -1826,7 +1990,7 @@ const ROUTINE_DATA = {
     {
       "id": "friday",
       "day": "Friday",
-      "title": "Pull B \u2014 Rear Delts + Back + Abs (Session 2 of 3)",
+      "title": "Pull B — Rear Delts + Back + Abs (Session 2 of 3)",
       "sessionName": "Pull B + Abs",
       "primaryFocus": "Rear Delt Thickness, Overhand Rows, Forearms & Targeted Belly Circuit",
       "duration": "~95 min",
@@ -1879,17 +2043,17 @@ const ROUTINE_DATA = {
               "defaultReps": "7"
             }
           ],
-          "progression": "All 4x8 \u2192 add 5kg",
+          "progression": "All 4x8 → add 5kg",
           "doThis": [
-            "Torso at 45\u00b0 or more toward parallel to floor",
-            "Pull bar to LOWER CHEST \u2014 not belly button",
-            "Squeeze scapula together at top \u2014 hold 1 sec",
-            "Control the descent \u2014 do not drop the bar"
+            "Torso at 45° or more toward parallel to floor",
+            "Pull bar to LOWER CHEST — not belly button",
+            "Squeeze scapula together at top — hold 1 sec",
+            "Control the descent — do not drop the bar"
           ],
           "neverDo": [
-            "Standing too upright \u2014 completely different exercise",
+            "Standing too upright — completely different exercise",
             "Jerking lower back to initiate",
-            "Pulling to belly button \u2014 lats disengage"
+            "Pulling to belly button — lats disengage"
           ],
           "youtubeQuery": "bent over barbell row overhand mid back thickness proper form",
           "youtubeUrl": "https://www.youtube.com/results?search_query=bent+over+barbell+row+overhand+mid+back+thickness+proper+form",
@@ -1900,8 +2064,8 @@ const ROUTINE_DATA = {
           "name": "Cable Face Pull",
           "rawName": "Cable Face Pull",
           "muscleGroup": "Rear Delts",
-          "target": "Rear delts, external rotators \u2014 PRIORITY given rear delt weakness",
-          "equipment": "Cable Machine \u2014 Rope Attachment High",
+          "target": "Rear delts, external rotators — PRIORITY given rear delt weakness",
+          "equipment": "Cable Machine — Rope Attachment High",
           "tempo": "2-1-3-1 (3 sec slow return)",
           "setsReps": "3 x 15",
           "rest": "60 sec",
@@ -1930,17 +2094,17 @@ const ROUTINE_DATA = {
               "defaultReps": "15"
             }
           ],
-          "progression": "3x15 \u2192 add 2.5kg",
+          "progression": "3x15 → add 2.5kg",
           "doThis": [
-            "Pull rope to FACE \u2014 nose level",
-            "Elbows stay HIGH \u2014 at ear level or above throughout",
-            "Both hands end beside ears \u2014 make a W shape",
-            "Thumbs pointing behind you at end \u2014 external rotation is the key"
+            "Pull rope to FACE — nose level",
+            "Elbows stay HIGH — at ear level or above throughout",
+            "Both hands end beside ears — make a W shape",
+            "Thumbs pointing behind you at end — external rotation is the key"
           ],
           "neverDo": [
-            "Elbows dropping below ears \u2014 removes rear delt activation completely",
+            "Elbows dropping below ears — removes rear delt activation completely",
             "Pulling to chin not to face",
-            "Going too heavy \u2014 form collapses entirely"
+            "Going too heavy — form collapses entirely"
           ],
           "youtubeQuery": "cable face pull rear delts external rotation proper form tutorial",
           "youtubeUrl": "https://www.youtube.com/results?search_query=cable+face+pull+rear+delts+external+rotation+proper+form+tutorial",
@@ -1951,8 +2115,8 @@ const ROUTINE_DATA = {
           "name": "Chest Supported Dumbbell Row",
           "rawName": "Chest Supported Dumbbell Row",
           "muscleGroup": "Mid Back & Lats",
-          "target": "Mid back + lats \u2014 no lower back fatigue, 100% back effort",
-          "equipment": "Dumbbells + Incline Bench 30\u00b0",
+          "target": "Mid back + lats — no lower back fatigue, 100% back effort",
+          "equipment": "Dumbbells + Incline Bench 30°",
           "tempo": "3-0-2-2 (2 sec squeeze)",
           "setsReps": "3 x 12",
           "rest": "90 sec",
@@ -1981,14 +2145,14 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "3x12 \u2192 add 2kg each side",
+          "progression": "3x12 → add 2kg each side",
           "doThis": [
-            "Lie face down \u2014 chest fully on pad throughout",
-            "Row to HIPS \u2014 not armpits",
+            "Lie face down — chest fully on pad throughout",
+            "Row to HIPS — not armpits",
             "Squeeze shoulder blades 2 full seconds at top"
           ],
           "neverDo": [
-            "Rowing to armpits \u2014 becomes rear delt row, wrong target",
+            "Rowing to armpits — becomes rear delt row, wrong target",
             "Lifting chest off pad to generate momentum"
           ],
           "youtubeQuery": "chest supported dumbbell row incline bench back thickness form",
@@ -2000,8 +2164,8 @@ const ROUTINE_DATA = {
           "name": "Chest-Supported Incline Rear Delt Raise",
           "rawName": "Chest-Supported Incline Rear Delt Raise",
           "muscleGroup": "Rear Delts",
-          "target": "Rear delt isolation \u2014 chest support removes balance and lower-back demand",
-          "equipment": "Dumbbells + Incline Bench (face-down, 45\u00b0)",
+          "target": "Rear delt isolation — chest support removes balance and lower-back demand",
+          "equipment": "Dumbbells + Incline Bench (face-down, 45°)",
           "tempo": "2-1-2-0",
           "setsReps": "3 x 15",
           "rest": "60 sec",
@@ -2030,7 +2194,7 @@ const ROUTINE_DATA = {
               "defaultReps": "15"
             }
           ],
-          "progression": "3x15 \u2192 add 2kg",
+          "progression": "3x15 → add 2kg",
           "doThis": [
             "Chest pressed flat into the bench the entire set",
             "Lead with elbows, raise to shoulder height",
@@ -2049,7 +2213,7 @@ const ROUTINE_DATA = {
         {
           "id": "ex_31",
           "name": "Chin-Ups",
-          "rawName": "\u2b50 CALISTHENICS \u2014 Chin-Ups",
+          "rawName": "⭐ CALISTHENICS — Chin-Ups",
           "muscleGroup": "Lats & Biceps",
           "target": "Lats + biceps (Underhand calisthenics)",
           "equipment": "Gym standard",
@@ -2095,7 +2259,7 @@ const ROUTINE_DATA = {
           "name": "Hammer Curl",
           "rawName": "Hammer Curl",
           "muscleGroup": "Brachialis & Arms",
-          "target": "Brachialis + brachioradialis \u2014 pushes bicep peak UP",
+          "target": "Brachialis + brachioradialis — pushes bicep peak UP",
           "equipment": "Dumbbells",
           "tempo": "3-0-2-1",
           "setsReps": "3 x 12 each",
@@ -2125,9 +2289,9 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "3x12 \u2192 increase to 14kg",
+          "progression": "3x12 → increase to 14kg",
           "doThis": [
-            "Neutral grip \u2014 palms face each other THROUGHOUT",
+            "Neutral grip — palms face each other THROUGHOUT",
             "Elbows pinned to sides",
             "Full extension at bottom",
             "Full contraction at top"
@@ -2143,10 +2307,10 @@ const ROUTINE_DATA = {
         },
         {
           "id": "ex_33",
-          "name": "Reverse Curl (EZ Bar) \u2014 Forearms",
-          "rawName": "Reverse Curl (EZ Bar) \u2014 Forearms",
+          "name": "Reverse Curl (EZ Bar) — Forearms",
+          "rawName": "Reverse Curl (EZ Bar) — Forearms",
           "muscleGroup": "Forearms",
-          "target": "Forearms \u2014 brachioradialis + extensors, visible in everyday clothes",
+          "target": "Forearms — brachioradialis + extensors, visible in everyday clothes",
           "equipment": "EZ Bar",
           "tempo": "3-0-2-0",
           "setsReps": "2 x 12",
@@ -2170,15 +2334,15 @@ const ROUTINE_DATA = {
               "defaultReps": "12"
             }
           ],
-          "progression": "2x12 \u2192 add 2.5kg",
+          "progression": "2x12 → add 2.5kg",
           "doThis": [
             "Overhand grip (knuckles facing up)",
             "Elbows pinned to sides",
             "Full extension at bottom",
-            "Slow the descent \u2014 forearms need eccentric loading"
+            "Slow the descent — forearms need eccentric loading"
           ],
           "neverDo": [
-            "Using underhand grip \u2014 defeats the purpose entirely",
+            "Using underhand grip — defeats the purpose entirely",
             "Swinging body",
             "Partial reps"
           ],
@@ -2235,7 +2399,7 @@ const ROUTINE_DATA = {
           "name": "Dumbbell Shrug",
           "rawName": "Dumbbell Shrug",
           "muscleGroup": "Upper Traps",
-          "target": "Upper traps \u2014 builds the neck-to-shoulder line visible from behind",
+          "target": "Upper traps — builds the neck-to-shoulder line visible from behind",
           "equipment": "Dumbbells",
           "tempo": "1-2-1-0 (2 sec hold at top)",
           "setsReps": "3 x 15",
@@ -2263,16 +2427,16 @@ const ROUTINE_DATA = {
               "defaultReps": "15"
             }
           ],
-          "progression": "3x15 \u2192 add 2.5kg",
+          "progression": "3x15 → add 2.5kg",
           "doThis": [
-            "Shrug STRAIGHT UP \u2014 not forward or backward",
-            "Hold at top 2 full seconds \u2014 squeeze hard",
-            "Full drop at bottom \u2014 stretch the trap"
+            "Shrug STRAIGHT UP — not forward or backward",
+            "Hold at top 2 full seconds — squeeze hard",
+            "Full drop at bottom — stretch the trap"
           ],
           "neverDo": [
-            "Rolling shoulders \u2014 no benefit and strains AC joint",
-            "Rushing \u2014 the 2 sec hold IS the stimulus",
-            "Going too heavy \u2014 loses the hold"
+            "Rolling shoulders — no benefit and strains AC joint",
+            "Rushing — the 2 sec hold IS the stimulus",
+            "Going too heavy — loses the hold"
           ],
           "youtubeQuery": "dumbbell shrug upper traps pause at top proper form",
           "youtubeUrl": "https://www.youtube.com/results?search_query=dumbbell+shrug+upper+traps+pause+at+top+proper+form",
@@ -2313,14 +2477,63 @@ const ROUTINE_DATA = {
           ],
           "progression": "",
           "doThis": [
-            "Lie flat, knees bent to 90\u00b0. Curl the pelvis UP off the floor bringing knees to chest. Lower with control."
+            "Lie flat, knees bent to 90°. Curl the pelvis UP off the floor bringing knees to chest. Lower with control."
           ],
           "neverDo": [
-            "Using momentum to swing the legs. Only moving the knees without curling the pelvis \u2014 that skips the lower abs."
+            "Using momentum to swing the legs. Only moving the knees without curling the pelvis — that skips the lower abs."
           ],
           "youtubeQuery": "reverse crunch floor lower abs pelvic curl proper form",
           "youtubeUrl": "https://www.youtube.com/results?search_query=reverse+crunch+floor+lower+abs+pelvic+curl+proper+form",
           "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Reverse%20Crunch%20exercise%20proper%20form"
+        },
+        {
+          "id": "ex_fri_bicycle",
+          "name": "Bicycle Crunch (Obliques & Waist)",
+          "rawName": "Bicycle Crunch",
+          "muscleGroup": "Obliques & Abs",
+          "target": "Obliques + Rectus Abdominis — Essential for tightening the waistline and narrowing waist-to-shoulder ratio",
+          "equipment": "Floor Mat",
+          "tempo": "Controlled 2-1-2-0",
+          "setsReps": "3 × 20 (10 each side)",
+          "rest": "60 sec",
+          "restSeconds": 60,
+          "rir": "RIR 1 all sets",
+          "warmupSets": [],
+          "workingSets": [
+            {
+              "set": 1,
+              "target": "20 reps (10/side)",
+              "defaultWeight": "",
+              "defaultReps": "20"
+            },
+            {
+              "set": 2,
+              "target": "20 reps (10/side)",
+              "defaultWeight": "",
+              "defaultReps": "20"
+            },
+            {
+              "set": 3,
+              "target": "20 reps (10/side)",
+              "defaultWeight": "",
+              "defaultReps": "20"
+            }
+          ],
+          "progression": "3×20 slow with 2-sec hold on each side",
+          "doThis": [
+            "Light fingertips behind ears — DO NOT pull neck",
+            "Rotate opposite shoulder/elbow to opposite knee",
+            "Fully extend the other leg out straight (hovering above floor)",
+            "Pause and squeeze the oblique for 1 second on each twist"
+          ],
+          "neverDo": [
+            "Yanking on the neck with hands",
+            "Rushing reps without full torso rotation",
+            "Letting extended leg touch the ground"
+          ],
+          "youtubeQuery": "bicycle crunch obliques abs core waist proper form",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=bicycle+crunch+obliques+abs+core+waist+proper+form",
+          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Bicycle+Crunch+exercise+proper+form"
         },
         {
           "id": "ex_37",
@@ -2330,7 +2543,7 @@ const ROUTINE_DATA = {
           "target": "Anti-extension core stability",
           "equipment": "Gym standard",
           "tempo": "Controlled (3-1-1-0)",
-          "setsReps": "3 x 30-40 sec",
+          "setsReps": "3 × 45 sec",
           "rest": "60 sec",
           "restSeconds": 60,
           "rir": "Hold to RIR 1",
@@ -2338,21 +2551,21 @@ const ROUTINE_DATA = {
           "workingSets": [
             {
               "set": 1,
-              "target": "40 sec hold",
+              "target": "45 sec hold",
               "defaultWeight": "",
-              "defaultReps": "40 sec hold"
+              "defaultReps": "45 sec"
             },
             {
               "set": 2,
-              "target": "35 sec hold",
+              "target": "45 sec hold",
               "defaultWeight": "",
-              "defaultReps": "35 sec hold"
+              "defaultReps": "45 sec"
             },
             {
               "set": 3,
-              "target": "30 sec hold",
+              "target": "45 sec hold",
               "defaultWeight": "",
-              "defaultReps": "30 sec hold"
+              "defaultReps": "45 sec"
             }
           ],
           "progression": "",
@@ -2371,9 +2584,9 @@ const ROUTINE_DATA = {
     {
       "id": "saturday",
       "day": "Saturday",
-      "title": "Shoulders + Arms + Abs (Session 3 of 3)",
+      "title": "Shoulders + Arms + Abs (Session 3 of 3) — Abs FIRST Priority",
       "sessionName": "Shoulders + Arms + Abs",
-      "primaryFocus": "3D Shoulder Caps, Bicep Peak, Horseshoe Triceps & Calves",
+      "primaryFocus": "ABS FIRST (Flat Bench Leg Raise → Weighted Crunch → Plank) before Shoulder & Arm Fatigue, followed by 3D Deltoid Caps & Horseshoe Triceps",
       "duration": "~95 min",
       "preWorkout": true,
       "preWorkoutTiming": "5:50 AM (1 scoop Karnage)",
@@ -2382,11 +2595,148 @@ const ROUTINE_DATA = {
       "cardio": null,
       "exercises": [
         {
+          "id": "ex_47",
+          "name": "Flat Bench Leg Raise",
+          "rawName": "Flat Bench Leg Raise",
+          "muscleGroup": "Lower Abs",
+          "target": "Lower abs (Hip & spinal control)",
+          "equipment": "Gym standard",
+          "tempo": "Controlled (3-1-1-0)",
+          "setsReps": "3 x 15",
+          "rest": "60 sec",
+          "restSeconds": 60,
+          "rir": "RIR 1",
+          "warmupSets": [],
+          "workingSets": [
+            {
+              "set": 1,
+              "target": "x 15",
+              "defaultWeight": "",
+              "defaultReps": "x 15"
+            },
+            {
+              "set": 2,
+              "target": "x 15",
+              "defaultWeight": "",
+              "defaultReps": "x 15"
+            },
+            {
+              "set": 3,
+              "target": "x 12",
+              "defaultWeight": "",
+              "defaultReps": "x 12"
+            }
+          ],
+          "progression": "",
+          "doThis": [
+            "Raise to 90°. Lower slowly without touching bench. Tilt pelvis upward at top for max lower ab contraction."
+          ],
+          "neverDo": [
+            "Swinging legs with momentum. Lower back arching off bench. Touching bench between reps."
+          ],
+          "youtubeQuery": "flat bench leg raise lower abs pelvic tilt proper form",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=flat+bench+leg+raise+lower+abs+pelvic+tilt+proper+form",
+          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=L-Sit%20progression%20exercise%20tutorial"
+        },
+        {
+          "id": "ex_48",
+          "name": "Weighted Ab Crunch (Decline Bench)",
+          "rawName": "Weighted Ab Crunch (Decline Bench)",
+          "muscleGroup": "Upper/Mid Abs",
+          "target": "Upper/mid abs (Weighted crunch)",
+          "equipment": "Gym standard",
+          "tempo": "Controlled (3-1-1-0)",
+          "setsReps": "3 x 15",
+          "rest": "60 sec",
+          "restSeconds": 60,
+          "rir": "RIR 1",
+          "warmupSets": [],
+          "workingSets": [
+            {
+              "set": 1,
+              "target": "10kg plate x 15",
+              "defaultWeight": "",
+              "defaultReps": "10kg plate x 15"
+            },
+            {
+              "set": 2,
+              "target": "10kg plate x 15",
+              "defaultWeight": "",
+              "defaultReps": "10kg plate x 15"
+            },
+            {
+              "set": 3,
+              "target": "10kg plate x 12",
+              "defaultWeight": "",
+              "defaultReps": "10kg plate x 12"
+            }
+          ],
+          "progression": "Increase from 5kg plate to 7.5kg plate in November.",
+          "doThis": [
+            "Decline bench, plate held at chest. Curl the torso up flexing the SPINE — this is a crunch, not a sit-up. Exhale hard at the top."
+          ],
+          "neverDo": [
+            "Using hip flexors to yank the torso up (full sit-up motion). Going too heavy before the movement is controlled."
+          ],
+          "youtubeQuery": "decline weighted ab crunch plate spinal flexion proper form",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=decline+weighted+ab+crunch+plate+spinal+flexion+proper+form",
+          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Weighted%20Ab%20Crunch%20(Decline%20Bench"
+        },
+        {
+          "id": "ex_sat_plank",
+          "name": "Plank (Anti-Extension Core Stability)",
+          "rawName": "Plank",
+          "muscleGroup": "Core (Anti-Extension)",
+          "target": "Anti-extension core stability & transverse abdominis activation before heavy pressing",
+          "equipment": "Floor Mat",
+          "tempo": "Hold",
+          "setsReps": "3 × 45 sec",
+          "rest": "60 sec",
+          "restSeconds": 60,
+          "rir": "Hold to RIR 1",
+          "warmupSets": [],
+          "workingSets": [
+            {
+              "set": 1,
+              "target": "45 sec hold",
+              "defaultWeight": "",
+              "defaultReps": "45 sec"
+            },
+            {
+              "set": 2,
+              "target": "45 sec hold",
+              "defaultWeight": "",
+              "defaultReps": "45 sec"
+            },
+            {
+              "set": 3,
+              "target": "45 sec hold",
+              "defaultWeight": "",
+              "defaultReps": "45 sec"
+            }
+          ],
+          "progression": "Progress hold from 45s to 60s without hips sagging",
+          "doThis": [
+            "Forearms and toes on floor, straight line head to heels",
+            "Brace core hard like preparing for a punch",
+            "Squeeze glutes to lock pelvis in neutral position",
+            "Breathe rhythmically into the diaphragm"
+          ],
+          "neverDo": [
+            "Hips sagging down toward floor (strains lower back)",
+            "Piking hips up into the air",
+            "Holding breath"
+          ],
+          "youtubeQuery": "forearm plank core anti extension proper form",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=forearm+plank+core+anti+extension+proper+form",
+          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Plank+exercise+proper+form"
+        },
+        {
           "id": "ex_38",
           "name": "Seated Dumbbell Shoulder Press",
           "rawName": "Seated Dumbbell Shoulder Press",
           "muscleGroup": "Deltoids (Front/Side)",
-          "target": "Front + side delts \u2014 heavy strength press",
+          "target": "Front + side delts — heavy strength press",
           "equipment": "Dumbbells + Upright Bench",
           "tempo": "2-1-2-0",
           "setsReps": "4 x 10",
@@ -2422,16 +2772,16 @@ const ROUTINE_DATA = {
               "defaultReps": "8"
             }
           ],
-          "progression": "All 4x10 \u2192 increase to 16kg",
+          "progression": "All 4x10 → increase to 16kg",
           "doThis": [
-            "Bench exactly 90\u00b0",
+            "Bench exactly 90°",
             "Press up and slightly inward at top",
             "Lower to ear height only",
             "Core braced throughout"
           ],
           "neverDo": [
-            "Leaning back \u2014 shifts load to upper chest",
-            "Partial reps at top \u2014 removes delt tension",
+            "Leaning back — shifts load to upper chest",
+            "Partial reps at top — removes delt tension",
             "Pressing too fast"
           ],
           "youtubeQuery": "seated dumbbell shoulder press deltoids overhead press proper form",
@@ -2443,8 +2793,8 @@ const ROUTINE_DATA = {
           "name": "Cable Lateral Raise",
           "rawName": "Cable Lateral Raise",
           "muscleGroup": "Side Delts",
-          "target": "Side delts \u2014 constant tension variation to Monday dumbbells",
-          "equipment": "Cable Machine \u2014 Low Pulley",
+          "target": "Side delts — constant tension variation to Monday dumbbells",
+          "equipment": "Cable Machine — Low Pulley",
           "tempo": "1-0-3-0",
           "setsReps": "4 x 15 each side",
           "rest": "60 sec between sides",
@@ -2477,7 +2827,7 @@ const ROUTINE_DATA = {
               "defaultReps": "15"
             }
           ],
-          "progression": "4x15 \u2192 add 2.5kg",
+          "progression": "4x15 → add 2.5kg",
           "doThis": [
             "Stand side-on, grab handle with FAR arm",
             "Lead with elbow, stop at shoulder height",
@@ -2533,11 +2883,11 @@ const ROUTINE_DATA = {
               "defaultReps": "8"
             }
           ],
-          "progression": "All 4x10 \u2192 add 2.5kg",
+          "progression": "All 4x10 → add 2.5kg",
           "doThis": [
             "Elbows pinned to sides throughout",
             "Full extension at bottom every single rep",
-            "Squeeze hard at top \u2014 hold 1 sec"
+            "Squeeze hard at top — hold 1 sec"
           ],
           "neverDo": [
             "Swinging body to generate momentum",
@@ -2552,8 +2902,8 @@ const ROUTINE_DATA = {
           "name": "Leaning Cable Lateral Raise",
           "rawName": "Leaning Cable Lateral Raise",
           "muscleGroup": "Side Delts (Stretch)",
-          "target": "Side delts \u2014 leaning increases tension at the bottom of the raise, where DB laterals are weakest",
-          "equipment": "Cable Machine \u2014 Low Pulley (hold frame for lean)",
+          "target": "Side delts — leaning increases tension at the bottom of the raise, where DB laterals are weakest",
+          "equipment": "Cable Machine — Low Pulley (hold frame for lean)",
           "tempo": "1-0-3-0",
           "setsReps": "4 x 15 each side",
           "rest": "60 sec between sides",
@@ -2586,7 +2936,7 @@ const ROUTINE_DATA = {
               "defaultReps": "15"
             }
           ],
-          "progression": "4x15 \u2192 add 1.25kg (small increments \u2014 stretch-position exercise)",
+          "progression": "4x15 → add 1.25kg (small increments — stretch-position exercise)",
           "doThis": [
             "Lean AWAY from the cable, holding the frame with your free hand",
             "Lead with elbow, raise to shoulder height",
@@ -2605,7 +2955,7 @@ const ROUTINE_DATA = {
           "name": "Dips (Forward Lean)",
           "rawName": "Dips (Forward Lean)",
           "muscleGroup": "Lower Chest & Triceps",
-          "target": "Lower chest + triceps \u2014 bodyweight compound",
+          "target": "Lower chest + triceps — bodyweight compound",
           "equipment": "Dip Bars",
           "tempo": "3-1-1-0",
           "setsReps": "4 x 12",
@@ -2641,15 +2991,15 @@ const ROUTINE_DATA = {
               "defaultReps": "Bodyweight x 10"
             }
           ],
-          "progression": "All 4x12 \u2192 add 5kg weight belt",
+          "progression": "All 4x12 → add 5kg weight belt",
           "doThis": [
-            "Forward lean 15-20\u00b0 \u2014 chest and tricep version",
+            "Forward lean 15-20° — chest and tricep version",
             "Lower until upper arms parallel to floor",
             "Full lockout at top",
             "3 sec controlled descent"
           ],
           "neverDo": [
-            "Dipping too low \u2014 shoulder impingement risk",
+            "Dipping too low — shoulder impingement risk",
             "No lockout at top",
             "Going too fast"
           ],
@@ -2662,7 +3012,7 @@ const ROUTINE_DATA = {
           "name": "Skull Crusher (EZ Bar)",
           "rawName": "Skull Crusher (EZ Bar)",
           "muscleGroup": "Triceps (Long Head)",
-          "target": "Tricep long head \u2014 builds the horseshoe arm shape",
+          "target": "Tricep long head — builds the horseshoe arm shape",
           "equipment": "EZ Bar + Flat Bench",
           "tempo": "3-1-1-0",
           "setsReps": "3 x 12",
@@ -2692,16 +3042,16 @@ const ROUTINE_DATA = {
               "defaultReps": "10"
             }
           ],
-          "progression": "3x12 \u2192 add 2.5kg",
+          "progression": "3x12 → add 2.5kg",
           "doThis": [
             "Bar directly above eyes to start",
             "Elbows stay fixed pointing straight up",
-            "Lower toward forehead \u2014 NOT behind head",
+            "Lower toward forehead — NOT behind head",
             "Only the forearm moves"
           ],
           "neverDo": [
             "Elbows flaring outward",
-            "Lowering behind head \u2014 shoulder strain risk",
+            "Lowering behind head — shoulder strain risk",
             "Upper arm moving with forearm"
           ],
           "youtubeQuery": "ez bar skull crusher lying triceps extension long head form",
@@ -2713,7 +3063,7 @@ const ROUTINE_DATA = {
           "name": "Seated Calf Raise",
           "rawName": "Seated Calf Raise",
           "muscleGroup": "Calves (Soleus)",
-          "target": "Soleus emphasis \u2014 complements Wednesday standing calf raise (gastrocnemius bias)",
+          "target": "Soleus emphasis — complements Wednesday standing calf raise (gastrocnemius bias)",
           "equipment": "Seated Calf Raise Machine",
           "tempo": "1-2-1-2 (2 sec pause TOP and BOTTOM)",
           "setsReps": "4 x 15-20",
@@ -2749,14 +3099,14 @@ const ROUTINE_DATA = {
               "defaultReps": "15"
             }
           ],
-          "progression": "All 4 sets full ROM \u2192 add 5kg",
+          "progression": "All 4 sets full ROM → add 5kg",
           "doThis": [
             "Rise as HIGH as possible at top",
-            "Knees bent throughout \u2014 this is what shifts emphasis to the soleus",
-            "2 sec pause at BOTH top and bottom \u2014 non-negotiable"
+            "Knees bent throughout — this is what shifts emphasis to the soleus",
+            "2 sec pause at BOTH top and bottom — non-negotiable"
           ],
           "neverDo": [
-            "Partial reps \u2014 same mistake as standing version, kills the stimulus",
+            "Partial reps — same mistake as standing version, kills the stimulus",
             "Bouncing at bottom",
             "Skipping the pauses"
           ],
@@ -2765,55 +3115,11 @@ const ROUTINE_DATA = {
           "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Seated%20Calf%20Raise%20exercise%20proper%20form"
         },
         {
-          "id": "ex_45",
-          "name": "Wrist Curl + Wrist Extension (Forearms)",
-          "rawName": "Wrist Curl + Wrist Extension (Forearms)",
-          "muscleGroup": "Forearms",
-          "target": "Forearms (Flexors & Extensors)",
-          "equipment": "Gym standard",
-          "tempo": "Controlled (3-1-1-0)",
-          "setsReps": "2 rounds x 15",
-          "rest": "60 sec",
-          "restSeconds": 60,
-          "rir": "RIR 1",
-          "warmupSets": [],
-          "workingSets": [
-            {
-              "set": 1,
-              "target": "Wrist Curl \u2014 DB x 15",
-              "defaultWeight": "",
-              "defaultReps": "Wrist Curl \u2014 DB x 15"
-            },
-            {
-              "set": 2,
-              "target": "Wrist Extension \u2014 DB x 15",
-              "defaultWeight": "",
-              "defaultReps": "Wrist Extension \u2014 DB x 15"
-            },
-            {
-              "set": 3,
-              "target": "Repeat both x 15 (2 total rounds)",
-              "defaultWeight": "",
-              "defaultReps": "Repeat both x 15 (2 total rounds)"
-            }
-          ],
-          "progression": "",
-          "doThis": [
-            "Forearms resting on bench/thighs, full wrist ROM both directions, light weight."
-          ],
-          "neverDo": [
-            "Using momentum. Going heavy \u2014 this is a small-muscle, high-rep exercise."
-          ],
-          "youtubeQuery": "dumbbell wrist curl and extension forearms hypertrophy form",
-          "youtubeUrl": "https://www.youtube.com/results?search_query=dumbbell+wrist+curl+and+extension+forearms+hypertrophy+form",
-          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Wrist%20Curl%20Wrist%20Extension%20exercise%20proper%20form"
-        },
-        {
           "id": "ex_46",
           "name": "Reverse Pec Deck Fly",
           "rawName": "Reverse Pec Deck Fly",
           "muscleGroup": "Rear Delts",
-          "target": "Rear delt isolation \u2014 machine-guided path, easiest exercise in the program to control",
+          "target": "Rear delt isolation — machine-guided path, easiest exercise in the program to control",
           "equipment": "Pec Deck Machine (reverse-facing)",
           "tempo": "2-1-2-1 (1 sec squeeze at contraction)",
           "setsReps": "3 x 15",
@@ -2843,12 +3149,12 @@ const ROUTINE_DATA = {
               "defaultReps": "15"
             }
           ],
-          "progression": "3x15 \u2192 add 2.5kg",
+          "progression": "3x15 → add 2.5kg",
           "doThis": [
             "Chest against the pad the entire set",
             "Slight elbow bend held constant throughout",
             "Squeeze shoulder blades together at the back",
-            "Control the return \u2014 do not let the arms fly back"
+            "Control the return — do not let the arms fly back"
           ],
           "neverDo": [
             "Using momentum to swing the handles back",
@@ -2858,138 +3164,6 @@ const ROUTINE_DATA = {
           "youtubeQuery": "reverse pec deck machine rear delt fly isolation proper form",
           "youtubeUrl": "https://www.youtube.com/results?search_query=reverse+pec+deck+machine+rear+delt+fly+isolation+proper+form",
           "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Reverse%20Pec%20Deck%20Fly%20exercise%20proper%20form"
-        },
-        {
-          "id": "ex_47",
-          "name": "Flat Bench Leg Raise",
-          "rawName": "Flat Bench Leg Raise",
-          "muscleGroup": "Lower Abs",
-          "target": "Lower abs (Hip & spinal control)",
-          "equipment": "Gym standard",
-          "tempo": "Controlled (3-1-1-0)",
-          "setsReps": "3 x 15",
-          "rest": "60 sec",
-          "restSeconds": 60,
-          "rir": "RIR 1",
-          "warmupSets": [],
-          "workingSets": [
-            {
-              "set": 1,
-              "target": "x 15",
-              "defaultWeight": "",
-              "defaultReps": "x 15"
-            },
-            {
-              "set": 2,
-              "target": "x 15",
-              "defaultWeight": "",
-              "defaultReps": "x 15"
-            },
-            {
-              "set": 3,
-              "target": "x 12",
-              "defaultWeight": "",
-              "defaultReps": "x 12"
-            }
-          ],
-          "progression": "",
-          "doThis": [
-            "Raise to 90\u00b0. Lower slowly without touching bench. Tilt pelvis upward at top for max lower ab contraction."
-          ],
-          "neverDo": [
-            "Swinging legs with momentum. Lower back arching off bench. Touching bench between reps."
-          ],
-          "youtubeQuery": "flat bench leg raise lower abs pelvic tilt proper form",
-          "youtubeUrl": "https://www.youtube.com/results?search_query=flat+bench+leg+raise+lower+abs+pelvic+tilt+proper+form",
-          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=L-Sit%20progression%20exercise%20tutorial"
-        },
-        {
-          "id": "ex_48",
-          "name": "Weighted Ab Crunch (Decline Bench)",
-          "rawName": "Weighted Ab Crunch (Decline Bench)",
-          "muscleGroup": "Upper/Mid Abs",
-          "target": "Upper/mid abs (Weighted crunch)",
-          "equipment": "Gym standard",
-          "tempo": "Controlled (3-1-1-0)",
-          "setsReps": "3 x 15",
-          "rest": "60 sec",
-          "restSeconds": 60,
-          "rir": "RIR 1",
-          "warmupSets": [],
-          "workingSets": [
-            {
-              "set": 1,
-              "target": "10kg plate x 15",
-              "defaultWeight": "",
-              "defaultReps": "10kg plate x 15"
-            },
-            {
-              "set": 2,
-              "target": "10kg plate x 15",
-              "defaultWeight": "",
-              "defaultReps": "10kg plate x 15"
-            },
-            {
-              "set": 3,
-              "target": "10kg plate x 12",
-              "defaultWeight": "",
-              "defaultReps": "10kg plate x 12"
-            }
-          ],
-          "progression": "",
-          "doThis": [
-            "Decline bench, plate held at chest. Curl the torso up flexing the SPINE \u2014 this is a crunch, not a sit-up. Exhale hard at the top."
-          ],
-          "neverDo": [
-            "Using hip flexors to yank the torso up (full sit-up motion). Going too heavy before the movement is controlled."
-          ],
-          "youtubeQuery": "decline weighted ab crunch plate spinal flexion proper form",
-          "youtubeUrl": "https://www.youtube.com/results?search_query=decline+weighted+ab+crunch+plate+spinal+flexion+proper+form",
-          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Weighted%20Ab%20Crunch%20(Decline%20Bench"
-        },
-        {
-          "id": "ex_49",
-          "name": "Hanging Knee Raise",
-          "rawName": "\u2b50 CALISTHENICS \u2014 Hanging Knee Raise",
-          "muscleGroup": "Lower Abs",
-          "target": "Lower abs (Calisthenics knee curl)",
-          "equipment": "Gym standard",
-          "tempo": "Controlled (3-1-1-0)",
-          "setsReps": "3 sets",
-          "rest": "60 sec",
-          "restSeconds": 60,
-          "rir": "RIR 1",
-          "warmupSets": [],
-          "workingSets": [
-            {
-              "set": 1,
-              "target": "bodyweight x 12",
-              "defaultWeight": "",
-              "defaultReps": "bodyweight x 12"
-            },
-            {
-              "set": 2,
-              "target": "bodyweight x 12",
-              "defaultWeight": "",
-              "defaultReps": "bodyweight x 12"
-            },
-            {
-              "set": 3,
-              "target": "bodyweight x 10",
-              "defaultWeight": "",
-              "defaultReps": "bodyweight x 10"
-            }
-          ],
-          "progression": "",
-          "doThis": [
-            "Dead hang start, curl knees up toward chest using the lower abs, not momentum. Lower with control."
-          ],
-          "neverDo": [
-            "Swinging the body. Using momentum from the shoulders instead of the abs."
-          ],
-          "youtubeQuery": "hanging knee raise lower abs calisthenics proper form",
-          "youtubeUrl": "https://www.youtube.com/results?search_query=hanging+knee+raise+lower+abs+calisthenics+proper+form",
-          "originalYoutubeUrl": "https://www.youtube.com/results?search_query=Hanging%20Knee%20Raise%20exercise%20proper%20form"
         }
       ]
     },
@@ -3007,7 +3181,379 @@ const ROUTINE_DATA = {
       "cardio": null,
       "exercises": []
     }
-  ]
+  ],
+  "progress": {
+    "lastUpdated": "October 31, 2026",
+    "dayNumber": 131,
+    "totalDaysOriginal": 180,
+    "extendedDeadline": "April–May 2027",
+    "overallPercent": 39,
+    "assessment": "Muscle development (chest, back, arms) is 50-58% complete (ahead of schedule). Belly fat regressed in October (-5%) due to skipped end-of-session abs and dietary looseness. Program extended to April–May 2027.",
+    "muscles": [
+      {
+        "muscle": "Back (thickness)",
+        "percent": 58,
+        "note": "Ahead of schedule. Dense mid-back."
+      },
+      {
+        "muscle": "Back (width + V-taper)",
+        "percent": 55,
+        "note": "Best muscle. Relaxed V-taper visible."
+      },
+      {
+        "muscle": "Chest (upper + mid)",
+        "percent": 50,
+        "note": "3D projection confirmed."
+      },
+      {
+        "muscle": "Biceps",
+        "percent": 50,
+        "note": "Clear peak forming."
+      },
+      {
+        "muscle": "Triceps",
+        "percent": 42,
+        "note": "Horseshoe outline present."
+      },
+      {
+        "muscle": "Shoulders (side delt)",
+        "percent": 42,
+        "note": "Progressing steadily but needs volume."
+      },
+      {
+        "muscle": "Rear delts",
+        "percent": 22,
+        "note": "Still weakest muscle group. Priority face-pulls & raises."
+      },
+      {
+        "muscle": "Upper abs",
+        "percent": 14,
+        "note": "Blocked by superficial fat layer."
+      },
+      {
+        "muscle": "Lower belly reduction",
+        "percent": -5,
+        "note": "⚠️ Regressed in October. Expanded. Primary bottleneck!"
+      }
+    ],
+    "timeline": [
+      {
+        "goal": "Chest complete",
+        "original": "Dec 2026",
+        "realistic": "Feb 2027",
+        "status": "On Track"
+      },
+      {
+        "goal": "Back V-taper obvious",
+        "original": "Already present",
+        "realistic": "Cleaner by Jan 2027",
+        "status": "Ahead"
+      },
+      {
+        "goal": "Shoulders complete",
+        "original": "Dec 2026",
+        "realistic": "Mar 2027",
+        "status": "Adjusted"
+      },
+      {
+        "goal": "Rear delts complete",
+        "original": "Feb 2027",
+        "realistic": "May 2027",
+        "status": "Lagging"
+      },
+      {
+        "goal": "Visible upper abs",
+        "original": "Dec 2026",
+        "realistic": "Feb 2027 (Strict diet)",
+        "status": "Critical"
+      },
+      {
+        "goal": "Lower belly flat",
+        "original": "Apr 2027",
+        "realistic": "Apr–May 2027",
+        "status": "Diet Bound"
+      },
+      {
+        "goal": "Complete Men's Physique Standard",
+        "original": "Apr 2027",
+        "realistic": "Apr–May 2027",
+        "status": "Achievable"
+      }
+    ],
+    "keyDietRules": [
+      "Cut 1 roti at dinner every single day (Non-negotiable).",
+      "No food consumption after 9:00 PM (Shutdown late-night startup snacking).",
+      "Weigh in Monday morning every week without fail. If weight climbs 2 weeks in a row, cut another roti.",
+      "20-minute brisk walk after dinner 5 nights/week (Cheapest fat loss intervention)."
+    ],
+    "absSummary": {
+      "totalSetsPerWeek": 27,
+      "previousSetsPerWeek": "15-18 (frequently skipped)",
+      "sessionsWithAbsFirst": "2 of 4 sessions (Wednesday & Saturday)",
+      "structure": [
+        {
+          "day": "Monday (End)",
+          "exercises": "Hanging Knee Raise",
+          "sets": "3 × 12"
+        },
+        {
+          "day": "Wednesday (START)",
+          "exercises": "Cable Crunch (3×15) + Hanging Leg Raise (3×12) + Reverse Crunch (3×15)",
+          "sets": "9 sets"
+        },
+        {
+          "day": "Friday (End)",
+          "exercises": "Reverse Crunch (3×15) + Bicycle Crunch (3×20) + Plank (3×45s)",
+          "sets": "9 sets"
+        },
+        {
+          "day": "Saturday (START)",
+          "exercises": "Flat Bench Leg Raise (3×15) + Weighted Crunch (3×15) + Plank (3×45s)",
+          "sets": "9 sets"
+        }
+      ]
+    }
+  },
+  "mobility": {
+    "title": "Weekly Mobility Flow",
+    "subtitle": "For all-day energy + joint health & injury prevention",
+    "version": "V1 — November 2026",
+    "duration": "8–10 minutes total",
+    "howToUse": "Morning, before breakfast or gym. Non-negotiable on rest days — especially not on rest days. Do this flow BEFORE your existing warm-up on training days, separately on rest days.",
+    "goals": [
+      "Clear joint stiffness from 7-8 hours of sleep immobility",
+      "Reactivate glutes and core (which shut off from long sitting)",
+      "Reset shoulder and thoracic posture before training or desk work",
+      "Raise baseline alertness and breathing capacity for the first 4-5 hours of the day"
+    ],
+    "baseBlock": {
+      "title": "Daily Base Block (5 min, non-negotiable)",
+      "duration": "5 min",
+      "description": "These five movements address the universal desk-worker + heavy-lifter problem areas: hip flexors, thoracic spine, glutes, shoulders.",
+      "exercises": [
+        {
+          "name": "90/90 Hip Rotation",
+          "reps": "5 reps per side",
+          "cue": "Sit on floor. Both knees bent at 90° — one in front, one to the side. Keep torso upright. Slowly rotate both legs together to swap which leg is in front. Hold 2 sec at each end.",
+          "why": "The single most important movement if you sit for work. Frees hip capsules and deep rotators.",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=90+90+hip+rotation+mobility+tutorial"
+        },
+        {
+          "name": "Cat-Cow",
+          "reps": "10 reps slow",
+          "cue": "On hands and knees. Inhale: drop belly, lift head (cow). Exhale: round spine, tuck chin (cat). Move vertebra by vertebra.",
+          "why": "Spinal articulation — not a stretch. If done fast it does nothing. Restores segmental control.",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=cat+cow+spinal+articulation+proper+form"
+        },
+        {
+          "name": "Thoracic Rotation (Thread the Needle)",
+          "reps": "6 reps per side",
+          "cue": "On hands and knees. Take one hand, slide it under your torso as far as possible toward opposite side, rotating the upper spine. Return.",
+          "why": "Directly counteracts forward rounding from phone/desk work. Restores upper back rotational mobility.",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=thread+the+needle+thoracic+rotation+proper+form"
+        },
+        {
+          "name": "Glute Bridge Hold",
+          "reps": "2 sets × 20 sec hold",
+          "cue": "Lie on back, knees bent, feet flat. Push hips up. At top: squeeze glutes hard, tuck pelvis slightly, breathe.",
+          "why": "Reactivates glutes that shut off from desk sitting. Directly improves squat, deadlift, and hip hinge mechanics.",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=glute+bridge+hold+activation+tutorial"
+        },
+        {
+          "name": "World's Greatest Stretch",
+          "reps": "4 reps per side",
+          "cue": "Start in lunge (right foot forward). Place right hand inside right foot on floor. Hold 2 sec. Then rotate right arm up toward ceiling, eyes following. Hold 2 sec. Step through.",
+          "why": "Hits hip flexor + thoracic rotation + ankle mobility in one comprehensive movement.",
+          "youtubeUrl": "https://www.youtube.com/results?search_query=worlds+greatest+stretch+proper+form+tutorial"
+        }
+      ]
+    },
+    "daySpecific": {
+      "monday": {
+        "title": "Monday Add-on (Push Day — Chest / Shoulder / Triceps)",
+        "duration": "3-4 min (Total ~9 min)",
+        "exercises": [
+          {
+            "name": "Doorframe Chest Stretch",
+            "reps": "30 sec each arm",
+            "cue": "Stand in doorframe, arm at 90°, step through. Stretches pec minor which chronically shortens from pressing.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=doorframe+chest+stretch+pec+minor+form"
+          },
+          {
+            "name": "Band (or Towel) Shoulder Dislocate",
+            "reps": "10 reps",
+            "cue": "Hold a towel wide with both hands, raise overhead and rotate behind you, keeping arms straight. Opens shoulder capsule. Non-negotiable before bench pressing.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=shoulder+dislocates+with+band+towel+tutorial"
+          },
+          {
+            "name": "Scapular Wall Slides",
+            "reps": "10 reps",
+            "cue": "Stand against wall, arms at 90° against wall, slide up and down. Activates lower traps which stabilize the shoulder during pressing.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=scapular+wall+slides+proper+form"
+          }
+        ]
+      },
+      "tuesday": {
+        "title": "Tuesday Add-on (Pull Day — Back / Biceps)",
+        "duration": "3-4 min (Total ~9 min)",
+        "exercises": [
+          {
+            "name": "Lat Hang",
+            "reps": "30 sec",
+            "cue": "Hang from a bar with straight arms (or grip a doorframe and lean back). Decompresses spine and opens lats before loading.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=lat+hang+dead+hang+spinal+decompression"
+          },
+          {
+            "name": "Face-down Y-T-W Raises",
+            "reps": "8 reps each letter",
+            "cue": "Lie face down, arms extended. Make Y shape (overhead), T shape (wide), W shape (elbows bent). Lift and lower slowly. Activates rear delts and lower traps.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=ytw+raises+prone+lower+traps+rear+delt"
+          },
+          {
+            "name": "Neck Side Stretch",
+            "reps": "20 sec per side",
+            "cue": "Tilt ear to shoulder, hold. Removes neck tension built from phone/screens that limits chin-up range.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=neck+side+stretch+upper+traps+mobility"
+          }
+        ]
+      },
+      "wednesday": {
+        "title": "Wednesday Add-on (Leg Day — Squats / Hip Hinge)",
+        "duration": "3-4 min (Total ~10 min)",
+        "exercises": [
+          {
+            "name": "Couch Stretch",
+            "reps": "60 sec per side",
+            "cue": "Kneel with one shin against wall behind you, other foot forward. Hold upright. Best hip flexor stretch for people who sit.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=couch+stretch+hip+flexor+proper+form"
+          },
+          {
+            "name": "Deep Squat Hold",
+            "reps": "60 sec",
+            "cue": "Feet shoulder-width, squat as low as possible, hold onto rack if needed. Natural resting position that directly improves squat depth.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=deep+squat+hold+mobility+drill"
+          },
+          {
+            "name": "Ankle Circles",
+            "reps": "10 each direction, each foot",
+            "cue": "Full rotation at the ankle. Ankle dorsiflexion is the first limiting factor in squat depth.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=ankle+circles+mobility+drill"
+          }
+        ]
+      },
+      "thursday": {
+        "title": "Thursday Add-on (Push Day — Chest / Triceps)",
+        "duration": "3-4 min (Total ~9 min)",
+        "exercises": [
+          {
+            "name": "Doorframe Chest Stretch",
+            "reps": "30 sec each arm",
+            "cue": "Stand in doorframe, arm at 90°, step through. Stretches pec minor.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=doorframe+chest+stretch+pec+minor+form"
+          },
+          {
+            "name": "Band (or Towel) Shoulder Dislocate",
+            "reps": "10 reps",
+            "cue": "Hold towel/band wide, rotate overhead and behind. Opens shoulder capsule.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=shoulder+dislocates+with+band+towel+tutorial"
+          },
+          {
+            "name": "Scapular Wall Slides",
+            "reps": "10 reps",
+            "cue": "Stand against wall, arms at 90°, slide up and down. Lower trap stabilizer activation.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=scapular+wall+slides+proper+form"
+          }
+        ]
+      },
+      "friday": {
+        "title": "Friday Add-on (Pull Day + Jefferson Curl)",
+        "duration": "4 min (Total ~10 min)",
+        "exercises": [
+          {
+            "name": "Lat Hang",
+            "reps": "30 sec",
+            "cue": "Hang with straight arms. Decompresses the lumbar and thoracic spine.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=lat+hang+dead+hang+spinal+decompression"
+          },
+          {
+            "name": "Face-down Y-T-W Raises",
+            "reps": "8 reps each letter",
+            "cue": "Prone raises in Y, T, W shapes to prime rear delts and mid/lower traps.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=ytw+raises+prone+lower+traps+rear+delt"
+          },
+          {
+            "name": "Neck Side Stretch",
+            "reps": "20 sec per side",
+            "cue": "Tilt ear to shoulder, breathe out, decompress cervical tension.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=neck+side+stretch+upper+traps+mobility"
+          },
+          {
+            "name": "Jefferson Curl (Decompression)",
+            "reps": "5 reps very slow",
+            "cue": "Stand on a step, hold light weight (2-5kg), slowly roll down vertebra by vertebra: chin to chest first, upper back, lower back. Return in reverse. Safest hamstring & spinal decompression when controlled.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=jefferson+curl+spinal+mobility+proper+form"
+          }
+        ]
+      },
+      "saturday": {
+        "title": "Saturday Add-on (Legs & Hips + Pigeon Pose)",
+        "duration": "4 min (Total ~11 min)",
+        "exercises": [
+          {
+            "name": "Couch Stretch",
+            "reps": "60 sec per side",
+            "cue": "One shin against wall, other foot forward on floor. Hold upright to open quads and psoas.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=couch+stretch+hip+flexor+proper+form"
+          },
+          {
+            "name": "Deep Squat Hold",
+            "reps": "60 sec",
+            "cue": "Full resting squat depth. Relax hips, chest proud, breathe.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=deep+squat+hold+mobility+drill"
+          },
+          {
+            "name": "Ankle Circles",
+            "reps": "10 each direction, each foot",
+            "cue": "Max range circular articulation of talocrural joint.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=ankle+circles+mobility+drill"
+          },
+          {
+            "name": "Pigeon Pose",
+            "reps": "60 sec per side",
+            "cue": "From plank, bring one knee toward wrist, shin diagonal across body, extend back leg. Targets piriformis and external hip rotators compressed from squatting frequency.",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=pigeon+pose+hip+rotators+piriformis+form"
+          }
+        ]
+      },
+      "sunday": {
+        "title": "Sunday (Rest Day — 5-min Base Block Only)",
+        "duration": "5-8 min",
+        "exercises": []
+      }
+    },
+    "shortOnTime": {
+      "fiveMinutes": "Do the 5-move base block. Skip day-specific additions.",
+      "threeMinutes": "Cat-Cow + Glute Bridge + World's Greatest Stretch (covers spinal articulation, glute activation, and hip flexor + thoracic rotation)."
+    },
+    "progressionPlan": [
+      {
+        "period": "Month 1 (November)",
+        "focus": "Build the habit. All 5 base movements daily."
+      },
+      {
+        "period": "Month 2 (December)",
+        "focus": "Add the day-specific blocks consistently."
+      },
+      {
+        "period": "Month 3 (January)",
+        "focus": "Add Jefferson curl on Fridays. Increase World's Greatest Stretch to 6 reps per side."
+      },
+      {
+        "period": "Month 4+ (February Onward)",
+        "focus": "Replace Glute Bridge with Single-Leg Glute Bridge for deeper hip stability."
+      }
+    ]
+  }
 };
 
 if (typeof module !== 'undefined') {

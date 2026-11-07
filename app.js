@@ -22,7 +22,8 @@
     weeklyLogs: {},       // { "1": { bodyweight: "", belly: "", sleep: "", notes: "", lifts: {} } }
     todayProtein: 0,
     proteinDate: new Date().toISOString().slice(0, 10),
-    activeWarmupKey: 'push'
+    activeWarmupKey: 'push',
+    mobilityCompleted: {}
   };
 
   let state = loadState();
@@ -164,12 +165,33 @@
   }
 
   // -------------------------------------------------------------
-  // REST TIMER CONTROLLER
+  // REST TIMER CONTROLLER (Background-Proof with Real Timestamps & Web Worker)
   // -------------------------------------------------------------
+  let timerWorker = null;
+  try {
+    const workerBlob = new Blob([`
+      let timerId = null;
+      self.onmessage = function(e) {
+        if (e.data === 'start') {
+          clearInterval(timerId);
+          timerId = setInterval(() => self.postMessage('tick'), 400);
+        } else if (e.data === 'stop') {
+          clearInterval(timerId);
+        }
+      };
+    `], { type: 'application/javascript' });
+    timerWorker = new Worker(URL.createObjectURL(workerBlob));
+  } catch (err) {
+    console.log('Web Worker creation note (falling back to window timers):', err);
+  }
+
   const timer = {
     totalSeconds: 90,
     remainingSeconds: 90,
     isRunning: false,
+    targetEndTime: 0,
+    intervalId: null,
+
     start(seconds) {
       unlockAudio();
       if (seconds !== undefined) {
@@ -180,14 +202,26 @@
         this.remainingSeconds = this.totalSeconds || 90;
       }
       this.isRunning = true;
+      this.targetEndTime = Date.now() + (this.remainingSeconds * 1000);
+
+      // Main window interval pump
       clearInterval(this.intervalId);
-      this.intervalId = setInterval(() => this.tick(), 1000);
+      this.intervalId = setInterval(() => this.tick(), 400);
+
+      // Worker pump (keeps firing reliably even in background tab)
+      if (timerWorker) {
+        timerWorker.postMessage('start');
+      }
+
       this.updateUI();
     },
 
     pause() {
+      if (!this.isRunning) return;
+      this.syncRemaining();
       this.isRunning = false;
       clearInterval(this.intervalId);
+      if (timerWorker) timerWorker.postMessage('stop');
       this.updateUI();
     },
 
@@ -200,23 +234,41 @@
     },
 
     reset() {
-      this.pause();
+      this.isRunning = false;
+      clearInterval(this.intervalId);
+      if (timerWorker) timerWorker.postMessage('stop');
       this.remainingSeconds = this.totalSeconds;
+      this.targetEndTime = 0;
       this.updateUI();
     },
 
     adjust(seconds) {
-      this.remainingSeconds = Math.max(5, this.remainingSeconds + seconds);
+      if (this.isRunning && this.targetEndTime > 0) {
+        this.targetEndTime += (seconds * 1000);
+        this.syncRemaining();
+      } else {
+        this.remainingSeconds = Math.max(5, this.remainingSeconds + seconds);
+      }
       this.totalSeconds = Math.max(this.totalSeconds, this.remainingSeconds);
       this.updateUI();
     },
 
+    syncRemaining() {
+      if (!this.isRunning || !this.targetEndTime) return;
+      const msLeft = this.targetEndTime - Date.now();
+      this.remainingSeconds = Math.max(0, Math.ceil(msLeft / 1000));
+    },
+
     tick() {
+      if (!this.isRunning) return;
+      this.syncRemaining();
+
       if (this.remainingSeconds > 0) {
-        this.remainingSeconds--;
         this.updateUI();
       } else {
-        this.pause();
+        this.isRunning = false;
+        clearInterval(this.intervalId);
+        if (timerWorker) timerWorker.postMessage('stop');
         playRestAlarm();
         showToast('Rest Complete! Time for your next set! 💪', 'success');
         this.updateUI(true);
@@ -273,6 +325,36 @@
       }
     }
   };
+
+  // Wire Worker message listener
+  if (timerWorker) {
+    timerWorker.onmessage = function() {
+      if (timer.isRunning) {
+        timer.tick();
+      }
+    };
+  }
+
+  // Handle mobile visibility change & page focus (when user leaves tab, locks screen, or returns)
+  function handleVisibilityOrFocus() {
+    if (timer.isRunning) {
+      timer.syncRemaining();
+      if (timer.remainingSeconds <= 0) {
+        timer.isRunning = false;
+        clearInterval(timer.intervalId);
+        if (timerWorker) timerWorker.postMessage('stop');
+        playRestAlarm();
+        showToast('Rest Complete! Time for your next set! 💪', 'success');
+        timer.updateUI(true);
+      } else {
+        timer.updateUI();
+      }
+    }
+  }
+
+  document.addEventListener('visibilitychange', handleVisibilityOrFocus);
+  window.addEventListener('focus', handleVisibilityOrFocus);
+  window.addEventListener('pageshow', handleVisibilityOrFocus);
 
   // -------------------------------------------------------------
   // TOAST SYSTEM
@@ -950,6 +1032,7 @@
     }
 
     renderHistoryOverview();
+    renderRealProgress();
   }
 
   function renderHistoryOverview() {
@@ -984,6 +1067,374 @@
       `;
       historyTbody.appendChild(tr);
     });
+  }
+
+  // -------------------------------------------------------------
+  // RENDER: REAL PROGRESS & HONEST ASSESSMENT (Oct 31, 2026)
+  // -------------------------------------------------------------
+  function renderRealProgress() {
+    const container = document.getElementById('real-progress-container');
+    if (!container || !ROUTINE_DATA || !ROUTINE_DATA.progress) return;
+
+    const p = ROUTINE_DATA.progress;
+
+    let musclesHtml = '';
+    p.muscles.forEach(m => {
+      const isRegressed = m.percent < 0;
+      let barColor = 'var(--primary)';
+      if (isRegressed) barColor = '#ef4444';
+      else if (m.percent >= 55) barColor = '#10b981';
+      else if (m.percent >= 40) barColor = '#f59e0b';
+      else barColor = 'var(--primary)';
+
+      const widthPct = Math.max(0, Math.min(100, m.percent));
+
+      musclesHtml += `
+        <div class="progress-muscle-card">
+          <div class="progress-muscle-header">
+            <span class="progress-muscle-name">${m.muscle}</span>
+            <span class="progress-muscle-val ${isRegressed ? 'text-regressed' : ''}">${isRegressed ? m.percent + '%' : m.percent + '%'}</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-inner" style="width: ${isRegressed ? '8%' : widthPct + '%'}; background: ${barColor};"></div>
+          </div>
+          <p class="progress-muscle-note">${m.note}</p>
+        </div>
+      `;
+    });
+
+    let timelineHtml = '';
+    p.timeline.forEach(t => {
+      timelineHtml += `
+        <tr>
+          <td><strong>${t.goal}</strong></td>
+          <td class="text-muted-sm">${t.original}</td>
+          <td><strong style="color:var(--primary);">${t.realistic}</strong></td>
+          <td><span class="badge-tag ${t.status === 'Critical' || t.status === 'Diet Bound' ? 'highlight-sets' : ''}">${t.status}</span></td>
+        </tr>
+      `;
+    });
+
+    let dietRulesHtml = '';
+    p.keyDietRules.forEach((r, idx) => {
+      dietRulesHtml += `
+        <div class="diet-rule-item">
+          <span class="diet-rule-num">${idx + 1}</span>
+          <p>${r}</p>
+        </div>
+      `;
+    });
+
+    let absSummaryHtml = '';
+    p.absSummary.structure.forEach(s => {
+      absSummaryHtml += `
+        <tr>
+          <td><strong>${s.day}</strong></td>
+          <td>${s.exercises}</td>
+          <td><strong style="color:var(--primary);">${s.sets}</strong></td>
+        </tr>
+      `;
+    });
+
+    container.innerHTML = `
+      <div class="card glass-card progress-hero-card">
+        <div class="progress-top-banner">
+          <div>
+            <span class="warning-badge" style="background:#ef444422; color:#ef4444; border:1px solid #ef444444;">V6.1 HONEST ASSESSMENT • DAY ${p.dayNumber} OF ${p.totalDaysOriginal}</span>
+            <h3 class="card-title-sm mt-2" style="font-size:1.3rem;">Real Physique Progress (Oct 31, 2026)</h3>
+            <p class="text-muted-sm" style="margin-top:4px;">${p.assessment}</p>
+          </div>
+          <div class="progress-overall-circle">
+            <div class="progress-overall-num">${p.overallPercent}%</div>
+            <div class="progress-overall-sub">Overall Goal</div>
+          </div>
+        </div>
+
+        <div class="progress-meta-row mt-3">
+          <div class="progress-stat-pill">
+            <span class="stat-label">Extended Deadline</span>
+            <span class="stat-val" style="color:var(--primary);">${p.extendedDeadline}</span>
+          </div>
+          <div class="progress-stat-pill">
+            <span class="stat-label">Weekly Abs Volume</span>
+            <span class="stat-val">${p.absSummary.totalSetsPerWeek} Sets <span class="stat-sub">(was ${p.absSummary.previousSetsPerWeek})</span></span>
+          </div>
+          <div class="progress-stat-pill">
+            <span class="stat-label">Abs First Frequency</span>
+            <span class="stat-val" style="color:#10b981;">2 of 4 Sessions (Wed &amp; Sat)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Muscle By Muscle Progress Bars -->
+      <div class="card glass-card mt-3">
+        <h3 class="card-title-sm mb-3">Muscle-By-Muscle Goal Completion</h3>
+        <div class="progress-muscles-grid">
+          ${musclesHtml}
+        </div>
+      </div>
+
+      <!-- 4 Non-Negotiable Diet Rules -->
+      <div class="card glass-card mt-3 rules-card" style="border-left: 3px solid var(--primary);">
+        <div class="card-header-simple">
+          <span class="warning-badge">MANDATORY NOVEMBER RULES</span>
+          <h3 class="card-title-sm">4 Non-Negotiable Fat Loss Interventions</h3>
+        </div>
+        <p class="text-muted-sm mb-3">"Without these four dietary changes, the abs restructure produces minimal visible result. You cannot out-train a calorie surplus."</p>
+        <div class="diet-rules-grid">
+          ${dietRulesHtml}
+        </div>
+      </div>
+
+      <!-- Restructured Abs Summary -->
+      <div class="card glass-card mt-3">
+        <h3 class="card-title-sm mb-2">Restructured Abs Schedule (27 Sets/Week)</h3>
+        <p class="text-muted-sm mb-3">Abs moved to the start of sessions on Wednesday and Saturday so they are completed at peak energy.</p>
+        <div class="table-responsive">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Day &amp; Placement</th>
+                <th>Exercises</th>
+                <th>Total Sets</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${absSummaryHtml}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Realistic Timeline Table -->
+      <div class="card glass-card mt-3">
+        <h3 class="card-title-sm mb-2">Revised Realistic Timeline</h3>
+        <p class="text-muted-sm mb-3">The 4-month slip is entirely caused by belly fat regression in September-October. Muscle hypertrophy is roughly on schedule.</p>
+        <div class="table-responsive">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Physique Goal</th>
+                <th>Original</th>
+                <th>Realistic Now</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${timelineHtml}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+  // -------------------------------------------------------------
+  // RENDER: MOBILITY VIEW (Daily 8-10 Min Joint & Energy Flow)
+  // -------------------------------------------------------------
+  function renderMobilityView() {
+    const container = document.getElementById('mobility-container');
+    if (!container || !ROUTINE_DATA || !ROUTINE_DATA.mobility) return;
+
+    const mob = ROUTINE_DATA.mobility;
+    const todayId = getTodayDayId();
+    const dayAddOn = mob.daySpecific[todayId];
+    const todayStr = new Date().toISOString().slice(0, 10);
+    const isTodayDone = !!(state.mobilityCompleted && state.mobilityCompleted[todayStr]);
+
+    // Daily Base 5 Movements HTML
+    let baseMovesHtml = '';
+    mob.baseBlock.exercises.forEach((ex, idx) => {
+      baseMovesHtml += `
+        <div class="mobility-exercise-card">
+          <div class="mobility-card-header">
+            <span class="mobility-step-badge">${idx + 1}</span>
+            <div class="mobility-step-info">
+              <strong class="mobility-step-title">${ex.name}</strong>
+              <span class="mobility-step-reps">${ex.reps}</span>
+            </div>
+            <a href="${ex.youtubeUrl}" target="_blank" rel="noopener" class="btn-youtube-tutorial" title="Watch ${ex.name} tutorial">
+              <svg width="14" height="14" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              ▶ Tutorial
+            </a>
+          </div>
+          <p class="mobility-step-cue">${ex.cue}</p>
+          <div class="mobility-why-tag"><strong>Why:</strong> ${ex.why}</div>
+        </div>
+      `;
+    });
+
+    // Today's specific addition
+    let todayAddonHtml = '';
+    if (dayAddOn && dayAddOn.exercises && dayAddOn.exercises.length > 0) {
+      let addonListHtml = '';
+      dayAddOn.exercises.forEach((ex, idx) => {
+        addonListHtml += `
+          <div class="mobility-exercise-card">
+            <div class="mobility-card-header">
+              <span class="mobility-step-badge add-on-badge">${idx + 1}</span>
+              <div class="mobility-step-info">
+                <strong class="mobility-step-title">${ex.name}</strong>
+                <span class="mobility-step-reps">${ex.reps}</span>
+              </div>
+              <a href="${ex.youtubeUrl}" target="_blank" rel="noopener" class="btn-youtube-tutorial" title="Watch ${ex.name} tutorial">
+                <svg width="14" height="14" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                ▶ Tutorial
+              </a>
+            </div>
+            <p class="mobility-step-cue">${ex.cue}</p>
+          </div>
+        `;
+      });
+
+      todayAddonHtml = `
+        <div class="card glass-card mt-3" style="border-left: 3px solid var(--primary);">
+          <div class="card-header-simple mb-3">
+            <span class="card-icon-badge">🎯</span>
+            <div>
+              <h3 class="card-title-sm">Today's Specific Addition (${dayAddOn.title.split('—')[0].trim()})</h3>
+              <p class="text-muted-sm">${dayAddOn.duration} • Targets today's prime lifters</p>
+            </div>
+          </div>
+          <div class="mobility-cards-list">
+            ${addonListHtml}
+          </div>
+        </div>
+      `;
+    } else {
+      todayAddonHtml = `
+        <div class="card glass-card mt-3 text-center" style="padding: 20px;">
+          <span style="font-size: 2rem;">🌿</span>
+          <h4 class="card-title-sm mt-1">Sunday Rest Day Mobility</h4>
+          <p class="text-muted-sm" style="font-size:0.85rem; max-width: 400px; margin: 4px auto 0;">
+            Do the full 5-minute base block only. Movement on rest days improves tissue quality, joint lubrication, and accelerates recovery.
+          </p>
+        </div>
+      `;
+    }
+
+    // Schedule Table HTML
+    const daysOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    let scheduleTableHtml = '';
+    daysOrder.forEach(dId => {
+      const d = mob.daySpecific[dId];
+      const isToday = dId === todayId;
+      const addOnName = (d && d.exercises && d.exercises.length > 0)
+        ? d.exercises.map(e => e.name).join(', ')
+        : 'None (Base Block Only)';
+
+      scheduleTableHtml += `
+        <tr class="${isToday ? 'active-day-row' : ''}">
+          <td><strong>${dId.charAt(0).toUpperCase() + dId.slice(1)} ${isToday ? '★ (Today)' : ''}</strong></td>
+          <td>5 Base Moves (5 min)</td>
+          <td>${addOnName}</td>
+          <td><span class="badge-tag ${isToday ? 'highlight-sets' : ''}">${d ? d.duration.split('(')[0].trim() : '5 min'}</span></td>
+        </tr>
+      `;
+    });
+
+    // Progression Plan HTML
+    let progHtml = '';
+    mob.progressionPlan.forEach(p => {
+      progHtml += `
+        <div class="roadmap-step">
+          <div class="roadmap-step-badge">${p.period}</div>
+          <div class="roadmap-step-content">
+            <strong>${p.focus}</strong>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = `
+      <!-- Complete Status Banner -->
+      <div class="card glass-card mobility-today-hero">
+        <div class="mobility-hero-flex">
+          <div>
+            <span class="badge-tag highlight-sets">DAILY PROTOCOL • 8–10 MIN</span>
+            <h3 class="card-title-sm mt-2" style="font-size:1.3rem;">Today's Morning Mobility Flow</h3>
+            <p class="text-muted-sm mt-1">${mob.howToUse}</p>
+          </div>
+          <button id="btn-toggle-mobility-done" class="btn-mobility-done ${isTodayDone ? 'is-done' : ''}">
+            <span>${isTodayDone ? '✓ Completed Today!' : 'Mark Completed'}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Part 1: Base Block (Every Day) -->
+      <div class="card glass-card mt-3">
+        <div class="card-header-simple mb-3">
+          <span class="card-icon-badge">🔄</span>
+          <div>
+            <h3 class="card-title-sm">1. Daily Base Block (5 Minutes — Non-Negotiable)</h3>
+            <p class="text-muted-sm">Do these 5 movements every single morning without fail.</p>
+          </div>
+        </div>
+        <div class="mobility-cards-list">
+          ${baseMovesHtml}
+        </div>
+      </div>
+
+      <!-- Part 2: Day-Specific Add-on -->
+      ${todayAddonHtml}
+
+      <!-- Part 3: Short on Time Protocols -->
+      <div class="card glass-card mt-3">
+        <h3 class="card-title-sm mb-2">Short on Time? (Emergency Protocols)</h3>
+        <div class="rules-list">
+          <div class="rule-item">
+            <strong>If you only have 5 minutes:</strong>
+            <p>${mob.shortOnTime.fiveMinutes}</p>
+          </div>
+          <div class="rule-item">
+            <strong>If you only have 3 minutes:</strong>
+            <p>${mob.shortOnTime.threeMinutes}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 4: Full 7-Day Schedule -->
+      <div class="card glass-card mt-3">
+        <h3 class="card-title-sm mb-2">Full 7-Day Mobility Schedule</h3>
+        <p class="text-muted-sm mb-3">Matches joint demands and target muscle groups for that day's lifting session.</p>
+        <div class="table-responsive">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Base Block</th>
+                <th>Day-Specific Add-on</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${scheduleTableHtml}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Part 5: Progressive Overload for Mobility -->
+      <div class="card glass-card mt-3">
+        <h3 class="card-title-sm mb-2">Mobility Progression Roadmap</h3>
+        <p class="text-muted-sm mb-3">Systematic habit building and advanced joint decompression.</p>
+        <div class="roadmap-timeline">
+          ${progHtml}
+        </div>
+      </div>
+    `;
+
+    // Hook mark completed button
+    const doneBtn = document.getElementById('btn-toggle-mobility-done');
+    if (doneBtn) {
+      doneBtn.addEventListener('click', () => {
+        if (!state.mobilityCompleted) state.mobilityCompleted = {};
+        state.mobilityCompleted[todayStr] = !state.mobilityCompleted[todayStr];
+        saveState();
+        renderMobilityView();
+        showToast(state.mobilityCompleted[todayStr] ? 'Mobility marked complete! Awesome job! 🧘' : 'Mobility status updated.', 'success');
+      });
+    }
   }
 
   // -------------------------------------------------------------
@@ -1066,7 +1517,7 @@
   }
 
   // -------------------------------------------------------------
-  // WARM-UP MODAL
+  // WARM-UP MODAL (With YouTube Tutorial Links)
   // -------------------------------------------------------------
   function openWarmupModal(typeKey) {
     const modal = document.getElementById('warmup-modal');
@@ -1080,11 +1531,22 @@
     if (stepsEl) {
       stepsEl.innerHTML = '';
       warmupInfo.steps.forEach((step, idx) => {
-        const item = document.createElement('label');
-        item.className = 'warmup-step-item';
+        const stepText = typeof step === 'string' ? step : step.text;
+        const stepUrl = (typeof step === 'object' && step.youtubeUrl) ? step.youtubeUrl : null;
+
+        const item = document.createElement('div');
+        item.className = 'warmup-step-row';
         item.innerHTML = `
-          <input type="checkbox" id="warmup-step-${idx}">
-          <span>${step}</span>
+          <label class="warmup-step-label">
+            <input type="checkbox" id="warmup-step-${idx}">
+            <span class="warmup-step-text">${stepText}</span>
+          </label>
+          ${stepUrl ? `
+            <a href="${stepUrl}" target="_blank" rel="noopener" class="btn-youtube-tutorial" title="Watch form video">
+              <svg width="12" height="12" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              ▶ Tutorial
+            </a>
+          ` : ''}
         `;
         stepsEl.appendChild(item);
       });
@@ -1117,6 +1579,7 @@
     if (targetViewId === 'view-tracker') renderTrackerView();
     if (targetViewId === 'view-guide') renderGuideView();
     if (targetViewId === 'view-workout') renderWorkoutView();
+    if (targetViewId === 'view-mobility') renderMobilityView();
   }
 
   // -------------------------------------------------------------
@@ -1200,6 +1663,14 @@
         const todayId = getTodayDayId();
         selectDay(todayId);
         switchView('view-workout');
+      });
+    }
+
+    // 3b. Quick "Mobility" Jump
+    const quickMobilityBtn = document.getElementById('btn-quick-mobility');
+    if (quickMobilityBtn) {
+      quickMobilityBtn.addEventListener('click', () => {
+        switchView('view-mobility');
       });
     }
 

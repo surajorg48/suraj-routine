@@ -28,14 +28,18 @@
     <header class="app-header">
       <div class="header-inner">
         <div class="brand-block">
-          <div class="brand-badge">V3.0</div>
+          <div class="brand-badge">V6.1</div>
           <div>
             <h1 class="brand-title">SURAJ <span class="highlight">AESTHETIC</span></h1>
-            <p class="brand-sub">6-Month Transformation • Men's Physique</p>
+            <p class="brand-sub">Transformation Hub • Men's Physique V6.1</p>
           </div>
         </div>
 
         <div class="header-actions">
+          <button id="btn-quick-mobility" class="btn-pill-mobility" title="Open Daily Mobility Flow">
+            <span>🧘</span>
+            <span>Mobility</span>
+          </button>
           <button id="btn-quick-today" class="btn-pill-today" title="Jump to Today's Workout">
             <span class="pulsing-dot"></span>
             <span id="today-label">Today</span>
@@ -295,6 +299,11 @@
             </table>
           </div>
         </div>
+
+        <!-- Real Progress & Honest Assessment (V6.1 Update) -->
+        <div id="real-progress-container" class="mt-4">
+          <!-- Dynamically populated from ROUTINE_DATA.progress -->
+        </div>
       </section>
 
       <!-- VIEW 5: MASTER GUIDE & PROTOCOLS -->
@@ -372,6 +381,19 @@
           <div class="terminology-grid" id="terminology-grid">
             <!-- Populated dynamically -->
           </div>
+        </div>
+      </section>
+
+      <!-- VIEW 6: MOBILITY FLOW (November 2026 V1) -->
+      <section id="view-mobility" class="view-section">
+        <div class="section-hero">
+          <div class="target-badge-lg">8–10 MIN DAILY MORNING FLOW</div>
+          <h2 class="section-title">Weekly Mobility Flow</h2>
+          <p class="section-subtitle">For all-day energy + joint health &amp; injury prevention. Do this BEFORE warm-up on training days, separately on rest days.</p>
+        </div>
+
+        <div id="mobility-container">
+          <!-- Dynamically populated from ROUTINE_DATA.mobility -->
         </div>
       </section>
 
@@ -480,6 +502,10 @@
       <button class="nav-tab" data-view="view-tracker" aria-label="Progress Logs">
         <span class="nav-icon">📊</span>
         <span class="nav-label">Tracker</span>
+      </button>
+      <button class="nav-tab" data-view="view-mobility" aria-label="Mobility Flow">
+        <span class="nav-icon">🧘</span>
+        <span class="nav-label">Mobility</span>
       </button>
       <button class="nav-tab" data-view="view-guide" aria-label="Master Guide">
         <span class="nav-icon">📖</span>
