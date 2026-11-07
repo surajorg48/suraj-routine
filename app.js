@@ -401,12 +401,12 @@
       pill.dataset.dayId = dayObj.id;
 
       const shortDay = dayObj.day.substring(0, 3);
-      const karnageText = dayObj.preWorkout ? '⚡ 1 Scp' : 'Skip';
+      const karnageText = dayObj.preWorkout ? '1 Scoop' : 'Rest';
 
       pill.innerHTML = `
         <span class="day-pill-name">${shortDay}</span>
         <span class="day-pill-sub">${dayObj.sessionName.split('—')[0].trim()}</span>
-        <span class="day-pill-karnage">${karnageText}</span>
+        <span class="day-pill-karnage ${dayObj.preWorkout ? 'has-pre' : 'no-pre'}">${karnageText}</span>
       `;
 
       pill.addEventListener('click', () => {
@@ -420,7 +420,7 @@
     const todayLabel = document.getElementById('today-label');
     if (todayLabel) {
       const todayObj = ROUTINE_DATA.days.find(d => d.id === todayId);
-      todayLabel.textContent = todayObj ? `Today: ${todayObj.day.substring(0,3)}` : 'Today';
+      todayLabel.textContent = todayObj ? `Today • ${todayObj.day.substring(0,3)}` : 'Today';
     }
   }
 
@@ -463,18 +463,31 @@
       <div class="day-badge-row">
         <span class="badge-session">${dayObj.sessionName}</span>
         <span class="badge-karnage ${dayObj.preWorkout ? '' : 'skip'}">
-          ${dayObj.preWorkout ? '⚡ Pre-Workout: YES (5:50 AM)' : '🌿 Pre-Workout: NO (Tolerance)'}
+          <span class="status-indicator-dot ${dayObj.preWorkout ? 'active' : 'idle'}"></span>
+          ${dayObj.preWorkout ? 'Pre-Workout: 5:50 AM (1 Scoop)' : 'No Pre-Workout (Tolerance)'}
         </span>
       </div>
       <h2 class="day-title-main">${dayObj.title}</h2>
       <p class="day-focus-desc">${dayObj.primaryFocus}</p>
       <div class="day-meta-chips">
-        <span class="meta-chip">⏱️ ${dayObj.duration}</span>
-        <span class="meta-chip">🏋️ ${dayObj.exercises.length} Exercises</span>
-        ${dayObj.cardio ? '<span class="meta-chip">❤️ Cardio Included</span>' : ''}
+        <span class="meta-chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          ${dayObj.duration}
+        </span>
+        <span class="meta-chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12"/></svg>
+          ${dayObj.exercises.length} Exercises
+        </span>
+        ${dayObj.cardio ? `
+          <span class="meta-chip meta-chip-cardio">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            Cardio Included
+          </span>
+        ` : ''}
         ${!isRest ? `
           <button class="btn-open-warmup" id="btn-trigger-warmup">
-            <span>🔥 Warm-Up Guide</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            <span>Warm-Up Guide</span>
           </button>
         ` : ''}
       </div>
@@ -491,10 +504,12 @@
 
     if (isRest) {
       exercisesContainer.innerHTML = `
-        <div class="card glass-card text-center" style="padding: 30px 20px;">
-          <div style="font-size: 2.8rem; margin-bottom: 10px;">💤</div>
-          <h3 class="card-title-sm" style="font-size: 1.25rem; margin-bottom: 8px;">Rest is Mandatory — Not Optional</h3>
-          <p class="text-muted-sm" style="max-width: 440px; margin: 0 auto 16px; font-size: 0.85rem; line-height: 1.5;">
+        <div class="card glass-card text-center" style="padding: 36px 20px;">
+          <div class="rest-day-icon-wrap mb-3">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </div>
+          <h3 class="card-title-sm" style="font-size: 1.25rem; margin-bottom: 8px;">Rest is Mandatory • Muscle Synthesis Active</h3>
+          <p class="text-muted-sm" style="max-width: 440px; margin: 0 auto 18px; font-size: 0.85rem; line-height: 1.5;">
             "Muscles are built during sleep and rest, not in the gym. The gym creates the stimulus. Sunday creates the muscle."
           </p>
           <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
@@ -539,9 +554,10 @@
         html += `
           <div class="mb-3">
             <div class="aux-title">
-              <span>🎯</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
               <span>${dayObj.finisher.name}</span>
               <a href="${dayObj.finisher.youtubeUrl}" target="_blank" rel="noopener" class="btn-youtube-tutorial" style="margin-left:auto;">
+                <svg width="12" height="12" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 ▶ Tutorial
               </a>
             </div>
@@ -555,7 +571,7 @@
         html += `
           <div>
             <div class="aux-title">
-              <span>❤️</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
               <span>${dayObj.cardio.name}</span>
             </div>
             <p class="aux-desc">
@@ -661,8 +677,13 @@
     if (ex.doThis.length > 0 || ex.neverDo.length > 0) {
       cuesHtml = `
         <div class="form-guide-toggle">
-          <span>Form Guidance &amp; Common Mistakes</span>
-          <span class="toggle-icon">▼</span>
+          <span style="display:flex; align-items:center; gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <span>Form Guidance &amp; Common Mistakes</span>
+          </span>
+          <span class="toggle-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
         </div>
         <div class="form-guide-body">
           ${ex.doThis.length > 0 ? `
@@ -704,7 +725,10 @@
         <span class="badge-tag">${ex.equipment}</span>
         <span class="badge-tag">Tempo: ${ex.tempo}</span>
         <span class="badge-tag highlight-sets">${ex.setsReps}</span>
-        <span class="badge-tag badge-rest-trigger" data-rest-seconds="${ex.restSeconds}">⏱️ Rest ${ex.rest}</span>
+        <button class="badge-tag badge-rest-trigger" data-rest-seconds="${ex.restSeconds}" style="cursor:pointer; display:inline-flex; align-items:center; gap:5px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Rest ${ex.rest}</span>
+        </button>
         <span class="badge-tag">${ex.rir}</span>
       </div>
 
@@ -821,7 +845,7 @@
         if (dayObj.cardio) {
           exercisesSummaryHtml += `
             <li class="split-ex-item" style="color:#38bdf8;">
-              <span>❤ Cardio: ${dayObj.cardio.name}</span>
+              <span>Cardio: ${dayObj.cardio.name}</span>
               <strong>${dayObj.cardio.duration}</strong>
             </li>
           `;
@@ -1303,8 +1327,10 @@
       `;
     } else {
       todayAddonHtml = `
-        <div class="card glass-card mt-3 text-center" style="padding: 20px;">
-          <span style="font-size: 2rem;">🌿</span>
+        <div class="card glass-card mt-3 text-center" style="padding: 24px;">
+          <div class="rest-day-icon-wrap mb-2" style="display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.05); color:var(--text-secondary);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </div>
           <h4 class="card-title-sm mt-1">Sunday Rest Day Mobility</h4>
           <p class="text-muted-sm" style="font-size:0.85rem; max-width: 400px; margin: 4px auto 0;">
             Do the full 5-minute base block only. Movement on rest days improves tissue quality, joint lubrication, and accelerates recovery.
@@ -1325,7 +1351,7 @@
 
       scheduleTableHtml += `
         <tr class="${isToday ? 'active-day-row' : ''}">
-          <td><strong>${dId.charAt(0).toUpperCase() + dId.slice(1)} ${isToday ? '★ (Today)' : ''}</strong></td>
+          <td><strong>${dId.charAt(0).toUpperCase() + dId.slice(1)} ${isToday ? '• Today' : ''}</strong></td>
           <td>5 Base Moves (5 min)</td>
           <td>${addOnName}</td>
           <td><span class="badge-tag ${isToday ? 'highlight-sets' : ''}">${d ? d.duration.split('(')[0].trim() : '5 min'}</span></td>
@@ -1432,7 +1458,7 @@
         state.mobilityCompleted[todayStr] = !state.mobilityCompleted[todayStr];
         saveState();
         renderMobilityView();
-        showToast(state.mobilityCompleted[todayStr] ? 'Mobility marked complete! Awesome job! 🧘' : 'Mobility status updated.', 'success');
+        showToast(state.mobilityCompleted[todayStr] ? 'Mobility session logged as complete' : 'Mobility status updated', 'success');
       });
     }
   }
@@ -1493,7 +1519,7 @@
           <div class="roadmap-step-badge">${step.month}</div>
           <div class="roadmap-step-content">
             <strong>${step.focus}</strong>
-            <p>🎯 Result: ${step.result}</p>
+            <p>Target: ${step.result}</p>
           </div>
         `;
         roadmapTimeline.appendChild(div);

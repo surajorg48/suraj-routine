@@ -37,15 +37,15 @@
 
         <div class="header-actions">
           <button id="btn-quick-mobility" class="btn-pill-mobility" title="Open Daily Mobility Flow">
-            <span>🧘</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="m5 9 7 2 7-2"/><path d="M12 11v5"/><path d="m8 20 4-4 4 4"/></svg>
             <span>Mobility</span>
           </button>
           <button id="btn-quick-today" class="btn-pill-today" title="Jump to Today's Workout">
-            <span class="pulsing-dot"></span>
+            <span class="status-dot-today"></span>
             <span id="today-label">Today</span>
           </button>
           <button id="btn-open-guide" class="btn-icon" aria-label="Open Master Guide & Instructions">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="16" x2="12" y2="12"></line>
               <line x1="12" y1="8" x2="12.01" y2="8"></line>
@@ -136,7 +136,9 @@
         <!-- Interactive Protein Tracker / Calculator -->
         <div class="card glass-card tracker-protein-card">
           <div class="card-header-simple">
-            <div class="card-icon-badge">🥗</div>
+            <div class="card-icon-badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.5 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            </div>
             <div>
               <h3 class="card-title-sm">Today's Protein Tracker</h3>
               <p class="text-muted-sm">Tap quick additions or custom grams to reach 130g</p>
@@ -316,7 +318,9 @@
         <!-- Pre-workout Karnage Card -->
         <div class="card glass-card">
           <div class="card-header-simple">
-            <span class="card-icon-badge">⚡</span>
+            <span class="card-icon-badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </span>
             <div>
               <h3 class="card-title-sm">Pre-Workout Protocol (Karnage)</h3>
               <p class="text-muted-sm">1 scoop ONLY (100mg) at 5:50 AM. Never take after 4:00 PM.</p>
@@ -343,7 +347,9 @@
         <!-- Deload Protocol Card -->
         <div class="card glass-card">
           <div class="card-header-simple">
-            <span class="card-icon-badge">🔄</span>
+            <span class="card-icon-badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+            </span>
             <div>
               <h3 class="card-title-sm">Deload Protocol (Every 6th Week)</h3>
               <p class="text-muted-sm">Weights reduced 40%. Same sets, same reps. No pre-workout.</p>
@@ -404,16 +410,18 @@
       <!-- Minimized Bar View -->
       <div class="timer-minimized-bar" id="timer-minimized-bar">
         <div class="timer-min-info">
-          <span class="timer-min-icon">⏱️</span>
+          <span class="timer-min-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </span>
           <span class="timer-min-label">Rest:</span>
           <span class="timer-min-digits" id="timer-min-digits">00:00</span>
         </div>
         <div class="timer-min-controls">
           <button id="btn-timer-min-toggle" class="btn-timer-icon" aria-label="Toggle Timer Play/Pause">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
           </button>
           <button id="btn-timer-expand" class="btn-timer-icon" aria-label="Expand Full Timer">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
           </button>
         </div>
       </div>
@@ -421,13 +429,14 @@
       <!-- Expanded Overlay Modal / Panel -->
       <div class="timer-expanded-panel" id="timer-expanded-panel">
         <div class="timer-panel-header">
-          <span class="timer-panel-title">REST TIMER</span>
+          <span class="timer-panel-title">Rest Timer</span>
           <div class="timer-header-tools">
-            <button id="btn-test-chime" class="btn-timer-tool" title="Test iPhone Rest Chime">
-              <span>🔔 Test Tone</span>
+            <button id="btn-test-chime" class="btn-timer-tool" title="Test Rest Chime">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              <span>Test Tone</span>
             </button>
             <button id="btn-timer-minimize" class="btn-timer-icon" aria-label="Minimize Timer">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
           </div>
         </div>
@@ -474,7 +483,7 @@
           <button class="btn-modal-close" id="btn-close-warmup" aria-label="Close Modal">&times;</button>
         </div>
         <div class="modal-body">
-          <p class="text-muted-sm mb-3">"Cold muscles tear. 5 minutes of warm-up prevents months of injury. Never skip this."</p>
+          <p class="text-muted-sm mb-3">5 minutes of joint prep prevents months of injury. Complete these sets before loading heavy compounds.</p>
           <div class="warmup-steps-list" id="warmup-modal-steps">
             <!-- Dynamically populated -->
           </div>
@@ -488,27 +497,39 @@
     <!-- BOTTOM THUMB NAVIGATION (Mobile-First) -->
     <nav class="bottom-nav" aria-label="Main Navigation">
       <button class="nav-tab active" data-view="view-workout" aria-label="Today Workout">
-        <span class="nav-icon">🏋️</span>
+        <span class="nav-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12"/></svg>
+        </span>
         <span class="nav-label">Workout</span>
       </button>
       <button class="nav-tab" data-view="view-split" aria-label="6-Day Split">
-        <span class="nav-icon">📅</span>
+        <span class="nav-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        </span>
         <span class="nav-label">6-Day Split</span>
       </button>
       <button class="nav-tab" data-view="view-nutrition" aria-label="Nutrition & Diet">
-        <span class="nav-icon">🥗</span>
+        <span class="nav-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.5 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        </span>
         <span class="nav-label">Nutrition</span>
       </button>
       <button class="nav-tab" data-view="view-tracker" aria-label="Progress Logs">
-        <span class="nav-icon">📊</span>
+        <span class="nav-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
+        </span>
         <span class="nav-label">Tracker</span>
       </button>
       <button class="nav-tab" data-view="view-mobility" aria-label="Mobility Flow">
-        <span class="nav-icon">🧘</span>
+        <span class="nav-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="m5 9 7 2 7-2"/><path d="M12 11v5"/><path d="m8 20 4-4 4 4"/></svg>
+        </span>
         <span class="nav-label">Mobility</span>
       </button>
       <button class="nav-tab" data-view="view-guide" aria-label="Master Guide">
-        <span class="nav-icon">📖</span>
+        <span class="nav-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 2v20"/></svg>
+        </span>
         <span class="nav-label">Guide</span>
       </button>
     </nav>
