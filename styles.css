@@ -2039,28 +2039,57 @@ a {
 .timer-header-tools {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
 }
 
 .btn-timer-icon {
-  background: var(--bg-surface);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--hairline);
   color: var(--text-secondary);
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
   padding: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-timer-icon:active {
+  transform: scale(0.92);
 }
 
 .btn-timer-icon:hover {
   color: var(--text-primary);
   border-color: var(--hairline-hover);
   background: var(--bg-surface-elevated);
+}
+
+/* Active State (Sound: On / Vibrate: On) */
+.btn-timer-icon.active {
+  background: rgba(244, 81, 11, 0.15);
+  border-color: rgba(244, 81, 11, 0.5);
+  color: var(--primary);
+}
+
+.btn-timer-icon.active .material-symbols-rounded {
+  color: var(--primary);
+}
+
+/* Muted / Off State */
+.btn-timer-icon.is-muted {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-tertiary);
+  opacity: 0.65;
+}
+
+.btn-timer-icon.is-muted .material-symbols-rounded {
+  color: var(--text-tertiary);
 }
 
 .btn-timer-icon .material-symbols-rounded {
@@ -2212,87 +2241,6 @@ a {
 .btn-timer-secondary:hover {
   color: var(--text-primary);
   border-color: var(--hairline-hover);
-}
-
-/* Alert Customization Strip (Sound Mute/Unmute, Vibration On/Off, Preview) */
-.timer-custom-strip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.btn-timer-custom-toggle {
-  flex: 1;
-  max-width: 140px;
-  min-height: 38px;
-  padding: 6px 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-full);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btn-timer-custom-toggle:active {
-  transform: scale(0.96);
-}
-
-.btn-timer-custom-toggle .custom-toggle-icon {
-  font-size: 19px;
-  line-height: 1;
-  transition: color 0.15s ease;
-}
-
-/* Active State (Sound: On / Vibrate: On) */
-.btn-timer-custom-toggle.active {
-  background: rgba(244, 81, 11, 0.12);
-  border-color: rgba(244, 81, 11, 0.45);
-  color: #fff;
-}
-
-.btn-timer-custom-toggle.active .custom-toggle-icon {
-  color: var(--primary);
-}
-
-/* Muted / Inactive State (Sound: Muted / Vibrate: Off) */
-.btn-timer-custom-toggle.is-muted {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.08);
-  color: var(--text-tertiary);
-  opacity: 0.75;
-}
-
-.btn-timer-custom-toggle.is-muted .custom-toggle-icon {
-  color: var(--text-tertiary);
-}
-
-/* Preview / Test Alert Button */
-.btn-timer-custom-toggle.btn-timer-preview {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: var(--hairline);
-  color: var(--text-primary);
-}
-
-.btn-timer-custom-toggle.btn-timer-preview:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--hairline-hover);
-}
-
-.btn-timer-custom-toggle.btn-timer-preview .custom-toggle-icon {
-  color: var(--primary-light, #fb923c);
 }
 
 /* ==========================================================================

@@ -434,10 +434,16 @@
             <span class="timer-panel-title">Rest Timer</span>
           </div>
           <div class="timer-header-tools">
-            <button id="btn-quick-sound-toggle" class="btn-timer-icon" title="Quick Mute/Unmute Sound" aria-label="Toggle Sound">
-              <span class="material-symbols-rounded" id="header-sound-icon">volume_up</span>
+            <button type="button" id="btn-timer-mute" class="btn-timer-icon active" aria-label="Toggle Sound Alert" title="Sound: On (Click to Mute)">
+              <span class="material-symbols-rounded" id="timer-sound-icon">volume_up</span>
             </button>
-            <button id="btn-timer-minimize" class="btn-timer-icon" aria-label="Minimize Timer">
+            <button type="button" id="btn-timer-vibrate" class="btn-timer-icon active" aria-label="Toggle Vibration Alert" title="Vibration: On (Click to Turn Off)">
+              <span class="material-symbols-rounded" id="timer-vibrate-icon">vibration</span>
+            </button>
+            <button type="button" id="btn-test-chime" class="btn-timer-icon" aria-label="Preview Sound & Vibration Alert" title="Preview Alert">
+              <span class="material-symbols-rounded">notifications_active</span>
+            </button>
+            <button type="button" id="btn-timer-minimize" class="btn-timer-icon" aria-label="Minimize Timer" title="Minimize Timer">
               <span class="material-symbols-rounded">expand_more</span>
             </button>
           </div>
@@ -473,22 +479,6 @@
           <button id="btn-timer-toggle-play" class="btn-timer-primary">Pause</button>
           <button id="btn-timer-add10" class="btn-timer-secondary">+10s</button>
           <button id="btn-timer-reset" class="btn-timer-secondary">Reset</button>
-        </div>
-
-        <!-- Alert Customization Strip (Mute Sound, Vibration On/Off, Preview) -->
-        <div class="timer-custom-strip">
-          <button type="button" id="btn-timer-mute" class="btn-timer-custom-toggle active" aria-pressed="true" title="Toggle Sound Alert">
-            <span class="material-symbols-rounded custom-toggle-icon" id="timer-sound-icon">volume_up</span>
-            <span class="custom-toggle-label" id="timer-sound-text">Sound: On</span>
-          </button>
-          <button type="button" id="btn-timer-vibrate" class="btn-timer-custom-toggle active" aria-pressed="true" title="Toggle Vibration Alert">
-            <span class="material-symbols-rounded custom-toggle-icon" id="timer-vibrate-icon">vibration</span>
-            <span class="custom-toggle-label" id="timer-vibrate-text">Vibrate: On</span>
-          </button>
-          <button type="button" id="btn-test-chime" class="btn-timer-custom-toggle btn-timer-preview" title="Preview Sound & Vibration Alert">
-            <span class="material-symbols-rounded custom-toggle-icon">play_circle</span>
-            <span class="custom-toggle-label">Test Alert</span>
-          </button>
         </div>
       </div>
     </div>
