@@ -67,6 +67,7 @@
       }
 
       const audioEl = document.getElementById('rest-chime-audio');
+      const warningAudioEl = document.getElementById('rest-warning-audio');
       if (audioEl && !isAudioUnlocked) {
         // Micro-play to prime iOS Safari audio buffer
         audioEl.volume = 0.01;
@@ -74,6 +75,14 @@
           audioEl.pause();
           audioEl.currentTime = 0;
           audioEl.volume = 1.0;
+        }).catch(() => {});
+      }
+      if (warningAudioEl && !isAudioUnlocked) {
+        warningAudioEl.volume = 0.01;
+        warningAudioEl.play().then(() => {
+          warningAudioEl.pause();
+          warningAudioEl.currentTime = 0;
+          warningAudioEl.volume = 1.0;
           isAudioUnlocked = true;
         }).catch(() => {});
       }
@@ -137,6 +146,59 @@
     }
   }
 
+  function playCountdownWarning() {
+    const warningAudioEl = document.getElementById('rest-warning-audio');
+    if (warningAudioEl) {
+      warningAudioEl.volume = 1.0;
+      warningAudioEl.currentTime = 0;
+      const playPromise = warningAudioEl.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          console.log('HTML5 warning audio play blocked, falling back to synth beep:', err);
+          playSynthesizedWarningBeep();
+        });
+      }
+    } else {
+      playSynthesizedWarningBeep();
+    }
+
+    // Gentle preparatory vibration
+    if ('vibrate' in navigator) {
+      try {
+        navigator.vibrate([100, 80, 100]);
+      } catch (err) {}
+    }
+  }
+
+  // Synthesized fallback 3-second countdown warning beeps (3, 2, 1)
+  function playSynthesizedWarningBeep() {
+    try {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      if (audioCtx) {
+        const now = audioCtx.currentTime;
+        [0.0, 1.0, 2.0].forEach(delay => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(600, now + delay);
+          gain.gain.setValueAtTime(0.0001, now + delay);
+          gain.gain.exponentialRampToValueAtTime(0.3, now + delay + 0.005);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + 0.12);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + delay);
+          osc.stop(now + delay + 0.15);
+        });
+      }
+    } catch (e) {}
+  }
+
   function playRestAlarm() {
     let playedHtml5 = false;
     const audioEl = document.getElementById('rest-chime-audio');
@@ -191,6 +253,7 @@
     isRunning: false,
     targetEndTime: 0,
     intervalId: null,
+    hasPlayedWarning: false,
 
     start(seconds) {
       unlockAudio();
@@ -201,6 +264,7 @@
       if (this.remainingSeconds <= 0) {
         this.remainingSeconds = this.totalSeconds || 90;
       }
+      this.hasPlayedWarning = false;
       this.isRunning = true;
       this.targetEndTime = Date.now() + (this.remainingSeconds * 1000);
 
@@ -235,6 +299,7 @@
 
     reset() {
       this.isRunning = false;
+      this.hasPlayedWarning = false;
       clearInterval(this.intervalId);
       if (timerWorker) timerWorker.postMessage('stop');
       this.remainingSeconds = this.totalSeconds;
@@ -250,6 +315,9 @@
         this.remainingSeconds = Math.max(5, this.remainingSeconds + seconds);
       }
       this.totalSeconds = Math.max(this.totalSeconds, this.remainingSeconds);
+      if (this.remainingSeconds > 4) {
+        this.hasPlayedWarning = false;
+      }
       this.updateUI();
     },
 
@@ -262,6 +330,12 @@
     tick() {
       if (!this.isRunning) return;
       this.syncRemaining();
+
+      // Trigger 3-4 second warning tone before completion
+      if (this.remainingSeconds <= 4 && this.remainingSeconds >= 1 && !this.hasPlayedWarning) {
+        this.hasPlayedWarning = true;
+        playCountdownWarning();
+      }
 
       if (this.remainingSeconds > 0) {
         this.updateUI();
@@ -1820,8 +1894,12 @@
       testChimeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         unlockAudio();
-        playRestAlarm();
-        showToast('🔔 iPhone completion chime previewed!', 'success');
+        playCountdownWarning();
+        showToast('Countdown warning (3-4s remaining) previewed!', 'info');
+        setTimeout(() => {
+          playRestAlarm();
+          showToast('Completion chime previewed!', 'success');
+        }, 3500);
       });
     }
 
