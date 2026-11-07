@@ -24,14 +24,19 @@
   <!-- App Container -->
   <div id="app" class="app-container">
 
-    <!-- Top Sticky Header -->
-    <header class="app-header">
+    <!-- Android Transparent / Overlay Top App Bar -->
+    <header class="app-header" id="app-header">
       <div class="header-inner">
         <div class="brand-block">
-          <div class="brand-badge">V6.1</div>
-          <div>
-            <h1 class="brand-title">SURAJ <span class="highlight">AESTHETIC</span></h1>
-            <p class="brand-sub">Transformation Hub • Men's Physique V6.1</p>
+          <div class="brand-avatar-badge" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12"/></svg>
+          </div>
+          <div class="brand-meta-column">
+            <div class="brand-title-row">
+              <h1 class="brand-title">SURAJ <span class="highlight">AESTHETIC</span></h1>
+              <span class="android-version-pill">V6.1</span>
+            </div>
+            <p class="brand-sub">Transformation Hub • Men's Physique</p>
           </div>
         </div>
 
@@ -405,25 +410,20 @@
 
     </main>
 
-    <!-- FLOATING REST TIMER WIDGET (Gym mobile-friendly) -->
+    <!-- FLOATING REST TIMER WIDGET (Gym mobile-friendly FAB & Modal) -->
     <div id="rest-timer-widget" class="rest-timer-widget minimized">
-      <!-- Minimized Bar View -->
-      <div class="timer-minimized-bar" id="timer-minimized-bar">
-        <div class="timer-min-info">
-          <span class="timer-min-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <!-- Android Floating Action Button (FAB) + Running Pill -->
+      <div class="timer-fab-wrap" id="timer-fab-wrap">
+        <button id="btn-timer-fab" class="android-fab" aria-label="Open Rest Timer Chronometer">
+          <span class="android-fab-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </span>
-          <span class="timer-min-label">Rest:</span>
-          <span class="timer-min-digits" id="timer-min-digits">00:00</span>
-        </div>
-        <div class="timer-min-controls">
-          <button id="btn-timer-min-toggle" class="btn-timer-icon" aria-label="Toggle Timer Play/Pause">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-          </button>
-          <button id="btn-timer-expand" class="btn-timer-icon" aria-label="Expand Full Timer">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-          </button>
-        </div>
+          <span class="android-fab-digits" id="timer-min-digits">00:00</span>
+          <span class="fab-pulse-ring" id="fab-pulse-ring"></span>
+        </button>
+        <button id="btn-timer-min-toggle" class="fab-mini-action" aria-label="Toggle Play/Pause">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        </button>
       </div>
 
       <!-- Expanded Overlay Modal / Panel -->

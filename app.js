@@ -289,9 +289,19 @@
       const ringProgress = document.getElementById('timer-ring-progress');
       const toggleBtn = document.getElementById('btn-timer-toggle-play');
       const minToggleBtn = document.getElementById('btn-timer-min-toggle');
+      const fabBtn = document.getElementById('btn-timer-fab');
+      const fabPulse = document.getElementById('fab-pulse-ring');
 
       if (minDigits) minDigits.textContent = timeStr;
       if (ringDigits) ringDigits.textContent = timeStr;
+
+      if (fabBtn) {
+        fabBtn.classList.toggle('running', this.isRunning);
+        fabBtn.classList.toggle('finished', isFinished);
+      }
+      if (fabPulse) {
+        fabPulse.style.display = this.isRunning ? 'block' : 'none';
+      }
 
       if (ringStatus) {
         if (isFinished) {
@@ -1754,32 +1764,24 @@
       });
     }
 
-    // 7. Rest Timer Floating Widget Controls
+    // 7. Rest Timer Floating Widget Controls (Android FAB + Expanded Overlay)
     const timerWidget = document.getElementById('rest-timer-widget');
-    const timerExpandBtn = document.getElementById('btn-timer-expand');
+    const timerFabBtn = document.getElementById('btn-timer-fab');
     const timerMinimizeBtn = document.getElementById('btn-timer-minimize');
-    const timerMinBar = document.getElementById('timer-minimized-bar');
     const timerMinToggle = document.getElementById('btn-timer-min-toggle');
     const timerTogglePlay = document.getElementById('btn-timer-toggle-play');
     const timerResetBtn = document.getElementById('btn-timer-reset');
     const timerSub10 = document.getElementById('btn-timer-sub10');
     const timerAdd10 = document.getElementById('btn-timer-add10');
 
-    if (timerExpandBtn && timerWidget) {
-      timerExpandBtn.addEventListener('click', () => {
+    if (timerFabBtn && timerWidget) {
+      timerFabBtn.addEventListener('click', () => {
         timerWidget.classList.add('expanded');
       });
     }
     if (timerMinimizeBtn && timerWidget) {
       timerMinimizeBtn.addEventListener('click', () => {
         timerWidget.classList.remove('expanded');
-      });
-    }
-    if (timerMinBar && timerWidget) {
-      timerMinBar.addEventListener('click', (e) => {
-        if (!e.target.closest('.btn-timer-icon')) {
-          timerWidget.classList.add('expanded');
-        }
       });
     }
     if (timerMinToggle) {
@@ -1799,6 +1801,18 @@
     }
     if (timerAdd10) {
       timerAdd10.addEventListener('click', () => timer.adjust(10));
+    }
+
+    // Header Transparent / Overlay Scroll Elevation Listener for Android
+    const appHeader = document.getElementById('app-header');
+    if (appHeader) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 16) {
+          appHeader.classList.add('is-scrolled');
+        } else {
+          appHeader.classList.remove('is-scrolled');
+        }
+      }, { passive: true });
     }
 
     const testChimeBtn = document.getElementById('btn-test-chime');
