@@ -154,11 +154,10 @@
   }
 
   // -------------------------------------------------------------
-  // REST TIMER ALERT SETTINGS (Mute Audio & Vibration On/Off)
+  // REST TIMER AUDIO SETTINGS (Mute Audio Toggle)
   // -------------------------------------------------------------
   const timerAlertSettings = {
     soundEnabled: localStorage.getItem('suraj_timer_sound_enabled') !== 'false',
-    vibrationEnabled: localStorage.getItem('suraj_timer_vibration_enabled') !== 'false',
 
     toggleSound() {
       this.soundEnabled = !this.soundEnabled;
@@ -168,27 +167,6 @@
       }
       this.updateUI();
       showToast(this.soundEnabled ? '🔔 Rest timer sound ON' : '🔕 Rest timer sound MUTED', 'info');
-    },
-
-    toggleVibration() {
-      this.vibrationEnabled = !this.vibrationEnabled;
-      localStorage.setItem('suraj_timer_vibration_enabled', this.vibrationEnabled ? 'true' : 'false');
-      if (!this.vibrationEnabled) {
-        cancelVibration();
-      }
-      this.updateUI();
-      if (this.vibrationEnabled) {
-        if ('vibrate' in navigator) {
-          try {
-            navigator.vibrate(250);
-          } catch (e) {}
-          showToast('📳 Rest timer vibration ON', 'info');
-        } else {
-          showToast('Vibration is unsupported by iOS Safari on iPhone (Apple OS restriction)', 'warning');
-        }
-      } else {
-        showToast('📴 Rest timer vibration OFF', 'info');
-      }
     },
 
     updateUI() {
@@ -203,18 +181,6 @@
       if (soundIcon) {
         soundIcon.textContent = this.soundEnabled ? 'volume_up' : 'volume_off';
       }
-
-      const vibBtn = document.getElementById('btn-timer-vibrate');
-      const vibIcon = document.getElementById('timer-vibrate-icon');
-      if (vibBtn) {
-        vibBtn.classList.toggle('active', this.vibrationEnabled);
-        vibBtn.classList.toggle('is-muted', !this.vibrationEnabled);
-        vibBtn.setAttribute('aria-label', this.vibrationEnabled ? 'Vibration: On' : 'Vibration: Off');
-        vibBtn.setAttribute('title', this.vibrationEnabled ? 'Vibration: On (Click to Turn Off)' : 'Vibration: Off (Click to Turn On)');
-      }
-      if (vibIcon) {
-        vibIcon.textContent = this.vibrationEnabled ? 'vibration' : 'mobile_off';
-      }
     }
   };
 
@@ -228,41 +194,6 @@
     if (chimeAudioEl) {
       chimeAudioEl.pause();
       chimeAudioEl.currentTime = 0;
-    }
-  }
-
-  function cancelVibration() {
-    if ('vibrate' in navigator) {
-      try {
-        navigator.vibrate(0);
-      } catch (err) {}
-    }
-  }
-
-  // Single discrete vibration pulse (300-350ms) for countdown beats
-  function triggerHapticPulse(ms = 350) {
-    if (!timerAlertSettings.vibrationEnabled) return;
-    if ('vibrate' in navigator) {
-      try {
-        navigator.vibrate(ms);
-      } catch (err) {
-        console.warn('Vibration call error:', err);
-      }
-    }
-  }
-
-  // 2-second continuous vibration at rest completion (chained pulses for Android compatibility)
-  function triggerCompletionVibrate() {
-    if (!timerAlertSettings.vibrationEnabled) return;
-    if ('vibrate' in navigator) {
-      try {
-        navigator.vibrate([1000, 80, 920]);
-        setTimeout(() => {
-          if (timerAlertSettings.vibrationEnabled && 'vibrate' in navigator) {
-            try { navigator.vibrate(900); } catch (e) {}
-          }
-        }, 1000);
-      } catch (err) {}
     }
   }
 
@@ -336,9 +267,6 @@
         playSynthesizedChime();
       }
     }
-
-    // 2-second vibration at the end matching completion ringtone
-    triggerCompletionVibrate();
   }
 
   // -------------------------------------------------------------
@@ -369,7 +297,6 @@
     targetEndTime: 0,
     intervalId: null,
     hasPlayedWarning: false,
-    lastVibrateSecond: null,
 
     start(seconds) {
       unlockAudio();
@@ -381,7 +308,6 @@
         this.remainingSeconds = this.totalSeconds || 90;
       }
       this.hasPlayedWarning = false;
-      this.lastVibrateSecond = null;
       this.isRunning = true;
       this.targetEndTime = Date.now() + (this.remainingSeconds * 1000);
 
@@ -404,7 +330,6 @@
       clearInterval(this.intervalId);
       if (timerWorker) timerWorker.postMessage('stop');
       stopAllTimerAudio();
-      cancelVibration();
       this.updateUI();
     },
 
@@ -419,11 +344,9 @@
     reset() {
       this.isRunning = false;
       this.hasPlayedWarning = false;
-      this.lastVibrateSecond = null;
       clearInterval(this.intervalId);
       if (timerWorker) timerWorker.postMessage('stop');
       stopAllTimerAudio();
-      cancelVibration();
       this.remainingSeconds = this.totalSeconds;
       this.targetEndTime = 0;
       this.updateUI();
@@ -439,7 +362,6 @@
       this.totalSeconds = Math.max(this.totalSeconds, this.remainingSeconds);
       if (this.remainingSeconds > 4) {
         this.hasPlayedWarning = false;
-        this.lastVibrateSecond = null;
       }
       this.updateUI();
     },
@@ -458,12 +380,6 @@
       if (this.remainingSeconds <= 4 && this.remainingSeconds >= 1 && !this.hasPlayedWarning) {
         this.hasPlayedWarning = true;
         playCountdownWarning();
-      }
-
-      // 4 single vibration pulses matching each countdown second (4, 3, 2, 1)
-      if (this.remainingSeconds <= 4 && this.remainingSeconds >= 1 && this.lastVibrateSecond !== this.remainingSeconds) {
-        this.lastVibrateSecond = this.remainingSeconds;
-        triggerHapticPulse(350);
       }
 
       if (this.remainingSeconds > 0) {
@@ -2030,46 +1946,25 @@
       });
     }
 
-    const vibrateBtn = document.getElementById('btn-timer-vibrate');
-    if (vibrateBtn) {
-      vibrateBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        unlockAudio();
-        timerAlertSettings.toggleVibration();
-      });
-    }
-
     const testChimeBtn = document.getElementById('btn-test-chime');
     if (testChimeBtn) {
       testChimeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         unlockAudio();
 
-        // 1. Trigger countdown audio + 4 single vibration pulses across 3-4s
-        playCountdownWarning();
-        triggerHapticPulse(350);
-        setTimeout(() => triggerHapticPulse(350), 1000);
-        setTimeout(() => triggerHapticPulse(350), 2000);
-        setTimeout(() => triggerHapticPulse(350), 3000);
-
-        const activeAlerts = [];
-        if (timerAlertSettings.soundEnabled) activeAlerts.push('Sound 🔔');
-        if (timerAlertSettings.vibrationEnabled) {
-          if ('vibrate' in navigator) {
-            activeAlerts.push('Vibrate 📳');
-          } else {
-            activeAlerts.push('Vibrate (iOS Unsupported)');
-          }
+        if (!timerAlertSettings.soundEnabled) {
+          showToast('Rest timer is MUTED. Unmute 🔔 to preview sound.', 'info');
+          return;
         }
-        const alertLabel = activeAlerts.length > 0 ? activeAlerts.join(' + ') : 'Muted (Silent)';
 
-        showToast(`Testing 4-sec countdown (${alertLabel})...`, 'info');
+        // Preview 3-4s warning countdown followed by completion chime
+        playCountdownWarning();
+        showToast('Testing 3-4s countdown warning tone... 🔔', 'info');
 
-        // 2. Trigger completion chime + 2s sustained vibration
         setTimeout(() => {
           playRestAlarm();
-          showToast(`Rest complete alert (${alertLabel})!`, 'success');
-        }, 3800);
+          showToast('Rest complete chime previewed! 🔔', 'success');
+        }, 3600);
       });
     }
 

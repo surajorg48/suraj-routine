@@ -1,5 +1,5 @@
 // Service Worker for Offline Gym Support
-const CACHE_NAME = 'suraj-routine-cache-v10';
+const CACHE_NAME = 'suraj-routine-cache-v11';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

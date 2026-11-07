@@ -2039,53 +2039,56 @@ a {
 .timer-header-tools {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 4px;
 }
 
+/* Borderless, clean header action icon buttons (no heavy box/border) */
 .btn-timer-icon {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--hairline);
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
   color: var(--text-secondary);
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   padding: 0;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .btn-timer-icon:active {
-  transform: scale(0.92);
+  transform: scale(0.90);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .btn-timer-icon:hover {
   color: var(--text-primary);
-  border-color: var(--hairline-hover);
-  background: var(--bg-surface-elevated);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-/* Active State (Sound: On / Vibrate: On) */
+/* Active State (Sound: On) - Pure icon accent with zero box border */
 .btn-timer-icon.active {
-  background: rgba(244, 81, 11, 0.15);
-  border-color: rgba(244, 81, 11, 0.5);
+  background: rgba(244, 81, 11, 0.1);
   color: var(--primary);
+  border: none;
 }
 
 .btn-timer-icon.active .material-symbols-rounded {
   color: var(--primary);
 }
 
-/* Muted / Off State */
+/* Muted State (Sound: Muted) - Subtle dimmed icon */
 .btn-timer-icon.is-muted {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: transparent;
   color: var(--text-tertiary);
-  opacity: 0.65;
+  opacity: 0.55;
+  border: none;
 }
 
 .btn-timer-icon.is-muted .material-symbols-rounded {
@@ -2093,7 +2096,7 @@ a {
 }
 
 .btn-timer-icon .material-symbols-rounded {
-  font-size: 20px;
+  font-size: 23px;
   line-height: 1;
 }
 
