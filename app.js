@@ -146,26 +146,130 @@
     }
   }
 
-  function playCountdownWarning() {
+  // -------------------------------------------------------------
+  // REST TIMER ALERT SETTINGS (Mute Audio & Vibration On/Off)
+  // -------------------------------------------------------------
+  const timerAlertSettings = {
+    soundEnabled: localStorage.getItem('suraj_timer_sound_enabled') !== 'false',
+    vibrationEnabled: localStorage.getItem('suraj_timer_vibration_enabled') !== 'false',
+
+    toggleSound() {
+      this.soundEnabled = !this.soundEnabled;
+      localStorage.setItem('suraj_timer_sound_enabled', this.soundEnabled ? 'true' : 'false');
+      if (!this.soundEnabled) {
+        stopAllTimerAudio();
+      }
+      this.updateUI();
+      showToast(this.soundEnabled ? '🔔 Rest timer sound enabled' : '🔕 Rest timer sound muted', 'info');
+    },
+
+    toggleVibration() {
+      this.vibrationEnabled = !this.vibrationEnabled;
+      localStorage.setItem('suraj_timer_vibration_enabled', this.vibrationEnabled ? 'true' : 'false');
+      if (!this.vibrationEnabled) {
+        cancelVibration();
+      }
+      this.updateUI();
+      if (this.vibrationEnabled) {
+        if ('vibrate' in navigator) {
+          try { navigator.vibrate(200); } catch (e) {}
+        }
+        showToast('📳 Rest timer vibration enabled', 'info');
+      } else {
+        showToast('📴 Rest timer vibration turned off', 'info');
+      }
+    },
+
+    updateUI() {
+      const soundBtn = document.getElementById('btn-timer-mute');
+      const soundIcon = document.getElementById('timer-sound-icon');
+      const soundText = document.getElementById('timer-sound-text');
+      const headerSoundBtn = document.getElementById('btn-quick-sound-toggle');
+      const headerSoundIcon = document.getElementById('header-sound-icon');
+
+      if (soundBtn) {
+        soundBtn.classList.toggle('active', this.soundEnabled);
+        soundBtn.classList.toggle('is-muted', !this.soundEnabled);
+        soundBtn.setAttribute('aria-pressed', this.soundEnabled ? 'true' : 'false');
+        soundBtn.setAttribute('title', this.soundEnabled ? 'Sound: On (Click to Mute)' : 'Sound: Muted (Click to Unmute)');
+      }
+      if (soundIcon) {
+        soundIcon.textContent = this.soundEnabled ? 'volume_up' : 'volume_off';
+      }
+      if (soundText) {
+        soundText.textContent = this.soundEnabled ? 'Sound: On' : 'Sound: Muted';
+      }
+      if (headerSoundBtn) {
+        headerSoundBtn.setAttribute('title', this.soundEnabled ? 'Quick Mute Sound' : 'Quick Unmute Sound');
+      }
+      if (headerSoundIcon) {
+        headerSoundIcon.textContent = this.soundEnabled ? 'volume_up' : 'volume_off';
+      }
+
+      const vibBtn = document.getElementById('btn-timer-vibrate');
+      const vibIcon = document.getElementById('timer-vibrate-icon');
+      const vibText = document.getElementById('timer-vibrate-text');
+
+      if (vibBtn) {
+        vibBtn.classList.toggle('active', this.vibrationEnabled);
+        vibBtn.classList.toggle('is-muted', !this.vibrationEnabled);
+        vibBtn.setAttribute('aria-pressed', this.vibrationEnabled ? 'true' : 'false');
+        vibBtn.setAttribute('title', this.vibrationEnabled ? 'Vibration: On (Click to Turn Off)' : 'Vibration: Off (Click to Turn On)');
+      }
+      if (vibIcon) {
+        vibIcon.textContent = this.vibrationEnabled ? 'vibration' : 'mobile_off';
+      }
+      if (vibText) {
+        vibText.textContent = this.vibrationEnabled ? 'Vibrate: On' : 'Vibrate: Off';
+      }
+    }
+  };
+
+  function stopAllTimerAudio() {
     const warningAudioEl = document.getElementById('rest-warning-audio');
     if (warningAudioEl) {
-      warningAudioEl.volume = 1.0;
+      warningAudioEl.pause();
       warningAudioEl.currentTime = 0;
-      const playPromise = warningAudioEl.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(err => {
-          console.log('HTML5 warning audio play blocked, falling back to synth beep:', err);
-          playSynthesizedWarningBeep();
-        });
-      }
-    } else {
-      playSynthesizedWarningBeep();
     }
+    const chimeAudioEl = document.getElementById('rest-chime-audio');
+    if (chimeAudioEl) {
+      chimeAudioEl.pause();
+      chimeAudioEl.currentTime = 0;
+    }
+  }
 
-    // Gentle preparatory vibration
+  function cancelVibration() {
     if ('vibrate' in navigator) {
       try {
-        navigator.vibrate([100, 80, 100]);
+        navigator.vibrate(0);
+      } catch (err) {}
+    }
+  }
+
+  function playCountdownWarning() {
+    // Only play audio if sound is enabled
+    if (timerAlertSettings.soundEnabled) {
+      const warningAudioEl = document.getElementById('rest-warning-audio');
+      if (warningAudioEl) {
+        warningAudioEl.volume = 1.0;
+        warningAudioEl.currentTime = 0;
+        const playPromise = warningAudioEl.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(err => {
+            console.log('HTML5 warning audio play blocked, falling back to synth beep:', err);
+            playSynthesizedWarningBeep();
+          });
+        }
+      } else {
+        playSynthesizedWarningBeep();
+      }
+    }
+
+    // 4 single vibrations matching 3-4 seconds countdown ringtone
+    if (timerAlertSettings.vibrationEnabled && 'vibrate' in navigator) {
+      try {
+        // Pattern: [vibrate 300ms, pause 700ms, vibrate 300ms, pause 700ms, vibrate 300ms, pause 700ms, vibrate 300ms]
+        navigator.vibrate([300, 700, 300, 700, 300, 700, 300]);
       } catch (err) {}
     }
   }
@@ -200,28 +304,32 @@
   }
 
   function playRestAlarm() {
-    let playedHtml5 = false;
-    const audioEl = document.getElementById('rest-chime-audio');
-    if (audioEl) {
-      audioEl.volume = 1.0;
-      audioEl.currentTime = 0;
-      const playPromise = audioEl.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          playedHtml5 = true;
-        }).catch(err => {
-          console.log('HTML5 audio play blocked, falling back to synth:', err);
-          playSynthesizedChime();
-        });
+    // Only play audio if sound is enabled
+    if (timerAlertSettings.soundEnabled) {
+      let playedHtml5 = false;
+      const audioEl = document.getElementById('rest-chime-audio');
+      if (audioEl) {
+        audioEl.volume = 1.0;
+        audioEl.currentTime = 0;
+        const playPromise = audioEl.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            playedHtml5 = true;
+          }).catch(err => {
+            console.log('HTML5 audio play blocked, falling back to synth:', err);
+            playSynthesizedChime();
+          });
+        }
+      } else {
+        playSynthesizedChime();
       }
-    } else {
-      playSynthesizedChime();
     }
 
-    // Mobile Vibration
-    if ('vibrate' in navigator) {
+    // 2-second vibration at the end matching completion ringtone
+    if (timerAlertSettings.vibrationEnabled && 'vibrate' in navigator) {
       try {
-        navigator.vibrate([250, 100, 250, 100, 400]);
+        // 2 continuous seconds of vibration (split into 950ms + 100ms pause + 950ms for maximum device support)
+        navigator.vibrate([950, 100, 950]);
       } catch (err) {}
     }
   }
@@ -286,6 +394,8 @@
       this.isRunning = false;
       clearInterval(this.intervalId);
       if (timerWorker) timerWorker.postMessage('stop');
+      stopAllTimerAudio();
+      cancelVibration();
       this.updateUI();
     },
 
@@ -302,6 +412,8 @@
       this.hasPlayedWarning = false;
       clearInterval(this.intervalId);
       if (timerWorker) timerWorker.postMessage('stop');
+      stopAllTimerAudio();
+      cancelVibration();
       this.remainingSeconds = this.totalSeconds;
       this.targetEndTime = 0;
       this.updateUI();
@@ -1889,18 +2001,62 @@
       }, { passive: true });
     }
 
+    // Rest Timer Customization Listeners (Sound Mute/Unmute & Vibration On/Off)
+    timerAlertSettings.updateUI();
+
+    const muteSoundBtn = document.getElementById('btn-timer-mute');
+    if (muteSoundBtn) {
+      muteSoundBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        unlockAudio();
+        timerAlertSettings.toggleSound();
+      });
+    }
+
+    const quickSoundBtn = document.getElementById('btn-quick-sound-toggle');
+    if (quickSoundBtn) {
+      quickSoundBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        unlockAudio();
+        timerAlertSettings.toggleSound();
+      });
+    }
+
+    const vibrateBtn = document.getElementById('btn-timer-vibrate');
+    if (vibrateBtn) {
+      vibrateBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        timerAlertSettings.toggleVibration();
+      });
+    }
+
     const testChimeBtn = document.getElementById('btn-test-chime');
     if (testChimeBtn) {
       testChimeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         unlockAudio();
         playCountdownWarning();
-        showToast('Countdown warning (3-4s remaining) previewed!', 'info');
+
+        const activeAlerts = [];
+        if (timerAlertSettings.soundEnabled) activeAlerts.push('Sound');
+        if (timerAlertSettings.vibrationEnabled) activeAlerts.push('Vibrate');
+        const alertLabel = activeAlerts.length > 0 ? activeAlerts.join(' + ') : 'Muted (Silent)';
+
+        showToast(`Testing 3-4s warning (${alertLabel})...`, 'info');
         setTimeout(() => {
           playRestAlarm();
-          showToast('Completion chime previewed!', 'success');
+          showToast(`Rest complete alert (${alertLabel})!`, 'success');
         }, 3500);
       });
+    }
+
+    // Support direct inspection via URL query
+    if (window.location.search.includes('timer=open')) {
+      const widget = document.getElementById('rest-timer-widget');
+      if (widget) {
+        widget.classList.remove('minimized');
+        widget.classList.add('expanded');
+      }
     }
 
     // Global audio unlock for iPhone / Safari on any tap
